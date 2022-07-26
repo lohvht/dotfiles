@@ -4,7 +4,11 @@
 Assuming if you have completed all of the __Getting Started__ instructions below,
 you should be able to run the following command to apply the dotfiles / installed package changes.
 ```bash
-home-manager switch --flake '.#general'
+nix build .#homeManagerConfigurations.$HOMECONFIG_NAME.activationPackage && ./result/activate
+
+# OR
+
+home-manager switch --flake .#$HOMECONFIG_NAME
 ```
 
 ## Getting Started (1) - Nix/Flakes/Home-Manager Installation
