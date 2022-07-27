@@ -133,3 +133,4 @@ TODO: Remove this section when done
 - Some comments on how to pin to specific versions of packages: https://news.ycombinator.com/item?id=28593823
 - Some examples on installing packages in home-manager specific to version: https://github.com/nix-community/home-manager/issues/2796
 - To find specific versions https://lazamar.co.uk/nix-versions/
+- Specific example on how to actually override a version of a package: https://github.com/NixOS/nixpkgs/issues/93327#issuecomment-825410447
