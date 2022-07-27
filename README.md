@@ -91,7 +91,7 @@ Run the Home Manager installation command and create the first Home Manager gene
 NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH} nix-shell '<home-manager>' -A install
 ```
 
-## Getting Started (1) - Git Clone
+## Getting Started (2) - Git Clone
 
 ```bash
 git clone git@github.com:lohvht/dotfiles.git ~/.config/nixpkgs
@@ -125,3 +125,11 @@ TODO:
 ```bash
 nix flake update ~/.config/nixpkgs
 ```
+
+## More Examples (Check with these)
+TODO: Remove this section when done
+- Example 1 nixpkgs by jonringer: https://github.com/jonringer/nixpkgs-config/blob/cc2958b5e0c8147849c66b40b55bf27ff70c96de/home.nix
+- Example2 nixpkgs by Misterio77: https://github.com/Misterio77/nix-starter-config/blob/main/flake.nix
+- Some comments on how to pin to specific versions of packages: https://news.ycombinator.com/item?id=28593823
+- Some examples on installing packages in home-manager specific to version: https://github.com/nix-community/home-manager/issues/2796
+- To find specific versions https://lazamar.co.uk/nix-versions/
