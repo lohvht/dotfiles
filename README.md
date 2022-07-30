@@ -11,6 +11,16 @@ nix build .#homeManagerConfigurations.$HOMECONFIG_NAME.activationPackage && ./re
 home-manager switch --flake .#$HOMECONFIG_NAME
 ```
 
+To check the updated list of `$HOMECONFIG_NAME`, run the following command and use the name immediately after the `homeConfigurations.` prefix
+```bash
+$ grep 'homeConfigurations' ~/.config/nixpkgs/flake.nix
+homeConfigurations.linux_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
+homeConfigurations.linux_headless_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
+homeConfigurations.darwin_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
+```
+
+As per the note, before running, you should go ahead and edit both the target `homeDirectory` as well as the `username`
+
 ## Getting Started (1) - Nix/Flakes/Home-Manager Installation
 
 Install nix, there several recommendation that NixOS has, you can check here: https://nixos.org/download.html

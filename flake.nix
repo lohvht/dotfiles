@@ -24,26 +24,61 @@
     nixpkgs-darwin-stable,
     home-manager,
     ...
-  }@flake-nix-inputs:
-  {
-    homeManagerConfigurations.darwin_64 = home-manager.lib.homeManagerConfiguration {
+  }@flake_nix_inputs:
+  let
+    # TODO: If you want to use packages exported from other flakes, add their overlays here.
+    # They will be added to your 'pkgs'
+    default_overlays = {
+      default = import ./pkgs/overlay.nix;
+    };
+    # makeHomeMgrConfig sets some example / sane defaults when creating
+    # a homeManagerConfiguration
+    # To override these defaults, simple pass in the relevant param names
+    makeHomeMgrConfig = { extraSpecialArgs ? {}, ...}@args: home-manager.lib.homeManagerConfiguration ({
+      system = flake-utils.lib.system.x86_64-linux;
+      # Main configuration file
+      configuration = import ./home-manager/home.nix;
+      stateVersion = "22.05";
+      extraModules = [
+        # Add custom home-manager modules here
+        ./home-manager/modules.nix
+        # Adds overlays
+        { nixpkgs.overlays = builtins.attrValues default_overlays; }
+      ];
+      extraSpecialArgs = {
+        is_GUI = false;
+        inherit flake_nix_inputs;
+      } // extraSpecialArgs;
+    } // builtins.removeAttrs args ["extraSpecialArgs"]);
+  in
+  rec {
+    # Home configurations
+    # Accessible via 'home-manager'
+    homeConfigurations.linux_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
       username = "test";
       homeDirectory = "/home/test";
-      system = flake-utils.lib.x86_64-darwin;
-      # Main configuration file
-      configuration = ./homes/home.nix;
-      extraSpecialArgs = {
-        is-headless: false;
-        inherit flake-nix-inputs;
-      };
-      # # NOTE: uncomment these extra params
-      # # check https://github.com/nix-community/home-manager/blob/release-22.05/flake.nix#L44
-      # for the actual params accepted by home-manager.lib.homeManagerConfiguration
-      # extraModules ? [ ]
-      # pkgs ? builtins.getAttr system nixpkgs.outputs.legacyPackages
-      # lib ? pkgs.lib
-      # check ? true
-      # stateVersion ? "20.09"
     };
+    homeConfigurations.linux_headless_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
+      username = "test";
+      homeDirectory = "/home/test";
+    };
+    homeConfigurations.darwin_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
+      username = "test";
+      homeDirectory = "/home/test";
+      system = flake-utils.lib.system.x86_64-darwin;
+    };
+
+    # Packages
+    # Accessible via 'nix build'
+    packages = flake-utils.lib.eachSystemMap flake-utils.lib.defaultSystems (system:
+      # Propagate nixpkgs-stable' packages, with our overlays applied
+      import nixpkgs-stable { inherit system; overlays = builtins.attrValues default_overlays; }
+    );
+
+    # Devshell for bootstrapping
+    # Accessible via 'nix develop'
+    devShells = flake-utils.lib.eachSystemMap flake-utils.lib.defaultSystems (system: {
+      default = import ./shell.nix { pkgs = packages.${system}; };
+    });
   };
 }
