@@ -1,25 +1,99 @@
-# Dotfiles (Updated as of 26th July 2022)
+# Dotfiles (Updated as of 31st July 2022)
 
 ## To Update Local Dotfiles / Installed Packages
-Assuming if you have completed all of the __Getting Started__ instructions below,
+Assuming if you have completed all of the [__Getting Started__](#getting-started-1---nixflakeshome-manager-installation) instructions below,
 you should be able to run the following command to apply the dotfiles / installed package changes.
 ```bash
-nix build .#homeManagerConfigurations.$HOMECONFIG_NAME.activationPackage && ./result/activate
+home-manager switch --flake .#$HOMECONFIG_NAME
 
 # OR
 
-home-manager switch --flake .#$HOMECONFIG_NAME
+nix build .#homeManagerConfigurations.$HOMECONFIG_NAME.activationPackage && ./result/activate
+```
+
+To update the packages for home-manager, simply run the nix-channel update and flake-lock updates first, then run the home-manager switch command above.
+```
+nix-channel --update
+nix flake update ~/.config/nixpkgs
 ```
 
 To check the updated list of `$HOMECONFIG_NAME`, run the following command and use the name immediately after the `homeConfigurations.` prefix
 ```bash
 $ grep 'homeConfigurations' ~/.config/nixpkgs/flake.nix
-homeConfigurations.linux_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
-homeConfigurations.linux_headless_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
-homeConfigurations.darwin_64 = makeHomeMgrConfig { # NOTE: REPLACE username / homeDirectory
+homeConfigurations.linux_64 = makeHomeMgrConfig {
+homeConfigurations.linux_headless_64 = makeHomeMgrConfig {
+homeConfigurations.darwin_64 = makeHomeMgrConfig {
 ```
 
 As per the note, before running, you should go ahead and edit both the target `homeDirectory` as well as the `username`
+
+## Rollbacks, cleanups and other miscelleanous ops info
+
+### Rollbacks & Cleanups
+Relevant Link: https://nix-community.github.io/home-manager/index.html#sec-usage-rollbacks
+
+Home Manager as of time of writing does not support rollbacks explicitly but the following steps can
+be used to help with this:
+```bash
+# 1. Run the following commands to see the generation you'll want to rollback to
+$ home-manager generations
+2022-07-31 11:44 : id 3 -> /nix/store/c4nxmvixgan6iw3h4qyb35mrllip4rzc-home-manager-generation
+2022-07-30 23:54 : id 2 -> /nix/store/6ybk9xq9i44v9afy27wwjpk2wz92z0cr-home-manager-generation
+2022-07-30 13:52 : id 1 -> /nix/store/qh89xz60pdiwizzr7q2mijm7iv8mh7dg-home-manager-generation
+
+# 2. Copy the store path of the generation you'll like to rollback to and run its `activate` script
+# For example if we want to rollback to generation 1
+$ /nix/store/qh89xz60pdiwizzr7q2mijm7iv8mh7dg-home-manager-generation/activate
+Starting home manager activation
+```
+
+Cleaning up unused nix stores can be done via the following:
+```bash
+# First cleanup home-generations, can replace `now` with relative days such as '-30days` etc
+home-manager expire-generations now
+
+nix-store --gc
+# OR the following to erase every generation for nix-store
+nix-collect-garbage -d
+```
+
+### Misc Info 1: Imperative Operations
+
+Taken from: https://nixos.wiki/wiki/Nix#Imperative_Operations
+
+nix environments also technically allow imperative operations, although the `home-manager switch .#$HOMECONFIG_NAME` should overwrite this
+
+Below are some `nix-env` common commands used to run imperatively
+```bash
+nix search packagename # Searching for packages
+nix-env -iA packagename # Installing a package, for example in `nix-shell`, you can run `nix-env -iA nixpkgs.custom_python310_with_defaults`
+nix-env -q # List installed packages
+nix-env -e packagename # Uninstall packages
+nix-env -u # Upgrade packages
+nix-env --list-generations # see nix-env generations
+nix-env --delete-generations +3 # remove every generation except current + 2 older
+nix-env --delete-generations old # remove all old generations
+nix-channel --list # list all installed channels
+nix-channel --update # update all nix channels
+nix-channel --remove channelname # remove channel
+nix-channel --add CHANNEL_URL channel_name # add a new channel to track, e.g. nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
+```
+
+### Misc Info 2: Temporary Shell
+
+Sometimes you'll want to try out temporary builds and not overwrite the current system, in this case
+nix allows us to drop into a temporary `shell` environment via `nix-shell`.
+
+To drop into this `shell`, with the project's overlays applied, do the following:
+```bash
+# cd into the nixpkgs path (i.e. ~/.config/nixpkgs), the path for this repo
+cd ~/.config/nixpkgs
+
+# drop into the environment, this should take a while if its your first time as
+# the store will take a while to fetch / build
+# the packages required
+nix-shell --pure
+```
 
 ## Getting Started (1) - Nix/Flakes/Home-Manager Installation
 
@@ -103,8 +177,35 @@ NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channel
 
 ## Getting Started (2) - Git Clone
 
+Clone the repository to the following path `~/.config/nixpkgs`.
 ```bash
 git clone git@github.com:lohvht/dotfiles.git ~/.config/nixpkgs
+```
+
+After that, proceed with the `home-manager switch` instruction at the [start of the document](#to-update-local-dotfiles--installed-packages)
+
+## Getting Started (3) - Non nix/home-manager related settings
+
+This repository consists of packages and dotfiles installations that can only be done at the `$HOME` level, as this is not a `NixOS` module.
+
+While certain tools and packages (such as some language support for Python/Golang/Rust etc) can be installed here, others tools may require installation at a system level, such as via either your native package manager or manual installation.
+
+Below in the following section are some of the starting points for some tools that I use
+### Docker installation
+Install docker desktop here: https://docs.docker.com/get-docker/
+
+### Change Default Shell
+1. Add the full path of the desired shell to the end of the `/etc/shells` file
+
+e.g.
+```bash
+echo '/home/myunixusername/.nix-profile/bin/zsh' >> /etc/shells
+echo '/home/myunixusername/.nix-profile/bin/bash' >> /etc/shells
+```
+
+2. Change shell with the following
+```bash
+chsh -s ~/.nix-profile/bin/fish
 ```
 
 ## Updating nix / nix packages / flake lockfile
@@ -126,10 +227,6 @@ Multi-user Nix users on Linux should run this with sudo:
 ```
 nix-channel --update; nix-env -iA nixpkgs.nix nixpkgs.cacert; systemctl daemon-reload; systemctl restart nix-daemon
 ```
-
-### Nix Packages
-
-TODO:
 
 ### Flake update lockfile
 ```bash

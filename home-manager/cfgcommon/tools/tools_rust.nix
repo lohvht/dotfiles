@@ -1,0 +1,19 @@
+config: lib: pkgs: extraArgs:
+let
+# TODO: Finish up this section
+in
+lib.optionals tools_rust != null [
+  cfgcommonlib.mkCfgCommon {
+    shell_extracommon = [
+      ''#### GENERATED SHELL SECTION FOR tools_rust START ###''
+      ''
+      if [[ -r ${config.home.homeDirectory}/.cargo/env ]]; then
+          source "${config.home.homeDirectory}/.cargo/env"
+      else
+          echo "WARNING: Can't find cargo env for rustup"
+      fi
+      ''
+      ''#### GENERATED SHELL SECTION FOR tools_rust END ###''
+    ];
+  }
+]

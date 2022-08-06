@@ -7,7 +7,7 @@
       then
       # If we have a lock, fetch locked nixpkgs
         let
-          inherit ((fromJSON (readFile ./flake.lock)).nodes.nixpkgs) locked;
+          inherit ((fromJSON (readFile ./flake.lock)).nodes.nixpkgs-stable) locked;
         in
         fetchTarball {
           url = "https://github.com/nixos/nixpkgs/archive/${locked.rev}.tar.gz";
@@ -20,7 +20,7 @@
         };
 
     system = currentSystem;
-    overlays = [ ];
+    overlays = [ (import ./overlays) ];
 
   in
   import nixpkgs { inherit system overlays; }
@@ -33,5 +33,25 @@ let
   '';
 in
 pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [ nix home-manager git ];
+  nativeBuildInputs = with pkgs; [
+    cacert
+    vim
+    nix
+    which
+    less
+    lesspipe
+    home-manager
+    git
+    nix-prefetch-git # To check thee sha256 checksum needed for mkDerivation: e.g, `nix-prefetch-git --url https://github.com/pyenv/pyenv.git --rev v2.3.3`
+    wget
+    curl
+    ripgrep
+
+    # TODO: Extra for testing overlays
+    # Remove when not needed
+    custom_python310_with_defaults
+    python310Packages.virtualenvwrapper
+    pyenv
+    nvm
+  ];
 }
