@@ -194,6 +194,8 @@ in
         nxflupi = "nix flake lock --update-input";
         nxcfgcd = "cd ~/.config/nixpkgs";
         nxrp = "nix repl";
+        nxsclean = "nix-store --gc";
+        hmclean = "home-manager expire-generations now";
       };
       shell_functions = [
         ''
