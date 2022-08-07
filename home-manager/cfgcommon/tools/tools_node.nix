@@ -21,7 +21,7 @@ lib.optionals (tools_node != null) [
       };
     };
 
-    shell_extracommoninit = [
+    shell_extracommon = [
       ''#### GENERATED SHELL SECTION FOR tools_node START ###''
       ''
       # Init Node version manager (NVM) for nix

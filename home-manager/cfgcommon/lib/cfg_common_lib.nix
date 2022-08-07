@@ -78,15 +78,6 @@ mergeCfgCommonsOp = x: y: let
   ny = mkCfgCommon y;
 in
 recursiveUpdateMerge nx ny;
-# mkCfgCommon{
-#   shell_variables = recursiveUpdateMerge nx.shell_variables y.shell_variables;
-#   shell_paths = nx.shell_paths ++ y.shell_paths;
-#   shell_aliases = recursiveUpdateMerge nx.shell_aliases y.shell_aliases;
-#   shell_functions = nx.shell_functions ++ y.shell_functions;
-#   shell_extracommon = nx.shell_extracommon ++ y.shell_extracommon;
-#   home_packages = nx.home_packages ++ y.home_packages;
-#   home_programs = recursiveUpdateMerge nx.home_programs y.home_programs;
-# };
 in
 {
   inherit mkCfgCommon;

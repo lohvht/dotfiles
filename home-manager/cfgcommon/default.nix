@@ -27,8 +27,8 @@ let
     shell_extracommon = builtins.concatStringsSep "\n" shell_extracommon;
     shell_extracommoninit = builtins.concatStringsSep "\n" shell_extracommoninit;
   };
-  bash_cfg = import ../shell/bash pkgs extraArgs shell_config;
-  zsh_cfg = import ../shell/zsh pkgs extraArgs shell_config;
+  bash_cfg = import ../shell/bash config pkgs extraArgs shell_config;
+  zsh_cfg = import ../shell/zsh config pkgs extraArgs shell_config;
 
   res_home_packages = lib.unique (home_packages ++ bash_cfg.home_packages ++ zsh_cfg.home_packages);
   res_home_programs = cfgcommonlib.recursiveUpdateMergeAttrs [home_programs bash_cfg.home_programs zsh_cfg.home_programs];
