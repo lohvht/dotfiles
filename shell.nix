@@ -42,17 +42,13 @@ pkgs.mkShell {
     lesspipe
     home-manager
     git
-    nix-prefetch-git # To check thee sha256 checksum needed for mkDerivation: e.g, `nix-prefetch-git --url https://github.com/pyenv/pyenv.git --rev v2.3.3`
+    nix-prefetch-git # To check thee sha256 checksum needed for mkDerivation: e.g, `nix-prefetch-git --url https://github.com/example/example.git --rev v2.3.3`
     wget
     curl
     ripgrep
 
     # TODO: Extra for testing overlays
     # Remove when not needed
-    custom_python310_with_defaults
-    python310Packages.virtualenvwrapper
-    pyenv
-    nvm
   ];
   shellHook = ''
     # Put any shell code that you'll like to run here
