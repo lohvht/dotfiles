@@ -3,6 +3,7 @@ config: lib: pkgs: extraArgs:
 let
   cfgcommonlib = import ./lib/cfg_common_lib.nix;
   inherit (extraArgs) is_GUI extra_git_config;
+  NXPKGS_CFG_PATH = "~/.config/nixpkgs";
 in
 [
   (cfgcommonlib.mkCfgCommon {
@@ -190,16 +191,28 @@ in
         # kubernetes
         k="kubectl ";
         # Nix aliases
-        nxup = "nix flake update"; # Update all flake inputs
-        nxcd = "cd ~/.config/nixpkgs";
+        nxcd = "cd ${NXPKGS_CFG_PATH}";
         nxrp = "nix repl";
         nxclean = "nix-store --gc";
+        nxcleandeep = "nix-collect-garbage -d";
         hmclean = "home-manager expire-generations now";
+        hmls = ''grep -Eo 'homeConfigurations.*' ${NXPKGS_CFG_PATH}/flake.nix | awk -F"homeConfigurations." '{print (NF>1)? $NF : ""}' | cut -d ' ' -f 1'';
       };
       shell_functions = [
         ''
+        function nxup() {
+          local restore=$PWD
+          cd ${NXPKGS_CFG_PATH}
+          nix flake update $@
+          cd $restore
+        }
+        ''
+        ''
         function hmapply() {
+          local restore=$PWD
+          cd ${NXPKGS_CFG_PATH}
           home-manager switch --impure --flake .#$@
+          cd $restore
         }
         ''
         ''
@@ -266,7 +279,7 @@ in
         ## Nix functions
         function nxsh() {
           local restore=$PWD
-          cd ~/.config/nixpkgs
+          cd ${NXPKGS_CFG_PATH}
           # nix develop $@
           nix-shell $@
           cd $restore
