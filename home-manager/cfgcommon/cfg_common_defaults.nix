@@ -276,7 +276,7 @@ in
         mkdir -p ${config.home.homeDirectory}/.vim/undo
 
         # Load initial extra shell dotfiles
-        for file in ~/.{rcextra}; do
+        for file in ~/.{aliasextra,rcextra}; do
           [ -r "$file" ] && [ -f "$file" ] && source "$file";
         done;
         ''

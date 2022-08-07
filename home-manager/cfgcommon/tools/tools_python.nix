@@ -85,11 +85,11 @@ lib.optionals (tools_python != null) [
     shell_extracommon = [
       ''#### GENERATED SHELL SECTION FOR tools_python START ###''
       ''
+      # init virtualenvwrapper
+      . virtualenvwrapper.sh
       if command -v pyenv 1>/dev/null 2>&1; then
         eval "$(pyenv init -)"
       fi
-      # init virtualenvwrapper
-      . virtualenvwrapper.sh
       ''
       ''#### GENERATED SHELL SECTION FOR tools_python END ###''
     ];
