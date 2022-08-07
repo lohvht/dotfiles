@@ -68,6 +68,11 @@
       # pkgs = nixpkgs-stable.legacyPackages.${system};
       extraSpecialArgs = {
         is_GUI = true;
+        tools_golang = {};
+        tools_python = {};
+        tools_node = {};
+        # tools_rust = {}; # TODO: Rust installation not ready yet
+        tools_latex = {};
       };
     };
     homeConfigurations.linux_headless_64 = makeHomeMgrConfig rec { # NOTE: REPLACE username / homeDirectory if needed
