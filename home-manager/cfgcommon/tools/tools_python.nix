@@ -2,10 +2,15 @@ config: lib: pkgs: extraArgs:
 let
   cfgcommonlib = import ../lib/cfg_common_lib.nix;
   inherit (extraArgs) tools_python is_GUI;
+  PYENV_ROOT = "${config.home.homeDirectory}/.pyenv";
 in
 lib.optionals (tools_python != null) [
   (cfgcommonlib.mkCfgCommon {
+    shell_paths = [
+      "${PYENV_ROOT}/bin"
+    ];
     shell_variables = {
+      inherit PYENV_ROOT;
       # directory for virtualenvs created using virtualenvwrapper
       WORKON_HOME = "${config.home.homeDirectory}/.virtualenvs";
       # use the same directory for virtualenvs as virtualenvwrapper
@@ -16,13 +21,21 @@ lib.optionals (tools_python != null) [
     };
     home_packages = [
       pkgs.python3
-      # TODO: explore using mach-nix for python development instead:
-      #       May be worth the effort instead of manually using our custom pyenv overlay
-      # https://github.com/DavHau/mach-nix/blob/5a51cd46a0c65dc7e70a9741264ec1268c00567b/examples.md#use-mach-nix-from-a-flake
-      pkgs.pyenv # will install pyenv_postinit as well
-      pkgs.custom_python310_with_defaults
-      pkgs.python310Packages.virtualenvwrapper # can't install within custom_python310_with_defaults as nix will wrap it with something that cant be sourced
+      pkgs.python3Packages.pip
+      pkgs.python3Packages.virtualenv
+      pkgs.python3Packages.virtualenvwrapper
     ];
+    home_files = {
+      "${PYENV_ROOT}" = {
+        recursive = true;
+        source = pkgs.fetchFromGitHub {
+          owner = "pyenv";
+          repo = "pyenv";
+          rev = "v2.3.3";
+          sha256 = "0a50nk6nmn19yxf5qxmc332wfbsvyn1yxhvn4imqy181fkwq2wlg";
+        };
+      };
+    };
     home_programs = {
     } // lib.optionalAttrs is_GUI {
       vscode = {
@@ -72,8 +85,9 @@ lib.optionals (tools_python != null) [
     shell_extracommoninit = [
       ''#### GENERATED SHELL SECTION FOR tools_python START ###''
       ''
-      # init pyenv shims & auto-completion
-      . pyenv_postinit
+      if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+      fi
       # init virtualenvwrapper
       . virtualenvwrapper.sh
       ''

@@ -30,7 +30,7 @@ let
   bash_cfg = import ../shell/bash pkgs extraArgs shell_config;
   zsh_cfg = import ../shell/zsh pkgs extraArgs shell_config;
 
-  res_home_packages = home_packages ++ bash_cfg.home_packages ++ zsh_cfg.home_packages;
+  res_home_packages = lib.unique (home_packages ++ bash_cfg.home_packages ++ zsh_cfg.home_packages);
   res_home_programs = cfgcommonlib.recursiveUpdateMergeAttrs [home_programs bash_cfg.home_programs zsh_cfg.home_programs];
   res_home_files = cfgcommonlib.recursiveUpdateMergeAttrs [home_files bash_cfg.home_files zsh_cfg.home_files];
 in
