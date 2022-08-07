@@ -18,6 +18,9 @@ To update the packages for home-manager, simply run the nix-channel update and f
 ```
 nix-channel --update
 nix flake update ~/.config/nixpkgs
+
+# OR
+nxup
 ```
 
 To check the updated list of `$HOMECONFIG_NAME`, run the following command and use the name immediately after the `homeConfigurations.` prefix

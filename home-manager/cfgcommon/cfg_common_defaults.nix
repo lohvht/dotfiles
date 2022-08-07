@@ -203,6 +203,7 @@ in
         function nxup() {
           local restore=$PWD
           cd ${NXPKGS_CFG_PATH}
+          nix-channel --update
           nix flake update $@
           cd $restore
         }
