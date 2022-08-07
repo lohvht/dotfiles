@@ -4,12 +4,16 @@
 Assuming if you have completed all of the [__Getting Started__](#getting-started-1---nixflakeshome-manager-installation) instructions below,
 you should be able to run the following command to apply the dotfiles / installed package changes.
 ```bash
-home-manager switch --flake .#$HOMECONFIG_NAME
+home-manager switch --impure --flake .#$HOMECONFIG_NAME
 
 # OR
 
 nix build .#homeManagerConfigurations.$HOMECONFIG_NAME.activationPackage && ./result/activate
 ```
+
+### NB: A word about the impurity and the `--impure`  flag
+The above advocates for `--impure` purely because we are using our `$HOME` and `$USER` env vars to
+switch the home-manager config. We could probably remove `--impure` if we set the userName and homeDirectories for the respective  `homeConfigurations` available, or just define a new `homeConfiguration` that does not use those.
 
 To update the packages for home-manager, simply run the nix-channel update and flake-lock updates first, then run the home-manager switch command above.
 ```

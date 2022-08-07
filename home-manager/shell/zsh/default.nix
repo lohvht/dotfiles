@@ -3,9 +3,9 @@ pkgs: extraArgs: { shell_function_str, shell_extracommon, shell_extracommoninit 
 let
   # utils
   stringifySetOptFn = shellOptions : let
-    setOptCmdFn = v: if lib.hasPrefix "-" v then "unsetopt" else "setopt";
-  in concatStringsSep "\n" (
-    map (v: "${setOptCmdFn v} ${lib.removePrefix "-" v}") shellOptions
+    setOptCmdFn = v: if pkgs.lib.hasPrefix "-" v then "unsetopt" else "setopt";
+  in pkgs.lib.concatStringsSep "\n" (
+    map (v: "${setOptCmdFn v} ${pkgs.lib.removePrefix "-" v}") shellOptions
   );
 
   shellOptions = [
@@ -22,7 +22,7 @@ in
     pkgs.meslo-lgs-nf # The Meslo Nerd Font patched for Powerlevel10k
   ];
   home_files = {
-    ".p10k.zsh" = builtins.readFile ./.p10k.zsh;
+    ".p10k.zsh".text = builtins.readFile ./.p10k.zsh;
   };
   home_programs = {
     zsh = {
@@ -131,8 +131,8 @@ in
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
         # Initialization code that may require console input (password prompts, [y/n]
         # confirmations, etc.) must go above this block; everything else may go below.
-        if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-          source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
       '';
 

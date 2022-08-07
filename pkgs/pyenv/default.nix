@@ -20,21 +20,31 @@
 }:
 let
   # TODO: This pyenv package installation still has a few issues
-  #       However installation for python 3 in general should be safe
+  #       However installation for python>=3.7.8 in general should be safe
   #       Pyenv has a list of common build problems, need to check why
   #       https://github.com/pyenv/pyenv/wiki/Common-build-problems
+  #
+  #       We may also need to study how Cpython is actually compiled on nix's end
+  #       So that we can emulate it when doing the pyenv installs
+  #       https://github.com/NixOS/nixpkgs/blob/2270b66d759f0a9c022576ce42fa5a770a754250/pkgs/development/interpreters/python/default.nix
   buildFlags = {
     CPPFLAGS = builtins.concatStringsSep " " [
       "-I${zlib.dev}/include"
       "-I${libffi.dev}/include"
       "-I${readline.dev}/include"
       "-I${bzip2.dev}/include"
-      "-I${openssl.dev}/include" 
+      "-I${openssl.dev}/include"
+      "-I${ncurses.dev}/include"
       "-I${sqlite.dev}/include"
       "-I${xz.dev}/include"
     ];
     CFLAGS = builtins.concatStringsSep " " [
+      "-I${zlib.dev}/include"
+      "-I${libffi.dev}/include"
+      "-I${readline.dev}/include"
+      "-I${bzip2.dev}/include"
       "-I${openssl.dev}/include"
+      "-I${ncurses.dev}/include"
       "-I${sqlite.dev}/include"
       "-I${xz.dev}/include"
     ];

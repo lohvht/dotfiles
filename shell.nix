@@ -7,7 +7,7 @@
       then
       # If we have a lock, fetch locked nixpkgs
         let
-          inherit ((fromJSON (readFile ./flake.lock)).nodes.nixpkgs-stable) locked;
+          inherit ((fromJSON (readFile ./flake.lock)).nodes.nixpkgs-unstable) locked;
         in
         fetchTarball {
           url = "https://github.com/nixos/nixpkgs/archive/${locked.rev}.tar.gz";
@@ -54,4 +54,7 @@ pkgs.mkShell {
     pyenv
     nvm
   ];
+  shellHook = ''
+    # Put any shell code that you'll like to run here
+  '';
 }

@@ -1,10 +1,12 @@
 config: lib: pkgs: extraArgs:
 let
 # TODO: Finish up this section
+  cfgcommonlib = import ../lib/cfg_common_lib.nix;
+  inherit (extraArgs) tools_rust;
 in
-lib.optionals tools_rust != null [
-  cfgcommonlib.mkCfgCommon {
-    shell_extracommon = [
+lib.optionals (tools_rust != null) [
+  (cfgcommonlib.mkCfgCommon {
+    shell_extracommoninit = [
       ''#### GENERATED SHELL SECTION FOR tools_rust START ###''
       ''
       if [[ -r ${config.home.homeDirectory}/.cargo/env ]]; then
@@ -15,5 +17,5 @@ lib.optionals tools_rust != null [
       ''
       ''#### GENERATED SHELL SECTION FOR tools_rust END ###''
     ];
-  }
+  })
 ]
