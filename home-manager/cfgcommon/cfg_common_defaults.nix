@@ -190,19 +190,23 @@ in
         # kubernetes
         k="kubectl ";
         # Nix aliases
-        nxflup = "nix flake lock"; # Update all flake inputs
-        nxflupi = "nix flake lock --update-input";
-        nxcfgcd = "cd ~/.config/nixpkgs";
+        nxup = "nix flake update"; # Update all flake inputs
+        nxcd = "cd ~/.config/nixpkgs";
         nxrp = "nix repl";
-        nxsclean = "nix-store --gc";
+        nxclean = "nix-store --gc";
         hmclean = "home-manager expire-generations now";
       };
       shell_functions = [
         ''
+        function hmapply() {
+          home-manager switch --impure --flake .#$@
+        }
+        ''
+        ''
         # Simple edit function
         function e() {
           # use $EDITOR, otherwise if not found fallback to vim
-          local editor="${EDITOR:-vi}"
+          local editor="''${EDITOR:-vi}"
           $editor $@
         }
         ''
