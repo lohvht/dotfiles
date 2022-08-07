@@ -7,7 +7,7 @@ in
 [
   (cfgcommonlib.mkCfgCommon {
       shell_variables = {
-        EDITOR = if is_GUI then "vim" else "code";
+        EDITOR = if is_GUI then "code" else "vim";
         # colored GCC warnings and errors
         GCC_COLORS ="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
       };
@@ -80,6 +80,7 @@ in
         vscode = {
           enable = true;
           package = pkgs.vscode;
+          mutableExtensionsDir = true;
           keybindings = if pkgs.stdenv.isDarwin then [
             { key = "shift+cmd+/"; command = "editor.action.goToImplementation"; when = "";}
           ] else [
@@ -268,6 +269,10 @@ in
       ];
       shell_extracommoninit = [
         ''
+        mkdir -p ${config.home.homeDirectory}/.vim/backups
+        mkdir -p ${config.home.homeDirectory}/.vim/swaps
+        mkdir -p ${config.home.homeDirectory}/.vim/undo
+
         # Load initial extra shell dotfiles
         for file in ~/.{rcextra}; do
           [ -r "$file" ] && [ -f "$file" ] && source "$file";

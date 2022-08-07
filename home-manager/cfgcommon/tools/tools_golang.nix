@@ -2,17 +2,21 @@ config: lib: pkgs: extraArgs:
 let
   cfgcommonlib = import ../lib/cfg_common_lib.nix;
   inherit (extraArgs) tools_golang is_GUI;
+  GOPATH = "${config.home.homeDirectory}/go";
 in
 lib.optionals (tools_golang != null) [
   (cfgcommonlib.mkCfgCommon {
     shell_paths = [
-      # golang's default `go install` bin path. Usually this will be `$HOME/go`
-      "$(go env GOPATH)/bin"
+      # # golang's default `go install` bin path. Usually this will be `$HOME/go`
+      "${GOPATH}/bin"
       "${config.home.homeDirectory}/.local/go/bin"
     ];
     home_packages = [
       pkgs.golangci-lint
     ];
+    shell_variables = {
+      inherit GOPATH;
+    };
     home_programs = {
       go = {
         # There may be some issues with `go` using certain types of compilation

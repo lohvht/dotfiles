@@ -11,10 +11,6 @@ home-manager switch --impure --flake .#$HOMECONFIG_NAME
 nix build .#homeManagerConfigurations.$HOMECONFIG_NAME.activationPackage && ./result/activate
 ```
 
-### NB: A word about the impurity and the `--impure`  flag
-The above advocates for `--impure` purely because we are using our `$HOME` and `$USER` env vars to
-switch the home-manager config. We could probably remove `--impure` if we set the userName and homeDirectories for the respective  `homeConfigurations` available, or just define a new `homeConfiguration` that does not use those.
-
 To update the packages for home-manager, simply run the nix-channel update and flake-lock updates first, then run the home-manager switch command above.
 ```
 nix-channel --update
@@ -29,7 +25,21 @@ homeConfigurations.linux_headless_64 = makeHomeMgrConfig {
 homeConfigurations.darwin_64 = makeHomeMgrConfig {
 ```
 
-As per the note, before running, you should go ahead and edit both the target `homeDirectory` as well as the `username`
+
+### NB: A word about the impurity and the `--impure`  flag
+The above advocates for `--impure` purely because we are using our `$HOME` and `$USER` env vars to
+switch the home-manager config. We could probably remove `--impure` if we set the `username` and `homeDirectory` for the respective  `homeConfigurations` available, or just define a new `homeConfiguration` that does not use those.
+
+### NB2: Errors on first application
+
+When applying the home-manager switch, occasionally Nix will fail to install the new home manager profile. Due to the a file conflict between `home-manager-path` and `nix`. An example of such a scenario here: https://github.com/nix-community/home-manager/issues/2995
+
+A workaround is to set the priority of the corresponding `nix` package to be 0, taking higher priority
+than `home-manager-path`
+
+```
+nix-env --set-flag priority 0 nix-2.10.3
+```
 
 ## Rollbacks, cleanups and other miscelleanous ops info
 

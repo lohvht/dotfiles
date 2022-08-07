@@ -6,7 +6,7 @@ let
 in
 lib.optionals (tools_rust != null) [
   (cfgcommonlib.mkCfgCommon {
-    shell_extracommoninit = [
+    shell_extracommon = [
       ''#### GENERATED SHELL SECTION FOR tools_rust START ###''
       ''
       if [[ -r ${config.home.homeDirectory}/.cargo/env ]]; then

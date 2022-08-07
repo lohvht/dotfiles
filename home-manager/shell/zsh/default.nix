@@ -1,5 +1,5 @@
 # Returns the zsh programs used as well as the additional pkgs required for the zsh shell 
-pkgs: extraArgs: { shell_function_str, shell_extracommon, shell_extracommoninit }:
+config: pkgs: extraArgs: { shell_function_str, shell_extracommon, shell_extracommoninit }:
 let
   # utils
   stringifySetOptFn = shellOptions : let
@@ -121,6 +121,10 @@ in
         # ZSH_CUSTOM=/path/to/new-custom-folder
       };
 
+      profileExtra = ''
+        if [ -e ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then . ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+      '';
+
       initExtraFirst = ''
         # Extra Init Shell Commands
         ${shell_extracommoninit}
@@ -139,7 +143,6 @@ in
       initExtra = ''
         # Extra shell opts for zsh
         ${setOptsStr}
-
         # Extra Shell Commands
         ${shell_extracommon}
         # Extra Shell Functions

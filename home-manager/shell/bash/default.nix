@@ -1,5 +1,5 @@
 # Returns the bash programs used as well as the additional pkgs required for the bash shell 
-pkgs: extraArgs: { shell_function_str, shell_extracommon, shell_extracommoninit }:
+config: pkgs: extraArgs: { shell_function_str, shell_extracommon, shell_extracommoninit }:
 let
 in
 {
@@ -31,6 +31,10 @@ in
         # on mac, give support to wombat256 colors
         TERM = "xterm-256color";
       };
+
+      profileExtra = ''
+        if [ -e ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then . ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+      '';
 
       bashrcExtra = ''
         ${shell_extracommoninit}
