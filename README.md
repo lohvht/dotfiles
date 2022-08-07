@@ -9,6 +9,9 @@ home-manager switch --impure --flake .#$HOMECONFIG_NAME
 # OR
 
 nix build .#homeManagerConfigurations.$HOMECONFIG_NAME.activationPackage && ./result/activate
+
+# OR After applying at least once, using the alias
+hmapply $HOMECONFIG_NAME
 ```
 
 To update the packages for home-manager, simply run the nix-channel update and flake-lock updates first, then run the home-manager switch command above.
@@ -19,10 +22,13 @@ nix flake update ~/.config/nixpkgs
 
 To check the updated list of `$HOMECONFIG_NAME`, run the following command and use the name immediately after the `homeConfigurations.` prefix
 ```bash
-$ grep 'homeConfigurations' ~/.config/nixpkgs/flake.nix
-homeConfigurations.linux_64 = makeHomeMgrConfig {
-homeConfigurations.linux_headless_64 = makeHomeMgrConfig {
-homeConfigurations.darwin_64 = makeHomeMgrConfig {
+$ grep -Eo 'homeConfigurations.*' ~/.config/nixpkgs/flake.nix | awk -F"homeConfigurations." '{print (NF>1)? $NF : ""}' | cut -d ' ' -f 1
+linux_64
+linux_headless_64
+darwin_64
+
+# OR After applying at least once, using the alias
+hmls
 ```
 
 
@@ -65,10 +71,18 @@ Cleaning up unused nix stores can be done via the following:
 ```bash
 # First cleanup home-generations, can replace `now` with relative days such as '-30days` etc
 home-manager expire-generations now
+# OR the folowing after applying once
+hmclean
+
 
 nix-store --gc
-# OR the following to erase every generation for nix-store
+# Or the following after applying once
+nxclean
+
+# The following to erase every generation for nix-store
 nix-collect-garbage -d
+# Or the following after applying once
+nxcleandeep
 ```
 
 ### Misc Info 1: Imperative Operations
@@ -245,6 +259,9 @@ nix-channel --update; nix-env -iA nixpkgs.nix nixpkgs.cacert; systemctl daemon-r
 ### Flake update lockfile
 ```bash
 nix flake update ~/.config/nixpkgs
+
+# After first apply
+nxup
 ```
 
 ## More Examples (Check with these)
