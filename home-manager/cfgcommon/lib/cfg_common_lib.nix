@@ -60,7 +60,7 @@ mkCfgCommon = {
   # home_programs to be added via programs in home.nix
   home_programs ? {},
   # home_files are files that are supposed to be written to home
-  home_files = {},
+  home_files ? {},
 }: {
   inherit shell_variables;
   inherit shell_paths;

@@ -1,12 +1,10 @@
 config: lib: pkgs: extraArgs:
 let
-  cfgcommonlib = import ../lib/cfg_common_lib.nix
+  cfgcommonlib = import ../lib/cfg_common_lib.nix;
   inherit (extraArgs) tools_latex is_GUI;
 in
-lib.optionals tools_latex != null [
-  cfgcommonlib.mkCfgCommon {
-    shell_paths = [
-    ];
+lib.optionals (tools_latex != null) [
+  (cfgcommonlib.mkCfgCommon {
     home_programs = {
       texlive = {
         enable = true;
@@ -15,7 +13,7 @@ lib.optionals tools_latex != null [
           # TODO: May wanna choose smaller scheme + add extra packages when needed
           # especially on places where space is a concern
           # We'll leave it to future Victor to handle though
-          tpkgs.scheme-full
+          inherit (tpkgs) scheme-full;
         };
       };
     } // lib.optionalAttrs is_GUI {
@@ -123,5 +121,5 @@ lib.optionals tools_latex != null [
         ];
       };
     };
-  }
+  })
 ]

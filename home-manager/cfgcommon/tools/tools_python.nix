@@ -1,10 +1,10 @@
 config: lib: pkgs: extraArgs:
 let
-  cfgcommonlib = import ../lib/cfg_common_lib.nix
+  cfgcommonlib = import ../lib/cfg_common_lib.nix;
   inherit (extraArgs) tools_python is_GUI;
 in
-lib.optionals tools_python != null [
-  cfgcommonlib.mkCfgCommon {
+lib.optionals (tools_python != null) [
+  (cfgcommonlib.mkCfgCommon {
     shell_variables = {
       # directory for virtualenvs created using virtualenvwrapper
       WORKON_HOME = "${config.home.homeDirectory}/.virtualenvs";
@@ -16,6 +16,9 @@ lib.optionals tools_python != null [
     };
     home_packages = [
       pkgs.python3
+      # TODO: explore using mach-nix for python development instead:
+      #       May be worth the effort instead of manually using our custom pyenv overlay
+      # https://github.com/DavHau/mach-nix/blob/5a51cd46a0c65dc7e70a9741264ec1268c00567b/examples.md#use-mach-nix-from-a-flake
       pkgs.pyenv # will install pyenv_postinit as well
       pkgs.custom_python310_with_defaults
       pkgs.python310Packages.virtualenvwrapper # can't install within custom_python310_with_defaults as nix will wrap it with something that cant be sourced
@@ -29,11 +32,11 @@ lib.optionals tools_python != null [
               "**/*.pyc" = true;
           };
           "workbench.editorAssociations" = {
-              "*.ipynb" = "jupyter-notebook"
+              "*.ipynb" = "jupyter-notebook";
           };
           "notebook.cellToolbarLocation" = {
               "default" = "right";
-              "jupyter-notebook" = "left"
+              "jupyter-notebook" = "left";
           };
         };
         extensions = [
@@ -66,7 +69,7 @@ lib.optionals tools_python != null [
       # deactivate
       ''
     ];
-    shell_extracommon = [
+    shell_extracommoninit = [
       ''#### GENERATED SHELL SECTION FOR tools_python START ###''
       ''
       # init pyenv shims & auto-completion
@@ -76,5 +79,5 @@ lib.optionals tools_python != null [
       ''
       ''#### GENERATED SHELL SECTION FOR tools_python END ###''
     ];
-  }
+  })
 ]

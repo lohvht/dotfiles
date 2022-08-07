@@ -3,8 +3,8 @@ let
   cfgcommonlib = import ../lib/cfg_common_lib.nix;
   inherit (extraArgs) tools_golang is_GUI;
 in
-lib.optionals tools_golang != null [
-  cfgcommonlib.mkCfgCommon {
+lib.optionals (tools_golang != null) [
+  (cfgcommonlib.mkCfgCommon {
     shell_paths = [
       # golang's default `go install` bin path. Usually this will be `$HOME/go`
       "$(go env GOPATH)/bin"
@@ -63,5 +63,5 @@ lib.optionals tools_golang != null [
         ];
       };
     };
-  }
+  })
 ]

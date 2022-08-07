@@ -5,7 +5,7 @@ let
   inherit (extraArgs) is_GUI extra_git_config;
 in
 [
-  cfgcommonlib.mkCfgCommon {
+  (cfgcommonlib.mkCfgCommon {
       shell_variables = {
         EDITOR = if is_GUI then "vim" else "code";
         # colored GCC warnings and errors
@@ -29,13 +29,13 @@ in
         pkgs.nix-prefetch-git
         pkgs.jq
         pkgs.tmux
-        # Home Manager's way of installing fonts for home-manager
-        # TODO: Untested but looks okay
-        # https://discourse.nixos.org/t/home-manager-nerdfonts/11226
-        (pkgs.nerdfonts.override { fonts = [ "Hack Nerd Font" ]; })
+        # # Home Manager's way of installing fonts for home-manager
+        # # TODO: Untested but looks okay
+        # # https://discourse.nixos.org/t/home-manager-nerdfonts/11226
+        # (pkgs.nerdfonts.override { fonts = [ "Hack Nerd Font" ]; })
       ];
       home_files = {
-        ".vimrc" = builtins.readFile ./.vimrc;
+        ".vimrc".text = builtins.readFile ./.vimrc;
       };
       home_programs = {
         man = {
@@ -48,10 +48,8 @@ in
           enableZshIntegration = true;
           nix-direnv = {
             enable = true;
-            enableFlakes = true;
           };
         };
-        fonts.fontconfig.enable = true;
         git = {
           enable = true;
           lfs.enable = true;
@@ -83,9 +81,9 @@ in
           enable = true;
           package = pkgs.vscode;
           keybindings = if pkgs.stdenv.isDarwin then [
-            { key = "shift+cmd+/"; command = "editor.action.goToImplementation"; when: ""}
+            { key = "shift+cmd+/"; command = "editor.action.goToImplementation"; when = "";}
           ] else [
-            { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when: ""}
+            { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when = "";}
           ];
           userSettings = {
             "workbench.settings.editor" = "json";
@@ -103,18 +101,18 @@ in
                     "text" = "TODO:";
                     "backgroundColor" = "teal";
                     "color" = "black";
-                    "overviewRulerColor" = "teal"
-                };
+                    "overviewRulerColor" = "teal";
+                }
                 {
                     "text" = "NOTE:";
                     "backgroundColor" = "purple";
                     "color" = "white";
-                    "overviewRulerColor" = "purple"
-                };
+                    "overviewRulerColor" = "purple";
+                }
             ];
             "workbench.colorCustomizations" = {};
             "editor.tokenColorCustomizations" = {
-                "comments" = "#278a06"
+                "comments" = "#278a06";
             };
             "search.searchOnType" = false;
             "diffEditor.ignoreTrimWhitespace" = false;
@@ -262,6 +260,7 @@ in
         function nxsh() {
           local restore=$PWD
           cd ~/.config/nixpkgs
+          # nix develop $@
           nix-shell $@
           cd $restore
         }
@@ -286,5 +285,5 @@ in
         [ -x ${pkgs.lesspipe}/bin/lesspipe.sh ] && eval "$(SHELL=${pkgs.bash} ${pkgs.lesspipe}/bin/lesspipe.sh)"
         ''
       ];
-  };
+  })
 ]

@@ -24,7 +24,7 @@ in
 
       sessionVariables = {
         PS1 = "\[\e]0;\u@\h: \w\a\]\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$";
-      } // lib.optionalAttrs pkgs.stdenv.isDarwin {
+      } // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
         # Apparently this is how MacOS sees colour
         CLICOLOR = 1;
         LSCOLORS = "ExFxBxDxCxegedabagacad";

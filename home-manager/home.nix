@@ -22,12 +22,19 @@ let
     tools_latex = null;
   } // specialArgs;
 
+  cfgcommonlib = import ./cfgcommon/lib/cfg_common_lib.nix;
   cfgcmn = import ./cfgcommon config lib pkgs extraArgs;
   inherit (cfgcmn) shell_variables shell_paths shell_aliases home_packages home_files home_programs;
+  
+  final_home_programs = cfgcommonlib.recursiveUpdateMergeAttrs [
+    {
+      # Let Home Manager install and manage itself.
+      home-manager.enable = true;
+    }
+    home_programs
+  ];
 in
 {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
   # Allow installation of non-free pkgs
   nixpkgs.config.allowUnfree = true;
 
@@ -39,5 +46,5 @@ in
   home.shellAliases = shell_aliases;
   home.packages = home_packages;
   home.file = home_files;
-  programs = home_programs;
+  programs = final_home_programs;
 }
