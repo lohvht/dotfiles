@@ -25,7 +25,7 @@ nxup
 
 To check the updated list of `$HOMECONFIG_NAME`, run the following command and use the name immediately after the `homeConfigurations.` prefix
 ```bash
-$ grep -Eo 'homeConfigurations.*' ~/.config/nixpkgs/flake.nix | awk -F"homeConfigurations." '{print (NF>1)? $NF : ""}' | cut -d ' ' -f 1
+$ awk '/^###### HOMECONFIG PROFILES START/{p=1;next};/^###### HOMECONFIG PROFILES END/{p=0};p' ~/.config/nixpkgs/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}'
 linux_64
 linux_headless_64
 darwin_64
