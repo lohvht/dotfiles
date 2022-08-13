@@ -20,8 +20,6 @@ in
     {
       # Let Home Manager install and manage itself.
       programs.home-manager.enable = true;
-      # Allow installation of non-free pkgs
-      nixpkgs.config.allowUnfree = true;
       # Allow allow fontconfig to discover fonts and configurations installed through home.packages and nix-env. 
       fonts.fontconfig.enable = true;
 

@@ -36,6 +36,13 @@ in
       pkgs.teams
       pkgs.zoom-us
     ];
+    home.file.".local/bin/update_installed_exts.sh".source =
+    pkgs.fetchFromGitHub {
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = "8f868e154ca265e38481ab15d28429f7ff72e0e4";
+      sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
+    } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
     programs.alacritty = {
       # Alacritty is a terminal emulator
       # TODO: add in alacritty settings a la
@@ -73,7 +80,7 @@ in
     };
     programs.vscode = {
       enable = true;
-      package = pkgs.vscode;
+      package = pkgs.vscodium;
       mutableExtensionsDir = true;
       keybindings = if pkgs.stdenv.isDarwin then [
         { key = "shift+cmd+/"; command = "editor.action.goToImplementation"; when = "";}
@@ -116,24 +123,50 @@ in
       extensions = [
         pkgs.vscode-extensions.eamodio.gitlens
         pkgs.vscode-extensions.ms-azuretools.vscode-docker
-        pkgs.vscode-extensions.ms-vscode-remote.remote-containers
-        pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
-        pkgs.vscode-extensions.ms-vscode-remote.remote-ssh-edit
-        pkgs.vscode-extensions.ms-vscode-remote.vscode-remote-extensionpack
         pkgs.vscode-extensions.ms-vscode.cpptools
-        pkgs.vscode-extensions.ms-vscode.cmake-tools
-        pkgs.vscode-extensions.Tyriar.sort-lines
+        pkgs.vscode-extensions.tyriar.sort-lines
         pkgs.vscode-extensions.zxh404.vscode-proto3
-        pkgs.vscode-extensions.twxs.cmake
-        pkgs.vscode-extensions.wayou.vscode-todo-highlight
-        pkgs.vscode-extensions.wmaurer.change-case
         pkgs.vscode-extensions.tomoki1207.pdf
-        pkgs.vscode-extensions.mtxr.sqltools
-        pkgs.vscode-extensions.monokai.theme-monokai-pro-vscode
         pkgs.vscode-extensions.mikestead.dotenv
         pkgs.vscode-extensions.mechatroner.rainbow-csv
-        pkgs.vscode-extensions.bcanzanella.openmatchingfiles
         pkgs.vscode-extensions.jnoortheen.nix-ide
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          publisher = "jgclark";
+          name = "vscode-todo-highlight";
+          version = "2.0.4";
+          sha256 = "18zm1w4ziq3i7fn2rcd095va7nqnbdmsvr82lj27s33zrd2wwzzr";
+        }
+        {
+          name = "change-case";
+          publisher = "wmaurer";
+          version = "1.0.0";
+          sha256 = "0dxsdahyivx1ghxs6l9b93filfm8vl5q2sa4g21fiklgdnaf7pxl";
+        }
+        {
+          name = "cmake-tools";
+          publisher = "ms-vscode";
+          version = "1.12.22";
+          sha256 = "1jampq21wly9hrawzfmmn1829jk31h6kl37svv2xc3cz34jk914y";
+        }
+        {
+          name = "cmake";
+          publisher = "twxs";
+          version = "0.0.17";
+          sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
+        }
+        {
+          publisher = "monokai";
+          name = "theme-monokai-pro-vscode";
+          version = "1.1.20";
+          sha256 = "0ddwqsvsqdjblmb0xlad17czy2837g27ymwvzissz4b9r111xyhx";
+        }
+        {
+          publisher = "bcanzanella";
+          name = "openmatchingfiles";
+          version = "0.5.2";
+          sha256 = "0wpv77jir5k77ml0x1y21gk4kxk53vnkxrqg4v35clhdhszzh6fq";
+        }
       ];
     };
   };
