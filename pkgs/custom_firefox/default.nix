@@ -1,12 +1,5 @@
-{
-  nur,
-  wrapFirefox,
-  firefox-devedition-bin-unwrapped,
-}@pkgs:
-let
-  inherit (nur.repos.rycee) firefox-addons;
-in
-wrapFirefox firefox-devedition-bin-unwrapped {
+{ pkgs, ... }:
+pkgs.wrapFirefox pkgs.firefox-devedition-bin-unwrapped {
   extraPolicies = {
     # Policies here: https://github.com/mozilla/policy-templates
     AppAutoUpdate = false;
