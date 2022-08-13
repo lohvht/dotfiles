@@ -32,72 +32,33 @@
     default_overlays = {
       default = import ./overlays;
     };
-    # makeHomeMgrConfig sets some example / sane defaults when creating
-    # a homeManagerConfiguration
-    # To override these defaults, simple pass in the relevant param names
-    makeHomeMgrConfig = {
+    mkHomeMgrCfg = homeProfileName: {
       system ? flake-utils.lib.system.x86_64-linux,
-      extraSpecialArgs ? {},
-      ...
-    }@args: home-manager.lib.homeManagerConfiguration ({
+    }@args:
+    nixpkgs-unstable.lib.nameValuePair homeProfileName (home-manager.lib.homeManagerConfiguration ({
       # Using $USER and $HOME may be impure but it works generally as a sane default.
       # If needed, users should replace them with args passed in
       username = builtins.getEnv "USER";
       homeDirectory = /. + builtins.getEnv "HOME";
       system = system;
       pkgs = nixpkgs-unstable.legacyPackages.${system};
-      # Main configuration file
       configuration = import ./home-manager/home.nix;
-      stateVersion = "22.05";
       extraModules = [
-        # Add custom home-manager modules here
-        ./home-manager/modules.nix
+        ./home-manager/profiles/${homeProfileName}.nix
         # Adds overlays
         { nixpkgs.overlays = builtins.attrValues default_overlays; }
       ];
-      extraSpecialArgs = {
-        is_GUI = false;
-      } // extraSpecialArgs;
-    } // builtins.removeAttrs args ["extraSpecialArgs" "system"]);
+    } // builtins.removeAttrs args ["system"]));    
   in
   rec {
     # Home configurations
-    # Accessible via 'home-manager'
-    homeConfigurations.linux_64 = makeHomeMgrConfig rec { # NOTE: REPLACE username / homeDirectory if needed
-      # system = flake-utils.lib.system.x86_64-linux;
-      # pkgs = nixpkgs-stable.legacyPackages.${system};
-      extraSpecialArgs = {
-        is_GUI = true;
-        tools_golang = {};
-        tools_python = {};
-        tools_node = {};
-        # tools_rust = {}; # TODO: Rust installation not ready yet
-        tools_latex = {};
-      };
-    };
-    homeConfigurations.linux_headless_64 = makeHomeMgrConfig rec { # NOTE: REPLACE username / homeDirectory if needed
-      # system = flake-utils.lib.system.x86_64-linux;
-      # pkgs = nixpkgs-stable.legacyPackages.${system};
-      extraSpecialArgs = {
-        extra_git_config = {
-          # NOTE: Replace the usernames here
-          userEmail = "example@example.com";
-          userName = "Example Name";
-        };
-        tools_golang = {};
-        tools_python = {};
-        tools_node = {};
-        # tools_rust = {}; # TODO: Rust installation not ready yet
-        tools_latex = {};
-      };
-    };
-    homeConfigurations.darwin_64 = makeHomeMgrConfig rec { # NOTE: REPLACE username / homeDirectory if needed
-      system = flake-utils.lib.system.x86_64-darwin;
-      pkgs = nixpkgs-unstable.legacyPackages.${system};
-      # pkgs = nixpkgs-darwin-stable.legacyPackages.${system};
-      extraSpecialArgs = {
-        is_GUI = true;
-      };
+    # Accessible via 'home-manager', profile names correspond to filenames in ./home-manager/profile
+    homeConfigurations = nixpkgs-unstable.lib.mapAttrs' mkHomeMgrCfg {  # NOTE: REPLACE username / homeDirectory if needed
+###### HOMECONFIG PROFILES START
+      linux_64 = {};
+      linux_headless_64 = {};
+      darwin_64 = { system = flake-utils.lib.system.x86_64-darwin; };
+###### HOMECONFIG PROFILES END
     };
 
     # Packages
