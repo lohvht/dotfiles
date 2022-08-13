@@ -109,6 +109,7 @@ in
         nxclean = "nix-store --gc";
         nxcleandeep = "nix-collect-garbage -d";
         hmclean = "home-manager expire-generations now";
+        hmgens = "home-manager generations";
         hmls = ''awk '/^###### HOMECONFIG PROFILES START/{p=1;next};/^###### HOMECONFIG PROFILES END/{p=0};p' ~/.config/nixpkgs/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}' '';
       };
       programs.man = { enable = true; generateCaches = true; };
