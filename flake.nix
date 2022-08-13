@@ -16,6 +16,8 @@
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
+
+    nur.url = "github:nix-community/NUR";
   };
   outputs = {
     self,
@@ -24,12 +26,14 @@
     nixpkgs-unstable,
     # nixpkgs-darwin-stable,
     home-manager,
+    nur,
     ...
   }:
   let
-    # TODO: If you want to use packages exported from other flakes, add their overlays here.
+    # NOTE: If you want to use packages exported from other flakes, add their overlays here.
     # They will be added to your 'pkgs'
     default_overlays = {
+      nur = nur.overlay;
       default = import ./overlays;
     };
     mkHomeMgrCfg = homeProfileName: {

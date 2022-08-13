@@ -46,9 +46,6 @@ pkgs.mkShell {
     wget
     curl
     ripgrep
-
-    # TODO: Extra for testing overlays
-    # Remove when not needed
   ];
   shellHook = ''
     # Put any shell code that you'll like to run here

@@ -266,12 +266,3 @@ nix flake update ~/.config/nixpkgs
 # After first apply
 nxup
 ```
-
-## More Examples (Check with these)
-TODO: Remove this section when done
-- Example 1 nixpkgs by jonringer: https://github.com/jonringer/nixpkgs-config/blob/cc2958b5e0c8147849c66b40b55bf27ff70c96de/home.nix
-- Example2 nixpkgs by Misterio77: https://github.com/Misterio77/nix-starter-config/blob/main/flake.nix
-- Some comments on how to pin to specific versions of packages: https://news.ycombinator.com/item?id=28593823
-- Some examples on installing packages in home-manager specific to version: https://github.com/nix-community/home-manager/issues/2796
-- To find specific versions https://lazamar.co.uk/nix-versions/
-- Specific example on how to actually override a version of a package: https://github.com/NixOS/nixpkgs/issues/93327#issuecomment-825410447
