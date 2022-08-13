@@ -25,7 +25,7 @@ in
 
       home.sessionVariables = {
         SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-        EDITOR = if isGUIEnable then "code" else "vim";
+        EDITOR = if isGUIEnable then "codium" else "vim";
         # colored GCC warnings and errors
         GCC_COLORS ="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
       };
