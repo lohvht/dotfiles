@@ -1,24 +1,25 @@
-config: lib: pkgs: extraArgs:
+{ config, lib, pkgs, ... }:
 let
-  cfgcommonlib = import ../lib/cfg_common_lib.nix;
-  inherit (extraArgs) tools_golang is_GUI;
+  isGUIEnable = config.customHomeProfile.GUI.enable;
+  cfg = config.customHomeProfile.golang;
+
   GOPATH = "${config.home.homeDirectory}/go";
 in
-lib.optionals (tools_golang != null) [
-  (cfgcommonlib.mkCfgCommon {
-    shell_paths = [
-      # # golang's default `go install` bin path. Usually this will be `$HOME/go`
-      "${GOPATH}/bin"
-      "${config.home.homeDirectory}/.local/go/bin"
-    ];
-    home_packages = [
-      pkgs.golangci-lint
-    ];
-    shell_variables = {
-      inherit GOPATH;
-    };
-    home_programs = {
-      go = {
+{
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    {
+      home.sessionPath = [
+        # # golang's default `go install` bin path. Usually this will be `$HOME/go`
+        "${GOPATH}/bin"
+        "${config.home.homeDirectory}/.local/go/bin"
+      ];
+      home.packages = [
+        pkgs.golangci-lint
+      ];
+      home.sessionVariables = {
+        inherit GOPATH;
+      };
+      programs.go = {
         # There may be some issues with `go` using certain types of compilation
         # such as using cgo or comoiling with static compiles
         # Can check here for more info: in https://nixos.wiki/wiki/Go
@@ -26,8 +27,9 @@ lib.optionals (tools_golang != null) [
         enable = true;
         package = pkgs.go;
       };
-    } // lib.optionalAttrs is_GUI {
-      vscode = {
+    }
+    (lib.mkIf isGUIEnable {
+      programs.vscode = {
         userSettings = {
           "go.formatTool" = "goimports";
           "go.useLanguageServer" = true;
@@ -66,6 +68,6 @@ lib.optionals (tools_golang != null) [
           pkgs.vscode-extensions.golang.go
         ];
       };
-    };
-  })
-]
+    })
+  ]);
+}

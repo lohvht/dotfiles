@@ -3,5 +3,11 @@
 {
   imports = [
     # List your module files here
+    ./common
+    ./golang
+    ./latex
+    ./node
+    ./python
+    ./rust 
   ];
 }
