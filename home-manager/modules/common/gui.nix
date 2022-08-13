@@ -78,6 +78,9 @@ in
         settings = ffcommon_settings // ffprivate_settings;
       };
     };
+    home.shellAliases = {
+      code="codium";
+    };
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
