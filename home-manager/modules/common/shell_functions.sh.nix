@@ -37,7 +37,7 @@ hmapply() {
   fi
 
   echo "Running home manager profile switch on $homeProfileName now"
-  home-manager switch --impure --flake $@ .#$homeProfileName
+  home-manager switch --impure --flake .#$homeProfileName $@
   cd $restore
 }
 

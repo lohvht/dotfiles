@@ -86,8 +86,14 @@ in
           pkgs.vscode-extensions.ms-python.python
           pkgs.vscode-extensions.ms-python.vscode-pylance
           pkgs.vscode-extensions.ms-toolsai.jupyter
-          pkgs.vscode-extensions.ms-toolsai.jupyter-keymap
           pkgs.vscode-extensions.ms-toolsai.jupyter-renderers
+        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "jupyter-keymap";
+            publisher = "ms-toolsai";
+            version = "1.0.0";
+            sha256 = "0wkwllghadil9hk6zamh9brhgn539yhz6dlr97bzf9szyd36dzv8";
+          }
         ];
       };
     })
