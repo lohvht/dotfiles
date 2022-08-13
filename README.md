@@ -1,4 +1,4 @@
-# Dotfiles (Updated as of 31st July 2022)
+# Dotfiles
 
 ## To Update Local Dotfiles / Installed Packages
 Assuming if you have completed all of the [__Getting Started__](#getting-started-1---nixflakeshome-manager-installation) instructions below,
