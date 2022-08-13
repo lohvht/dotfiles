@@ -147,6 +147,7 @@ in
       programs.man = { enable = true; generateCaches = true; };
       programs.direnv = { enable = true; enableBashIntegration = true; enableZshIntegration = true; nix-direnv.enable = true; };
       programs.git = {
+        # TODO: Add fancy git related stuff such as contributors tag, pre-commit hooks etc 
         enable = true;
         lfs.enable = true;
         aliases = {
