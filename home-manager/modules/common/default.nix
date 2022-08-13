@@ -26,6 +26,7 @@ in
       fonts.fontconfig.enable = true;
 
       home.sessionVariables = {
+        SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
         EDITOR = if isGUIEnable then "code" else "vim";
         # colored GCC warnings and errors
         GCC_COLORS ="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
@@ -34,26 +35,59 @@ in
         "${config.home.homeDirectory}/.local/bin"
       ];
       home.packages = [
-        pkgs.cacert
-        pkgs.vim
-        pkgs.which
+        pkgs.bitwarden-cli # password manager CLI
+        pkgs.glibcLocales # Locales!
+        pkgs.file # Determine file type.
+        pkgs.which # Show full path of shell commands.
+        pkgs.cron # Daemon to execute scheduled commands.
+        pkgs.moreutils # Collection of useful tools that aren't coreutils. https://joeyh.name/code/moreutils/
+        pkgs.tree # List directory contents in tree-like format.
+        pkgs.bmon # Bandwidth monitor and rate estimator.
+        pkgs.bind # DNS server (provides `dig`)
+        pkgs.tcpdump # Dump traffic on a network.
+        pkgs.ncdu # ncurses disk usage.
+        pkgs.smartmontools # Hard-drive health monitoring via `smartctl` or `smartd`
+        pkgs.unzip # uncompress `.zip` files.
+        pkgs.zip # compress `.zip` files.
+        # Man pages
+        pkgs.man
+        pkgs.man-pages
+        pkgs.posix_man_pages
+        pkgs.stdman
+        pkgs.cacert # A bundle of X.509 certificates of public Certificate Authorities (CA)
+        pkgs.vim # vim
         pkgs.gnumake
         pkgs.less
         pkgs.lesspipe
-        pkgs.htop
+        pkgs.htop # Interactive process viewer.
+        pkgs.iotop # Top-like I/O monitor.
+        pkgs.powertop # Power consumption and management diagnosis tool.
+        pkgs.lshw # List hardware.
+        pkgs.usbutils # Tools for working with usb devices (`lsusb`, etc.)
+        pkgs.inetutils # Collection of common network programs, ping, ifconfig, hostname, traceroute etc
+        pkgs.psmisc # Collection of utilities using proc filesystem (`pstree`, `killall`, etc.)
         pkgs.gnugrep
         pkgs.ripgrep
-        pkgs.wget
+        pkgs.wget # Non-interactive network downloader.
         pkgs.curl
         pkgs.nix-prefetch-git
         pkgs.jq
         pkgs.tmux
-        # # Home Manager's way of installing fonts for home-manager
-        # # TODO: Untested but looks okay
-        # # https://discourse.nixos.org/t/home-manager-nerdfonts/11226
-        # (pkgs.nerdfonts.override { fonts = [ "Hack Nerd Font" ]; })
         pkgs.zsh-powerlevel10k
         pkgs.meslo-lgs-nf # The Meslo Nerd Font patched for Powerlevel10k
+        # More fonts
+        pkgs.meslo-lg
+        pkgs.source-code-pro
+        pkgs.source-sans-pro
+        pkgs.source-serif-pro
+        pkgs.font-awesome_5
+        pkgs.inconsolata
+        pkgs.siji
+        pkgs.material-icons
+        pkgs.powerline-fonts
+        pkgs.roboto
+        pkgs.roboto-mono
+        pkgs.roboto-slab
       ];
       home.file.".vimrc".text = builtins.readFile ./.vimrc;
       home.shellAliases = {

@@ -77,6 +77,10 @@ in
               "default" = "right";
               "jupyter-notebook" = "left";
           };
+          "[python]" = {
+            "editor.insertSpaces" = true;
+            "editor.tabSize" = 2;
+          };
         };
         extensions = [
           pkgs.vscode-extensions.ms-python.python
