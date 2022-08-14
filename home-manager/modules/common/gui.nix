@@ -11,6 +11,7 @@ let
     "privacy.donottrackheader.enabled" = true;
     "privacy.trackingprotection.enabled" = true;
     "privacy.trackingprotection.socialtracking.enabled" = true;
+    "general.autoScroll" = true;
   };
   ffprivate_settings = {
     "browser.privatebrowsing.autostart" = true;
