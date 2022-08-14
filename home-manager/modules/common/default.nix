@@ -110,7 +110,10 @@ in
         gshow = "git show";
         gadd = "git add ";
         gmrg = "git merge ";
+        grb = "git rebase ";
+        grbi = "git rebase -i ";
         gpull = "git pull";
+        gpullrb = "git pull --rebase";
         gpush = "git push";
         gco = "git checkout ";
         glg = "git log";
@@ -171,6 +174,9 @@ in
           stad = "stash drop";
           stas = "stash save ";
           sta = "stash ";
+          rb = "rebase ";
+          rbi = "rebase -i ";
+          pullrb = "pull --rebase";
         };
       };      
     }
