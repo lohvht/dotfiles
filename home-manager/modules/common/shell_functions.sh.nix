@@ -6,6 +6,7 @@ in
 nxup() {
   local restore=$PWD
   cd ${NXPKGS_CFG_PATH}
+  git pull
   nix-channel --update
   nix flake update $@
   cd $restore
