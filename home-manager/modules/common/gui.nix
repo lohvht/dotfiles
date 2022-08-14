@@ -63,6 +63,9 @@ let
         ExtensionRecommendations = false;
         SkipOnboarding = true;
       };
+      Homepage = {
+        StartPage = "previous-session";
+      };
     };
     extraPrefs = ''
       // Show more ssl cert infos
