@@ -17,7 +17,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
 
+    nixgl.url = "github:guibou/nixGL";
+    nixgl.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
   outputs = {
     self,
@@ -27,6 +30,7 @@
     # nixpkgs-darwin-stable,
     home-manager,
     nur,
+    nixgl,
     ...
   }:
   let
@@ -34,6 +38,7 @@
     # They will be added to your 'pkgs'
     default_overlays = {
       nur = nur.overlay;
+      nixgl = nixgl.overlay;
       default = import ./overlays;
     };
     mkHomeMgrCfg = homeProfileName: {
