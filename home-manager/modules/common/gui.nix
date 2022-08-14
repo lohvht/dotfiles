@@ -28,6 +28,48 @@ let
     "privacy.clearOnShutdown.siteSettings" = true;
     "signon.rememberSignons" = false;
   };
+
+  custom_firefox_pkg = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+    extraPolicies = {
+      # Policies here: https://github.com/mozilla/policy-templates
+      AppAutoUpdate = false;
+      DisableAppUpdate = true;
+      DisableBuiltinPDFViewer = true;
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      DisableTelemetry = true;
+      DisableDeveloperTools = false;
+      DisableFeedbackCommands = true;
+      DisableSystemAddonUpdate = true;
+      DisableFormHistory = true;
+      NewTabPage = false;
+      DontCheckDefaultBrowser = true;
+      DisplayBookmarksToolbar = true;
+      NetworkPrediction = false; # disable dns prefetch
+      NoDefaultBookmarks = true;
+      OfferToSaveLogins = false;
+      PasswordManagerEnabled = false;
+      SearchSuggestEnabled = false;
+      FirefoxHome = {
+        Search = false;
+        Highlights = false;
+        Pocket = false;
+        SponsoredPocket = false;
+        Snippets = false;
+        TopSites = false;
+        SponsoredTopSites = false;
+      };
+      UserMessaging = {
+        ExtensionRecommendations = false;
+        SkipOnboarding = true;
+      };
+    };
+    extraPrefs = ''
+      // Show more ssl cert infos
+      lockPref("security.identityblock.show_extended_validation", true);
+    '';
+  };
+
 in
 {
   config = lib.mkIf cfg.enable {
@@ -36,13 +78,36 @@ in
       pkgs.teams
       pkgs.zoom-us
     ];
-    home.file.".local/bin/update_installed_exts.sh".source =
-    pkgs.fetchFromGitHub {
-      owner = "NixOS";
-      repo = "nixpkgs";
-      rev = "8f868e154ca265e38481ab15d28429f7ff72e0e4";
-      sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
-    } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
+    home.file = {
+      ".local/bin/update_installed_exts.sh".source = pkgs.fetchFromGitHub {
+        owner = "NixOS";
+        repo = "nixpkgs";
+        rev = "8f868e154ca265e38481ab15d28429f7ff72e0e4";
+        sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
+      } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
+      ".local/share/applications/firefox.desktop".text = ''
+        [Desktop Entry]
+        Categories=Network;WebBrowser
+        Exec=firefox -P Default %U
+        GenericName=Web Browser
+        Icon=${custom_firefox_pkg}/share/icons/hicolor/128x128/apps/firefox.png
+        MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp
+        Name=Firefox
+        Type=Application
+        Version=1.4
+      '';
+      ".local/share/applications/firefox_private.desktop".text = ''
+        [Desktop Entry]
+        Categories=Network;WebBrowser
+        Exec=firefox -P Private %U
+        GenericName=Web Browser
+        Icon=${custom_firefox_pkg}/share/icons/hicolor/128x128/apps/firefox.png
+        MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp
+        Name=Firefox Private
+        Type=Application
+        Version=1.4
+      '';
+    };
     programs.alacritty = {
       # Alacritty is a terminal emulator
       # TODO: add in alacritty settings a la
@@ -56,7 +121,7 @@ in
     programs.firefox = {
       enable = true;
       # https://nixos.org/manual/nixpkgs/stable/#build-wrapped-firefox-with-extensions-and-policies
-      package = pkgs.custom_firefox;
+      package = custom_firefox_pkg;
       extensions = [
         firefox-addons.ublock-origin
         firefox-addons.bitwarden
@@ -65,16 +130,16 @@ in
         firefox-addons.disable-javascript
         firefox-addons.https-everywhere
         firefox-addons.privacy-badger
-        firefox-addons.privacy-redirect
         firefox-addons.unpaywall
       ];
       profiles.default = {
-        name = "default";
+        name = "Default";
         settings = ffcommon_settings;
+        isDefault = true;
       };
       profiles.private = {
         id = 1;
-        name = "private";
+        name = "Private";
         settings = ffcommon_settings // ffprivate_settings;
       };
     };
@@ -85,11 +150,14 @@ in
       enable = true;
       package = pkgs.vscodium;
       mutableExtensionsDir = true;
-      keybindings = if pkgs.stdenv.isDarwin then [
+      keybindings = [
+        { key = "ctrl+alt+up"; command = "editor.action.insertCursorAbove"; when = "editorTextFocus";}
+        { key = "ctrl+alt+down"; command = "editor.action.insertCursorBelow"; when = "editorTextFocus";}        
+      ] ++ (if pkgs.stdenv.isDarwin then [
         { key = "shift+cmd+/"; command = "editor.action.goToImplementation"; when = "";}
       ] else [
         { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when = "";}
-      ];
+      ]);
       userSettings = {
         "workbench.settings.editor" = "json";
         "update.mode" = "none";
