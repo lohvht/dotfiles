@@ -36,13 +36,33 @@
         "type": "github"
       }
     },
+    "nixgl": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1656321324,
+        "narHash": "sha256-Sz0uWspqvshGFbT+XmRVVayuW514rNNLLvrre8jBLLU=",
+        "owner": "guibou",
+        "repo": "nixGL",
+        "rev": "047a34b2f087e2e3f93d43df8e67ada40bf70e5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "guibou",
+        "repo": "nixGL",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1660375717,
-        "narHash": "sha256-U/wSSm6eMfNoMG2Rq48+KPwJIq8bfuW/qcf5digYZ8g=",
+        "lastModified": 1660406107,
+        "narHash": "sha256-KRJfqdthSSVtY6D4qZNGYk8MZSMWYFqk6QcCNqY6WOE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "65c15b0a26593a77e65e4212d8d9f58d83844f07",
+        "rev": "f0316a346762abc8042cebad541898ba17476391",
         "type": "github"
       },
       "original": {
@@ -54,11 +74,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1660393337,
-        "narHash": "sha256-oqdyZGXgjuL1aeAp1LWKcqN2/dSdctA1rsJ4drHCTk8=",
+        "lastModified": 1660455845,
+        "narHash": "sha256-rmH5WLGSCEnqlj+o5Vd+vnhaVgV+4/lhKEHH3/luMUY=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "87693545c252904f97120f25086a221526a506d7",
+        "rev": "6fe9873a4704de8e9f57a26c8a86e127647b0131",
         "type": "github"
       },
       "original": {
@@ -71,6 +91,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "nixgl": "nixgl",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur"
       }
