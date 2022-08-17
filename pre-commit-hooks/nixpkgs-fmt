@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# exit when any command fails
+set -e
+
+# Filter files match Added (A), Copied (C), Modified (M) conditions.
+nixFiles=$(git diff --cached --name-only --diff-filter=ACM | grep '\.nix$' || true)
+
+# Apply the auto format first
+nix fmt
+
+if [ -n "$nixFiles" ]; then
+    git add $nixFiles
+fi
