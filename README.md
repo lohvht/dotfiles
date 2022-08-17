@@ -25,7 +25,7 @@ nxup
 
 To check the updated list of `$HOMECONFIG_NAME`, run the following command and use the name immediately after the `homeConfigurations.` prefix
 ```bash
-$ awk '/^###### HOMECONFIG PROFILES START/{p=1;next};/^###### HOMECONFIG PROFILES END/{p=0};p' ~/.config/nixpkgs/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}'
+$ awk '/^        ###### HOMECONFIG PROFILES START/{p=1;next};/^        ###### HOMECONFIG PROFILES END/{p=0};p' ~/.config/nixpkgs/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}'
 linux_64
 linux_headless_64
 darwin_64
@@ -227,6 +227,12 @@ Install docker desktop here: https://docs.docker.com/get-docker/
 
 ### Change Default Shell
 1. Add the full path of the desired shell to the end of the `/etc/shells` file
+
+### Adding preinstall hooks automatically via direnv
+The .envrc
+```
+export FOO=foo > .envrc
+```
 
 e.g.
 ```bash

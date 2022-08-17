@@ -19,7 +19,7 @@ in
     echo "Started applying of home manager profiles, showing possible profile values:"
     # This is functionally similar to hmls, because hmls isnt available due to the position of aliases definition under home-manager
     # We cannot use hmls directly.
-    homeManagerProfiles="$(awk '/^###### HOMECONFIG PROFILES START/{p=1;next};/^###### HOMECONFIG PROFILES END/{p=0};p' ~/.config/nixpkgs/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}')"
+    homeManagerProfiles="$(awk '/^        ###### HOMECONFIG PROFILES START/{p=1;next};/^        ###### HOMECONFIG PROFILES END/{p=0};p' ~/.config/nixpkgs/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}')"
     echo "$homeManagerProfiles"
     echo ""
 
