@@ -97,6 +97,25 @@ in
   }
 
   ## Home manager functions
+  hmclean() {
+    echo "Started cleanup of home manager generations, showing generations"
+    home-manager generations
+    echo ""
+
+    # TODO: Make it default to `now`, and specify an option instead, such as `--expire`
+    local dateByDateCmd=""
+    if [ $# -gt 0 ]; then
+      dateByDateCmd="$1"
+    else
+      echo 'please enter a valid date string as passed in via `date -d`'
+      echo 'such as "now"'
+      echo 'and then press [ENTER] '
+      read dateByDateCmd
+    fi
+    echo "Cleaning up home manager generations up to: $dateByDateCmd"
+    home-manager expire-generations $dateByDateCmd
+  }
+
   hmrollback() {
     echo "Started rollback of home manager generations, showing generations"
     home-manager generations
