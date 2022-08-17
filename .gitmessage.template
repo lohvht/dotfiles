@@ -1,0 +1,32 @@
+
+# |---  Max limit of 50 chars at EOL here.  -----|
+## Title: "[JIRA issue number if any] [Commit Type]: [Message]"
+## See EXTRA INFO section below for more info
+
+# |--------------  Max limit of 50 chars at EOL here.  ----------------|
+## Description: Explain *why* this change is being made, *what* does it fix etc...
+## Provide links to any JIRA issue, commit, Merge Requests or other resources if needed
+
+## Co-authors: "Co-authored-by: Example Name <ExampleName@users.noreply.github.com>"
+# Add in Co-authored-by for all contributors, if any. Must have at least one empty line before it.
+
+##
+# EXTRA INFO
+# =======================================================
+#                        TITLE
+# =======================================================
+# - "Commit Type" can be:
+#    feat     (new feature)
+#    fix      (bug fix for existing features, not for other work, such as building script, etc)
+#    perf     (code change that will improve performance of existing code)
+#    refactor (refactoring production code)
+#    style    (visual / code style changes, such as formatting, missing semi colons, etc; Does not affect current function)
+#    docs     (changes to documentation)
+#    test     (adding missing tests or refactoring tests; no production code change)
+#    chore    (changes to build process or tools or libs, updating bash scripts, git files etc; no production code change)
+# - Message should be a short message that summarises the change in this commit
+# - The next 3 lines contain titles examples for reference:
+#     JRA-123 feat: Implemented password validation
+#     JRA-456 fix: Bugfix for server implmenentation
+#     JRA-789 chore: Update CI to include linting
+#     style: fixed style to be consistent

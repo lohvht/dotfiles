@@ -47,6 +47,7 @@ in
         pkgs.smartmontools # Hard-drive health monitoring via `smartctl` or `smartd`
         pkgs.unzip # uncompress `.zip` files.
         pkgs.zip # compress `.zip` files.
+        pkgs.pre-commit # precommit hooks
         # Man pages
         pkgs.man
         pkgs.man-pages
@@ -145,7 +146,7 @@ in
         nxcleandeep = "nix-collect-garbage -d";
         hmclean = "home-manager expire-generations now";
         hmgens = "home-manager generations";
-        hmls = ''awk '/^###### HOMECONFIG PROFILES START/{p=1;next};/^###### HOMECONFIG PROFILES END/{p=0};p' ~/.config/nixpkgs/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}' '';
+        hmls = ''awk '/^        ###### HOMECONFIG PROFILES START/{p=1;next};/^        ###### HOMECONFIG PROFILES END/{p=0};p' ~/.config/nixpkgs/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}' '';
       };
       programs.man = { enable = true; generateCaches = true; };
       programs.direnv = { enable = true; enableBashIntegration = true; enableZshIntegration = true; nix-direnv.enable = true; };
@@ -177,6 +178,9 @@ in
           rb = "rebase ";
           rbi = "rebase -i ";
           pullrb = "pull --rebase";
+        };
+        extraConfig = {
+          init.defaultBranch = "main";
         };
       };
     }
