@@ -1,18 +1,20 @@
 { config, lib, pkgs, ... }@moduleargs:
 let
   # utils
-  stringifyZSHSetOptFn = zshShellOptions : let
-    setOptCmdFn = v: if pkgs.lib.hasPrefix "-" v then "unsetopt" else "setopt";
-  in pkgs.lib.concatStringsSep "\n" (
-    map (v: "${setOptCmdFn v} ${pkgs.lib.removePrefix "-" v}") zshShellOptions
-  );
+  stringifyZSHSetOptFn = zshShellOptions:
+    let
+      setOptCmdFn = v: if pkgs.lib.hasPrefix "-" v then "unsetopt" else "setopt";
+    in
+    pkgs.lib.concatStringsSep "\n" (
+      map (v: "${setOptCmdFn v} ${pkgs.lib.removePrefix "-" v}") zshShellOptions
+    );
 
   # Options
   zshShellOptions = [
-    "-CASE_GLOB"            # Case insensitive globbing
-    "GLOB_STAR_SHORT"       # Recursive globbing
-    "INC_APPEND_HISTORY"    # save commands are added to the history immediately, otherwise only when shell exits.
-    "GLOB_DOTS"             # Do not require a leading '.' in a filename to be matched explicitly
+    "-CASE_GLOB" # Case insensitive globbing
+    "GLOB_STAR_SHORT" # Recursive globbing
+    "INC_APPEND_HISTORY" # save commands are added to the history immediately, otherwise only when shell exits.
+    "GLOB_DOTS" # Do not require a leading '.' in a filename to be matched explicitly
   ];
 
   zshSetOptsStr = stringifyZSHSetOptFn zshShellOptions;
@@ -29,13 +31,13 @@ in
         # if only directory path is entered, cd there.
         autocd = true; # i.e. setopt AUTO_CD
         history = {
-          size                  = 1000000;
-          save                  = 1000000;
-          ignoreDups            = true;    # i.e. setopt HIST_IGNORE_DUPS
-          ignoreSpace           = true;    # i.e. setopt HIST_IGNORE_SPACE
-          expireDuplicatesFirst = true;    # i.e. setopt HIST_EXPIRE_DUPS_FIRST
-          extended              = true;    # i.e. setopt EXTENDED_HISTORY
-          share                 = true;    # i.e. setopt SHARE_HISTORY
+          size = 1000000;
+          save = 1000000;
+          ignoreDups = true; # i.e. setopt HIST_IGNORE_DUPS
+          ignoreSpace = true; # i.e. setopt HIST_IGNORE_SPACE
+          expireDuplicatesFirst = true; # i.e. setopt HIST_EXPIRE_DUPS_FIRST
+          extended = true; # i.e. setopt EXTENDED_HISTORY
+          share = true; # i.e. setopt SHARE_HISTORY
         };
 
         enableAutosuggestions = true;
@@ -50,7 +52,7 @@ in
           # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
           # or set a custom format using the strftime function format specifications,
           # see 'man strftime' for details.
-          HIST_STAMPS="%d/%m/%y %T";
+          HIST_STAMPS = "%d/%m/%y %T";
           # # Set name of the theme to load --- if set to "random", it will
           # # load a random theme each time oh-my-zsh is loaded, in which case,
           # # to know which specific one was loaded, run: echo $RANDOM_THEME

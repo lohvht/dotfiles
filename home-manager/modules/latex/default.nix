@@ -24,34 +24,60 @@ in
           "latex-workshop.view.pdf.viewer" = "browser";
           "latex-workshop.latex.outDir" = "%DIR%/out";
           "latex-workshop.latex.tools" = [
-              {
-                  "name" = "latexmk"; "command" = "latexmk"; "env" = {};
-                  "args" = ["-synctex=1" "-interaction=nonstopmode" "-file-line-error" "-pdf" "-pdflatex=lualatex" "-outdir=%DIR%/out" "%DOC%"];
-              }
-              {   "name" = "lualatexmk"; "command" = "latexmk"; "env" = {};
-                  "args" = ["-synctex=1" "-interaction=nonstopmode" "-file-line-error" "-lualatex" "-outdir=%OUTDIR%" "%DOC%"];
-              }
-              {   "name" = "latexmk_rconly"; "command" = "latexmk"; "env" = {};
-                  "args" = ["%DOC%"];
-              }
-              {   "name" = "pdflatex"; "command" = "pdflatex"; "env" = {};
-                  "args" = ["-synctex=1" "-interaction=nonstopmode" "-file-line-error" "%DOC%"];
-              }
-              {   "name" = "bibtex"; "command" = "bibtex"; "env" = {};
-                  "args" = ["%DOCFILE%"];
-              }
-              {   "name" = "rnw2tex"; "command" = "Rscript"; "env" = {};
-                  "args" = ["-e" "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"];
-              }
-              {   "name" = "jnw2tex"; "command" = "julia"; "env" = {};
-                  "args" = ["-e" "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"];
-              }
-              {   "name" = "jnw2texmintex"; "command" = "julia"; "env" = {};
-                  "args" = ["-e" "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"];
-              }
-              {   "name" = "tectonic"; "command" = "tectonic"; "env" = {};
-                  "args" = ["--synctex" "--keep-logs" "%DOC%.tex"];
-              }
+            {
+              "name" = "latexmk";
+              "command" = "latexmk";
+              "env" = { };
+              "args" = [ "-synctex=1" "-interaction=nonstopmode" "-file-line-error" "-pdf" "-pdflatex=lualatex" "-outdir=%DIR%/out" "%DOC%" ];
+            }
+            {
+              "name" = "lualatexmk";
+              "command" = "latexmk";
+              "env" = { };
+              "args" = [ "-synctex=1" "-interaction=nonstopmode" "-file-line-error" "-lualatex" "-outdir=%OUTDIR%" "%DOC%" ];
+            }
+            {
+              "name" = "latexmk_rconly";
+              "command" = "latexmk";
+              "env" = { };
+              "args" = [ "%DOC%" ];
+            }
+            {
+              "name" = "pdflatex";
+              "command" = "pdflatex";
+              "env" = { };
+              "args" = [ "-synctex=1" "-interaction=nonstopmode" "-file-line-error" "%DOC%" ];
+            }
+            {
+              "name" = "bibtex";
+              "command" = "bibtex";
+              "env" = { };
+              "args" = [ "%DOCFILE%" ];
+            }
+            {
+              "name" = "rnw2tex";
+              "command" = "Rscript";
+              "env" = { };
+              "args" = [ "-e" "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')" ];
+            }
+            {
+              "name" = "jnw2tex";
+              "command" = "julia";
+              "env" = { };
+              "args" = [ "-e" "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")" ];
+            }
+            {
+              "name" = "jnw2texmintex";
+              "command" = "julia";
+              "env" = { };
+              "args" = [ "-e" "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")" ];
+            }
+            {
+              "name" = "tectonic";
+              "command" = "tectonic";
+              "env" = { };
+              "args" = [ "--synctex" "--keep-logs" "%DOC%.tex" ];
+            }
           ];
         };
         extensions = [

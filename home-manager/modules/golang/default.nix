@@ -42,7 +42,7 @@ in
             };
           };
           "go.lintOnSave" = "package";
-          "go.lintTool" ="golangci-lint";
+          "go.lintTool" = "golangci-lint";
           "go.lintFlags" = [
             "--fast"
           ];
@@ -52,7 +52,7 @@ in
             # "local" = "git.example.com";
             # Experimental settings
             "completeUnimported" = true; # autocomplete unimported packages
-            "deepCompletion" = true;     # enable deep completion
+            "deepCompletion" = true; # enable deep completion
           };
           # "go.toolsEnvVars" = {
           #     "GOOS" = "linux"

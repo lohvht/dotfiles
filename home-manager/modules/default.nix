@@ -8,6 +8,6 @@
     ./latex
     ./node
     ./python
-    ./rust 
+    ./rust
   ];
 }

@@ -59,10 +59,10 @@ in
         #######
         # pyenv virtualenvs
         #######
-        pyls="pyenv versions"; # check pythons installed
-        pylsav="pyenv install -l | less"; # check available pythons to install
-        py-version-install="pyenv install ";
-        py-version-uninstall="pyenv uninstall ";
+        pyls = "pyenv versions"; # check pythons installed
+        pylsav = "pyenv install -l | less"; # check available pythons to install
+        py-version-install = "pyenv install ";
+        py-version-uninstall = "pyenv uninstall ";
       };
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
@@ -74,8 +74,8 @@ in
           "files.exclude"."**/*.pyc" = true;
           "workbench.editorAssociations"."*.ipynb" = "jupyter-notebook";
           "notebook.cellToolbarLocation" = {
-              "default" = "right";
-              "jupyter-notebook" = "left";
+            "default" = "right";
+            "jupyter-notebook" = "left";
           };
           "[python]" = {
             "editor.insertSpaces" = true;
