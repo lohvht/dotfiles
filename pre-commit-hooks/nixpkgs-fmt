@@ -12,3 +12,11 @@ nix fmt
 if [ -n "$nixFiles" ]; then
     git add $nixFiles
 fi
+
+# Double check so that we dont try to commit empty
+nixFiles=$(git diff --cached --name-only --diff-filter=ACM | grep '\.nix$' || true)
+
+if [ ! -n "$nixFiles" ]; then
+    echo "$0: After applying formatting, there is nothing to commit"
+    exit 1
+fi
