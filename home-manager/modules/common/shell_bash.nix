@@ -11,15 +11,15 @@ in
         enable = true;
         # don't put duplicate lines or lines starting with space in the history.
         # See bash(1) for more options
-        historyControl = ["ignorespace" "ignoredups"];
+        historyControl = [ "ignorespace" "ignoredups" ];
         historyFileSize = 1000000;
         shellOptions = [
-          "checkjobs"    # Warn if closing shell with running jobs.
-          "extglob"      # If set, the extended pattern matching features are enabled.
-          "nocaseglob"   # Case insensitive globbing
-          "autocd"       # if only directory path is entered, cd there.
-          "globstar"     # Recursive globbing
-          "histappend"   # Immediately append history instead of overwriting
+          "checkjobs" # Warn if closing shell with running jobs.
+          "extglob" # If set, the extended pattern matching features are enabled.
+          "nocaseglob" # Case insensitive globbing
+          "autocd" # if only directory path is entered, cd there.
+          "globstar" # Recursive globbing
+          "histappend" # Immediately append history instead of overwriting
           "checkwinsize" # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
         ];
 

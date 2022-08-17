@@ -22,70 +22,71 @@
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
-  outputs = {
-    self,
-    flake-utils,
-    # nixpkgs-stable,
-    nixpkgs-unstable,
-    # nixpkgs-darwin-stable,
-    home-manager,
-    nur,
-    nixgl,
-    ...
-  }:
-  let
-    # NOTE: If you want to use packages exported from other flakes, add their overlays here.
-    # They will be added to your 'pkgs'
-    default_overlays = {
-      nur = nur.overlay;
-      nixgl = nixgl.overlay;
-      default = import ./overlays;
-    };
-    mkHomeMgrCfg = homeProfileName: {
-      system ? flake-utils.lib.system.x86_64-linux,
-    }@args:
-    nixpkgs-unstable.lib.nameValuePair homeProfileName (home-manager.lib.homeManagerConfiguration ({
-      # Using $USER and $HOME may be impure but it works generally as a sane default.
-      # If needed, users should replace them with args passed in
-      username = builtins.getEnv "USER";
-      homeDirectory = /. + builtins.getEnv "HOME";
-      system = system;
-      pkgs = nixpkgs-unstable.legacyPackages.${system};
-      configuration = import ./home-manager/home.nix;
-      extraModules = [
-        ./home-manager/profiles/${homeProfileName}.nix
-        # Adds overlays
-        { nixpkgs.overlays = builtins.attrValues default_overlays; }
-      ];
-    } // builtins.removeAttrs args ["system"]));
-    # Formatter, in the form of formatter.<system> = pkgs.<system>
-    fm = flake-utils.lib.eachSystem flake-utils.lib.defaultSystems (system: {
-      default = nixpkgs-unstable.legacyPackages.${system}.nixpkgs-fmt;
-    });
-  in
-  rec {
-    formatter = fm.default;
-    # Home configurations
-    # Accessible via 'home-manager', profile names correspond to filenames in ./home-manager/profile
-    homeConfigurations = nixpkgs-unstable.lib.mapAttrs' mkHomeMgrCfg {  # NOTE: REPLACE username / homeDirectory if needed
-###### HOMECONFIG PROFILES START
-      linux_64 = {};
-      linux_headless_64 = {};
-      darwin_64 = { system = flake-utils.lib.system.x86_64-darwin; };
-###### HOMECONFIG PROFILES END
-    };
+  outputs =
+    { self
+    , flake-utils
+    , # nixpkgs-stable,
+      nixpkgs-unstable
+    , # nixpkgs-darwin-stable,
+      home-manager
+    , nur
+    , nixgl
+    , ...
+    }:
+    let
+      # NOTE: If you want to use packages exported from other flakes, add their overlays here.
+      # They will be added to your 'pkgs'
+      default_overlays = {
+        nur = nur.overlay;
+        nixgl = nixgl.overlay;
+        default = import ./overlays;
+      };
+      mkHomeMgrCfg = homeProfileName: { system ? flake-utils.lib.system.x86_64-linux
+                                      ,
+                                      }@args:
+        nixpkgs-unstable.lib.nameValuePair homeProfileName (home-manager.lib.homeManagerConfiguration ({
+          # Using $USER and $HOME may be impure but it works generally as a sane default.
+          # If needed, users should replace them with args passed in
+          username = builtins.getEnv "USER";
+          homeDirectory = /. + builtins.getEnv "HOME";
+          system = system;
+          pkgs = nixpkgs-unstable.legacyPackages.${system};
+          configuration = import ./home-manager/home.nix;
+          extraModules = [
+            ./home-manager/profiles/${homeProfileName}.nix
+            # Adds overlays
+            { nixpkgs.overlays = builtins.attrValues default_overlays; }
+          ];
+        } // builtins.removeAttrs args [ "system" ]));
+      # Formatter, in the form of formatter.<system> = pkgs.<system>
+      fm = flake-utils.lib.eachSystem flake-utils.lib.defaultSystems (system: {
+        default = nixpkgs-unstable.legacyPackages.${system}.nixpkgs-fmt;
+      });
+    in
+    rec {
+      formatter = fm.default;
+      # Home configurations
+      # Accessible via 'home-manager', profile names correspond to filenames in ./home-manager/profile
+      homeConfigurations = nixpkgs-unstable.lib.mapAttrs' mkHomeMgrCfg {
+        # NOTE: REPLACE username / homeDirectory if needed
+        ###### HOMECONFIG PROFILES START
+        linux_64 = { };
+        linux_headless_64 = { };
+        darwin_64 = { system = flake-utils.lib.system.x86_64-darwin; };
+        ###### HOMECONFIG PROFILES END
+      };
 
-    # Packages
-    # Accessible via 'nix build'
-    packages = flake-utils.lib.eachSystemMap flake-utils.lib.defaultSystems (system:
-      # Propagate nixpkgs-unstable' packages, with our overlays applied
-      import nixpkgs-unstable { inherit system; overlays = builtins.attrValues default_overlays; }
-    );
+      # Packages
+      # Accessible via 'nix build'
+      packages = flake-utils.lib.eachSystemMap flake-utils.lib.defaultSystems (system:
+        # Propagate nixpkgs-unstable' packages, with our overlays applied
+        import nixpkgs-unstable { inherit system; overlays = builtins.attrValues default_overlays; }
+      );
 
-    # Devshell for bootstrapping
-    # Accessible via 'nix develop'
-    devShells = flake-utils.lib.eachSystemMap flake-utils.lib.defaultSystems (system: {
-      default = import ./shell.nix { pkgs = packages.${system}; };
-    });
-  };
+      # Devshell for bootstrapping
+      # Accessible via 'nix develop'
+      devShells = flake-utils.lib.eachSystemMap flake-utils.lib.defaultSystems (system: {
+        default = import ./shell.nix { pkgs = packages.${system}; };
+      });
+    };
 }

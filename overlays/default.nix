@@ -3,5 +3,5 @@ final: prev:
 let
 in
 {
-# This line adds our custom packages into the overlay.
+  # This line adds our custom packages into the overlay.
 } // import ../pkgs { pkgs = final; }

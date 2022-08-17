@@ -27,7 +27,7 @@ in
         SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
         EDITOR = if isGUIEnable then "code" else "vim";
         # colored GCC warnings and errors
-        GCC_COLORS ="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
+        GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
       };
       home.sessionPath = [
         "${config.home.homeDirectory}/.local/bin"
@@ -131,13 +131,13 @@ in
         ######
         # Port checking command
         ######
-        grep-port-listen="lsof -i -P -n | grep LISTEN";
+        grep-port-listen = "lsof -i -P -n | grep LISTEN";
         #######
         # SSH config
         #######
-        showssh="cat ~/.ssh/config| grep Host";
+        showssh = "cat ~/.ssh/config| grep Host";
         # kubernetes
-        k="kubectl ";
+        k = "kubectl ";
         # Nix aliases
         nxcd = "cd ${NXPKGS_CFG_PATH}";
         nxrp = "nix repl";
@@ -178,7 +178,7 @@ in
           rbi = "rebase -i ";
           pullrb = "pull --rebase";
         };
-      };      
+      };
     }
   ]);
 }

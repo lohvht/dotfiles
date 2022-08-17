@@ -156,12 +156,13 @@ in
         pkgs.discord
       ];
       home.file = {
-        ".local/bin/update_installed_exts.sh".source = pkgs.fetchFromGitHub {
-          owner = "NixOS";
-          repo = "nixpkgs";
-          rev = "8f868e154ca265e38481ab15d28429f7ff72e0e4";
-          sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
-        } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
+        ".local/bin/update_installed_exts.sh".source = pkgs.fetchFromGitHub
+          {
+            owner = "NixOS";
+            repo = "nixpkgs";
+            rev = "8f868e154ca265e38481ab15d28429f7ff72e0e4";
+            sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
+          } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
       };
       programs.alacritty = {
         # Alacritty is a terminal emulator
@@ -200,24 +201,24 @@ in
         };
       };
       home.shellAliases = {
-        code="codium";
+        code = "codium";
       };
       programs.vscode = {
         enable = true;
         package = pkgs.vscodium;
         mutableExtensionsDir = true;
         keybindings = [
-          { key = "ctrl+alt+up"; command = "editor.action.insertCursorAbove"; when = "editorTextFocus";}
-          { key = "ctrl+alt+down"; command = "editor.action.insertCursorBelow"; when = "editorTextFocus";}        
+          { key = "ctrl+alt+up"; command = "editor.action.insertCursorAbove"; when = "editorTextFocus"; }
+          { key = "ctrl+alt+down"; command = "editor.action.insertCursorBelow"; when = "editorTextFocus"; }
         ] ++ (if pkgs.stdenv.isDarwin then [
-          { key = "shift+cmd+/"; command = "editor.action.goToImplementation"; when = "";}
+          { key = "shift+cmd+/"; command = "editor.action.goToImplementation"; when = ""; }
         ] else [
-          { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when = "";}
+          { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when = ""; }
         ]);
         userSettings = {
           "workbench.settings.editor" = "json";
           "update.mode" = "none";
-          "editor.rulers" = [ 72 80 100 120 140 160];
+          "editor.rulers" = [ 72 80 100 120 140 160 ];
           "editor.tabSize" = 2;
           "explorer.confirmDelete" = false;
           "terminal.integrated.fontFamily" = "MesloLGS NF";
@@ -226,22 +227,22 @@ in
           "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
           "search.followSymlinks" = false;
           "todohighlight.keywords" = [
-              {
-                  "text" = "TODO:";
-                  "backgroundColor" = "teal";
-                  "color" = "black";
-                  "overviewRulerColor" = "teal";
-              }
-              {
-                  "text" = "NOTE:";
-                  "backgroundColor" = "purple";
-                  "color" = "white";
-                  "overviewRulerColor" = "purple";
-              }
+            {
+              "text" = "TODO:";
+              "backgroundColor" = "teal";
+              "color" = "black";
+              "overviewRulerColor" = "teal";
+            }
+            {
+              "text" = "NOTE:";
+              "backgroundColor" = "purple";
+              "color" = "white";
+              "overviewRulerColor" = "purple";
+            }
           ];
-          "workbench.colorCustomizations" = {};
+          "workbench.colorCustomizations" = { };
           "editor.tokenColorCustomizations" = {
-              "comments" = "#278a06";
+            "comments" = "#278a06";
           };
           "search.searchOnType" = false;
           "diffEditor.ignoreTrimWhitespace" = false;
