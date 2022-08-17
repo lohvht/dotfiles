@@ -153,6 +153,7 @@ in
         pkgs.bitwarden
         pkgs.teams
         pkgs.zoom-us
+        pkgs.discord
       ];
       home.file = {
         ".local/bin/update_installed_exts.sh".source = pkgs.fetchFromGitHub {

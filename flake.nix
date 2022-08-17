@@ -57,9 +57,14 @@
         # Adds overlays
         { nixpkgs.overlays = builtins.attrValues default_overlays; }
       ];
-    } // builtins.removeAttrs args ["system"]));    
+    } // builtins.removeAttrs args ["system"]));
+    # Formatter, in the form of formatter.<system> = pkgs.<system>
+    fm = flake-utils.lib.eachSystem flake-utils.lib.defaultSystems (system: {
+      default = nixpkgs-unstable.legacyPackages.${system}.nixpkgs-fmt;
+    });
   in
   rec {
+    formatter = fm.default;
     # Home configurations
     # Accessible via 'home-manager', profile names correspond to filenames in ./home-manager/profile
     homeConfigurations = nixpkgs-unstable.lib.mapAttrs' mkHomeMgrCfg {  # NOTE: REPLACE username / homeDirectory if needed
