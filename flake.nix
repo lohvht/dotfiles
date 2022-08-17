@@ -44,20 +44,22 @@
       mkHomeMgrCfg = homeProfileName: { system ? flake-utils.lib.system.x86_64-linux
                                       ,
                                       }@args:
-        nixpkgs-unstable.lib.nameValuePair homeProfileName (home-manager.lib.homeManagerConfiguration ({
-          # Using $USER and $HOME may be impure but it works generally as a sane default.
-          # If needed, users should replace them with args passed in
-          username = builtins.getEnv "USER";
-          homeDirectory = /. + builtins.getEnv "HOME";
-          system = system;
-          pkgs = nixpkgs-unstable.legacyPackages.${system};
-          configuration = import ./home-manager/home.nix;
-          extraModules = [
-            ./home-manager/profiles/${homeProfileName}.nix
-            # Adds overlays
-            { nixpkgs.overlays = builtins.attrValues default_overlays; }
-          ];
-        } // builtins.removeAttrs args [ "system" ]));
+        nixpkgs-unstable.lib.nameValuePair homeProfileName (
+          home-manager.lib.homeManagerConfiguration ({
+            # Using $USER and $HOME may be impure but it works generally as a sane default.
+            # If needed, users should replace them with args passed in
+            username = builtins.getEnv "USER";
+            homeDirectory = /. + builtins.getEnv "HOME";
+            system = system;
+            pkgs = nixpkgs-unstable.legacyPackages.${system};
+            configuration = import ./home-manager/home.nix;
+            extraModules = [
+              ./home-manager/profiles/${homeProfileName}.nix
+              # Adds overlays
+              { nixpkgs.overlays = builtins.attrValues default_overlays; }
+            ];
+          } // builtins.removeAttrs args [ "system" ])
+        );
       # Formatter, in the form of formatter.<system> = pkgs.<system>
       fm = flake-utils.lib.eachSystem flake-utils.lib.defaultSystems (system: {
         default = nixpkgs-unstable.legacyPackages.${system}.nixpkgs-fmt;
