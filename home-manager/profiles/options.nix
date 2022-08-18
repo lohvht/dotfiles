@@ -1,7 +1,10 @@
 { config, lib, options, pkgs, ... }:
 {
   options.customHomeProfile = {
-    GUI.enable = lib.mkEnableOption "check if we should include GUI options for home manager profiles";
+    GUI = {
+      enable = lib.mkEnableOption "check if we should include GUI options for home manager profiles";
+      gaming.enable = lib.mkEnableOption "check if we include gaming related options";
+    };
     git = {
       username = lib.mkOption {
         type = lib.types.nullOr lib.types.str;

@@ -29,7 +29,9 @@ in
 
       home.sessionVariables = {
         SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-        EDITOR = if isGUIEnable then "code" else "vim";
+        # TODO: solve this issue once and for all, codium is the free open source version of vscode that we'll install via this home-manager
+        # installation, but for windows we still use `code` for convenience, need to find a way to check for WSL, else check for linux / darwin
+        # EDITOR = if isGUIEnable then "codium" else "vim";
         # colored GCC warnings and errors
         GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
       };
