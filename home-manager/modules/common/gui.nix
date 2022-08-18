@@ -74,9 +74,19 @@ let
     '';
   };
 
+  # NOTE: *that* an-anime-game-launcher specific, assume that installation is done in linux via the
+  # appropriate channels (not going to link here, but lookup 'n-anime-game-launcher')
+  # The defaults here are usually the same and its *USUALLY* safe to go ahead and delete to reinstall
+  # These settings if we somehow bork the relevant configuration
+  agl_root = "${config.home.homeDirectory}/.local/share/anime-game-launcher";
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
+    (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable) {
+      home.shellAliases = {
+        genshin_start = ''WINEPREFIX='${agl_root}/game' ${agl_root}/runners/lutris-GE-Proton7-22-x86_64/bin/wine64 ${agl_root}/game/drive_c/Program\ Files/Genshin\ Impact/GenshinImpact.exe'';
+      };
+    })
     (lib.mkIf pkgs.stdenv.isLinux {
       home.file = {
         ".local/share/applications/firefox.desktop" = {
