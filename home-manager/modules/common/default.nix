@@ -17,6 +17,10 @@ in
     (lib.mkIf (gitCfg.userEmail != null) {
       programs.git.userEmail = gitCfg.userEmail;
     })
+    (lib.mkIf pkgs.stdenv.isLinux {
+      # Make it easier for generic non-nixos linuxes
+      targets.genericLinux.enable = true;
+    })
     {
       # Let Home Manager install and manage itself.
       programs.home-manager.enable = true;
