@@ -19,6 +19,7 @@
 
     nixgl.url = "github:guibou/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nixgl.inputs.flake-utils.follows = "flake-utils";
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
@@ -38,7 +39,9 @@
       # They will be added to your 'pkgs'
       default_overlays = {
         nur = nur.overlay;
-        nixgl = nixgl.overlay;
+        # TODO: For now this suffices, the relevant bug is https://github.com/guibou/nixGL/issues/111
+        # If it doesnt resolve, we need to think of a way to handle system related nixpkgs.
+        nixgl = nixgl.overlay.x86_64-linux;
         default = import ./overlays;
       };
       mkHomeMgrCfg = homeProfileName: { system ? flake-utils.lib.system.x86_64-linux
