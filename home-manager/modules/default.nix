@@ -4,6 +4,7 @@
   imports = [
     # List your module files here
     ./common
+    ./gui
     ./golang
     ./latex
     ./node
