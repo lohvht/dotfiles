@@ -41,9 +41,7 @@ in
             rev = "8f868e154ca265e38481ab15d28429f7ff72e0e4";
             sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
           } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
-      };
-      home.shellAliases = {
-        code = "codium";
+        ".local/bin/code".source = config.lib.file.mkOutOfStoreSymlink "${pkgs.vscodium}/bin/codium";
       };
       programs.vscode = {
         enable = true;
