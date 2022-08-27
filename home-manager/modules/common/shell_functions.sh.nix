@@ -46,7 +46,7 @@ in
   e() {
     # use $EDITOR, otherwise if not found fallback to vim
     local editor="''${EDITOR:-vi}"
-    $editor $@
+    eval $editor $@
   }
 
   gf() {
