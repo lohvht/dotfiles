@@ -11,12 +11,12 @@ in
   imports = [
     ./browser.nix
     ./vscode.nix
-    # ./conky.nix
+    ./conky.nix
   ];
   config = lib.mkIf cfg.enable (lib.mkMerge [
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable) {
       home.shellAliases = {
-        genshin_start = ''WINEPREFIX='${agl_root}/game' ${agl_root}/runners/lutris-GE-Proton7-22-x86_64/bin/wine64 ${agl_root}/game/drive_c/Program\ Files/Genshin\ Impact/GenshinImpact.exe'';
+        genshin_start = ''WINEPREFIX='${agl_root}/game' ${agl_root}/runners/lutris-GE-Proton7-26-x86_64/bin/wine64 ${agl_root}/game/drive_c/Program\ Files/Genshin\ Impact/GenshinImpact.exe'';
       };
     })
     (lib.mkIf pkgs.stdenv.isLinux {
