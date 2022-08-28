@@ -147,8 +147,11 @@ let
     resultStr;
 in
 {
-  config = lib.mkIf cfg.enable (lib.mkMerge [
+  config = lib.mkIf (cfg.enable && pkgs.stdenv.isLinux) (lib.mkMerge [
     {
+      home.shellAliases = {
+        conky_reload = "pkill -USR1 conky";
+      };
       # NOTE: lohvht@27aug2022: autostart may create multiple entries of the same conky instance on auto startup if
       #       we choose to restore session on your DE.
       #       One way to circumvent this is to not allow `conky` to be restored under the desktop Autostart settings
@@ -177,8 +180,8 @@ in
           own_window = true,
           own_window_class = 'Conky',
           own_window_argb_visual = true,
-          own_window_argb_value = 50,
-          own_window_transparent = true,
+          own_window_argb_value = 192,
+          own_window_transparent = no,
           own_window_type = 'normal',
           own_window_hints = 'undecorated,below,skip_taskbar,sticky,skip_pager',
           own_window_colour = '000000',
