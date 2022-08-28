@@ -169,6 +169,12 @@ The choice of installations determine how `nix` will be run. Under a *multi-user
 ```bash
 $ nix-env --version
 nix-env (Nix) 2.3.15
+
+nix-channel --list
+
+# Add nixpkgs unstable if not added automatically
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+nix-channel --update
 ```
 
 ### Nix Flakes Installation

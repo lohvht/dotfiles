@@ -10,5 +10,6 @@
     ./node
     ./python
     ./rust
+    ./ruby
   ];
 }

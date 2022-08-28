@@ -98,7 +98,11 @@ in
           pkgs.vscode-extensions.mikestead.dotenv
           pkgs.vscode-extensions.mechatroner.rainbow-csv
           pkgs.vscode-extensions.jnoortheen.nix-ide
+          pkgs.vscode-extensions.ibm.output-colorizer
+          pkgs.vscode-extensions.formulahendry.auto-rename-tag
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          # NOTE: We can use the shell function `get_vsixpkg $publisher $extension_name` to easily get the required updated
+          # version as well as the required SHA info.
           {
             publisher = "jgclark";
             name = "vscode-todo-highlight";
@@ -114,8 +118,8 @@ in
           {
             name = "cmake-tools";
             publisher = "ms-vscode";
-            version = "1.12.22";
-            sha256 = "1jampq21wly9hrawzfmmn1829jk31h6kl37svv2xc3cz34jk914y";
+            version = "1.12.24";
+            sha256 = "1dlg9yyvcf70k6ykvz0s7zlhm7qjvj6mv34bnl3gdwc1282rs42c";
           }
           {
             name = "cmake";
@@ -124,16 +128,22 @@ in
             sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
           }
           {
-            publisher = "monokai";
             name = "theme-monokai-pro-vscode";
-            version = "1.1.20";
-            sha256 = "0ddwqsvsqdjblmb0xlad17czy2837g27ymwvzissz4b9r111xyhx";
+            publisher = "monokai";
+            version = "1.1.21";
+            sha256 = "16pznay32d9pd1gigcrzww1rnni0sq1r8hg28awvvw9wnqn0hlk4";
           }
           {
             publisher = "bcanzanella";
             name = "openmatchingfiles";
             version = "0.5.2";
             sha256 = "0wpv77jir5k77ml0x1y21gk4kxk53vnkxrqg4v35clhdhszzh6fq";
+          }
+          {
+            name = "vscode-direnv";
+            publisher = "Rubymaniac";
+            version = "0.0.2";
+            sha256 = "1gml41bc77qlydnvk1rkaiv95rwprzqgj895kxllqy4ps8ly6nsd";
           }
         ];
       };

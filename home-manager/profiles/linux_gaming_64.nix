@@ -17,6 +17,7 @@
     GUI.gaming.enable = true;
     golang.enable = true;
     python.enable = true;
+    ruby.enable = true;
     node.enable = true;
     latex.enable = true;
     # NOTE: Replace the usernames here
