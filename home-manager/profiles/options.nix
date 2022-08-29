@@ -95,7 +95,10 @@
     };
     golang.enable = lib.mkEnableOption "enable golang configuration";
     latex.enable = lib.mkEnableOption "enable latex configuration";
-    node.enable = lib.mkEnableOption "enable node configuration";
+    node = {
+      enable = lib.mkEnableOption "enable node configuration";
+      includeFrontendTools = lib.mkEnableOption "Add in vscode frontend tools";
+    };
     python.enable = lib.mkEnableOption "enable python configuration";
     rust.enable = lib.mkEnableOption "enable rust configuration";
     ruby.enable = lib.mkEnableOption "enable ruby configuration";
