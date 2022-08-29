@@ -48,6 +48,7 @@ in
         };
       };
       home.shellAliases = {
+        rb-binstubs = "bundle install --binstubs";
         rbls = "rbenv versions"; # check ruby installed
         rblsav = "rbenv install -l | less"; # check available ruby to install
         rb-version-install = "rbenv install ";
