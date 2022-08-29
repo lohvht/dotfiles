@@ -60,13 +60,13 @@ in
     (lib.mkIf isGUIEnable {
       programs.vscode = {
         userSettings = {
-          "ruby.useBundler" = false; #run non-lint commands with bundle exec
+          # "ruby.useBundler" = false; #run non-lint commands with bundle exec
           "ruby.useLanguageServer" = true; # use the internal language server (see below)
-          "ruby.lint" = {
-            rubocop.useBundler = false; # enable rubocop via bundler
-            reek.useBundler = false; # enable reek via bundler
-          };
-          "ruby.format" = "rubocop"; # use rubocop for formatting
+          # "ruby.lint" = {
+          #   rubocop.useBundler = false; # enable rubocop via bundler
+          #   reek.useBundler = false; # enable reek via bundler
+          # };
+          # "ruby.format" = "rubocop"; # use rubocop for formatting
         };
         extensions = [
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
