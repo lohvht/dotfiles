@@ -39,9 +39,7 @@
       # They will be added to your 'pkgs'
       default_overlays = {
         nur = nur.overlay;
-        # TODO: For now this suffices, the relevant bug is https://github.com/guibou/nixGL/issues/111
-        # If it doesnt resolve, we need to think of a way to handle system related nixpkgs.
-        nixgl = nixgl.overlay.x86_64-linux;
+        nixgl = nixgl.overlay;
         default = import ./overlays;
       };
       mkHomeMgrCfg = homeProfileName: { system ? flake-utils.lib.system.x86_64-linux
