@@ -149,6 +149,9 @@ in
 
   # Taken from https://github.com/NixOS/nixpkgs/blob/8f868e1/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh
   # first arg => publisher, second arg => extname
+  # If the SHA validation fails, run the following command to the downloaded zip file
+  # `nix-hash --flat --base32 --type sha256 /nix/store/{EXT_NAME_HASH}.zip`
+  # and use this string instead
   function get_vsixpkg() {
       N="$1.$2"
 
