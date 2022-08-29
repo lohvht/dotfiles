@@ -12,6 +12,7 @@ let
     "privacy.trackingprotection.enabled" = true;
     "privacy.trackingprotection.socialtracking.enabled" = true;
     "general.autoScroll" = true;
+    "webgl.force-enable" = true;
   };
   ffprivate_settings = {
     "browser.privatebrowsing.autostart" = true;
