@@ -33,6 +33,16 @@ in
       };
     })
     {
+      programs.bash.initExtra = ''
+        ########## VSCODE GUI INTEGRATION START ##########
+        [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
+        ########## VSCODE GUI INTEGRATION END ##########
+      '';
+      programs.zsh.initExtra = ''
+        ########## VSCODE GUI INTEGRATION START ##########
+        [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+        ########## VSCODE GUI INTEGRATION END ##########
+      '';
       home.file = {
         ".local/bin/update_installed_exts.sh".source = pkgs.fetchFromGitHub
           {
@@ -56,6 +66,7 @@ in
           { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when = ""; }
         ]);
         userSettings = {
+          "terminal.integrated.shellIntegration.enabled" = false;
           "workbench.settings.editor" = "json";
           "update.mode" = "none";
           "editor.rulers" = [ 72 80 100 120 140 160 ];
