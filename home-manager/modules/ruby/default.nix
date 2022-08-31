@@ -70,30 +70,30 @@ in
         };
         extensions = [
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          # {
-          #   name = "endwise";
-          #   publisher = "kaiwood";
-          #   version = "1.5.1";
-          #   sha256 = "1dg096dnv3isyimp3r73ih25ya0yj0m1y9ryzrz40m0mbsk21mp4";
-          # }
-          # {
-          #   name = "rails-db-schema";
-          #   publisher = "aki77";
-          #   version = "0.2.5";
-          #   sha256 = "15l437ck4fvag40v91fr33z6ay0k8sq5pc1rci1gmg30fa86q3kn";
-          # }
-          # {
-          #   name = "solargraph";
-          #   publisher = "castwide";
-          #   version = "0.23.0";
-          #   sha256 = "0ivawyq16712j2q4wic3y42lbqfml5gs24glvlglpi0kcgnii96n";
-          # }
-          # {
-          #   name = "vscode-ruby";
-          #   publisher = "wingrunr21";
-          #   version = "0.28.0";
-          #   sha256 = "1gab5cka87zw7i324rz9gmv423rf5sylsq1q1dhfkizmrpwzaxqz";
-          # }
+          {
+            name = "endwise";
+            publisher = "kaiwood";
+            version = "1.5.1";
+            sha256 = "1dg096dnv3isyimp3r73ih25ya0yj0m1y9ryzrz40m0mbsk21mp4";
+          }
+          {
+            name = "rails-db-schema";
+            publisher = "aki77";
+            version = "0.2.5";
+            sha256 = "15l437ck4fvag40v91fr33z6ay0k8sq5pc1rci1gmg30fa86q3kn";
+          }
+          {
+            name = "solargraph";
+            publisher = "castwide";
+            version = "0.23.0";
+            sha256 = "0ivawyq16712j2q4wic3y42lbqfml5gs24glvlglpi0kcgnii96n";
+          }
+          {
+            name = "vscode-ruby";
+            publisher = "wingrunr21";
+            version = "0.28.0";
+            sha256 = "1gab5cka87zw7i324rz9gmv423rf5sylsq1q1dhfkizmrpwzaxqz";
+          }
           # {
           #   name = "ruby";
           #   publisher = "rebornix";
