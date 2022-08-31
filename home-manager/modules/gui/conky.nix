@@ -26,7 +26,7 @@ let
   # Conky templated strings
 
   # TODO: only support arch for now
-  conky_package_update_section = if (!pkgs.stdenv.isLinux || linuxCfg.distro == null || linuxCfg.distro != "arch") then "" else
+  conky_package_update_section = if (!pkgs.stdenv.isLinux || linuxCfg.distro == null || linuxCfg.distro != "arch") then "#" else
   ''
     #Package Section
     ''${color4}''${hr}''${color}
@@ -63,7 +63,7 @@ let
       ${builtins.concatStringsSep "" line_one_parts}
       ${builtins.concatStringsSep "" line_two_parts}'';
 
-  conky_avg_cpu_temp_str = if hardwareCfg.cpuMake == null then "" else
+  conky_avg_cpu_temp_str = if hardwareCfg.cpuMake == null then "#" else
   let
     after_pipe_cmd = if hardwareCfg.cpuMake == "ryzen" then "grep 'Tctl:' | sed -e 's/Tctl:\s*//'" else "grep 'Package id' | awk '{print $4}'";
   in
@@ -104,7 +104,7 @@ let
         )
         hardwareCfg.gpus;
 
-      resultStr = if (builtins.length conky_gpu_texts) == 0 then "" else ''
+      resultStr = if (builtins.length conky_gpu_texts) == 0 then "#" else ''
         #
         # GPU Section
         ''${color4}''${hr}''${color}
@@ -112,7 +112,7 @@ let
     in
     resultStr;
 
-  conky_text_network_section = if hardwareCfg.networkInterface == null then "" else ''
+  conky_text_network_section = if hardwareCfg.networkInterface == null then "#" else ''
     #
     #network
     ''${color4}''${hr}''${color}
@@ -138,7 +138,7 @@ let
         )
         hardwareCfg.disks;
 
-      resultStr = if (builtins.length conky_disk_texts) == 0 then "" else ''
+      resultStr = if (builtins.length conky_disk_texts) == 0 then "#" else ''
         #
         #Storage
         ''${color4}''${hr}''${color}
