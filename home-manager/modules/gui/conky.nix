@@ -225,7 +225,7 @@ in
         #
         #Processor section
         ''${color4}''${hr}''${color}
-        ''${alignc}''${color6}''${font ${font_header3_unbold}}''${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'| uniq }''${color} @ ''${color6}''${freq_g 1}GHz''${font}
+        ''${alignc}''${color6}''${font ${font_header3_unbold}}''${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //' -e 's/ @ .*//' | uniq }''${color} @ ''${color6}''${freq_g 1}GHz''${font}
         ${conky_avg_cpu_temp_str}
         ''${goto 10}''${color}Active Governor: ''${alignr 10}''${color6}''${execi 1 cut -b 1-20 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor}''${color}''${font}
         #Cores
