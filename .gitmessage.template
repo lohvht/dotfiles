@@ -3,7 +3,7 @@
 ## Title: "[JIRA issue number if any] [Commit Type]: [Message]"
 ## See EXTRA INFO section below for more info
 
-# |--------------  Max limit of 50 chars at EOL here.  ----------------|
+# |--------------  Max limit of 72 chars at EOL here.  ----------------|
 ## Description: Explain *why* this change is being made, *what* does it fix etc...
 ## Provide links to any JIRA issue, commit, Merge Requests or other resources if needed
 

@@ -215,8 +215,13 @@ NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channel
 ## Getting Started (2) - Git Clone
 
 Clone the repository to the following path `~/.config/nixpkgs`.
+
+Overwrite the git name and git email for this as well in this step
 ```bash
 git clone git@github.com:lohvht/dotfiles.git ~/.config/nixpkgs
+
+git config --add user.name "Victor Loh"
+git config --add user.email vic94loh@hotmail.com
 ```
 
 After that, proceed with the `home-manager switch` instruction at the [start of the document](#to-update-local-dotfiles--installed-packages)
