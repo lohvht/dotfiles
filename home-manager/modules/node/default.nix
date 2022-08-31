@@ -53,7 +53,7 @@ in
             name = "volar";
             publisher = "vue";
             version = "0.40.4";
-            sha256 = "1w6qnd6qy2lazvfpi2ybcpqyfgi77fdhrb9ywsa5992ycvg8kvzv";
+            sha256 = "0qp724v1731gazrp4wzg17x91yhdncnmadqhfhd87vfhsfy2xcz6";
           }
         ];
       };
