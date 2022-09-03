@@ -84,8 +84,8 @@ let
                 in
                 ''${pkgs.radeontop}/bin/radeontop -b ${gpu.pcie_bus_id} -l1 -d - | grep -o "${metricName} ${unitsToGrep}" | sed -e 's/${metricName} //' | cut -d " " -f ${builtins.toString(selectedUnitIndex + 1)} | sed -e 's/${builtins.elemAt units selectedUnitIndex}$//' '';
 
-              currentPowerCMD = if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'slowPPT:' | awk '{print $2}'" else "";
-              maxPowerCMD = if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'slowPPT:' | sed -e 's/.*(cap = //' -e  's/ W)$//'" else "";
+              currentPowerCMD = if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'PPT:' | awk '{print $2}'" else "";
+              maxPowerCMD = if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'PPT:' | sed -e 's/.*(cap = //' -e  's/ W)$//'" else "";
               loadCMD = if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "gpu" ["%"] 0}" else "";
               vRAMCMD = if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "gpu" ["%"] 0}" else "";
               graphicsSpeedCMD = if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "sclk" ["%" "ghz"] 1}" else "";
@@ -160,7 +160,7 @@ in
         [Desktop Entry]
         Type=Application
         Name=conky
-        Exec=${pkgs.conky}/bin/conky --daemonize --pause=5
+        Exec=${pkgs.conky}/bin/conky --daemonize --pause=30
         StartupNotify=false
         Terminal=false
       '';
