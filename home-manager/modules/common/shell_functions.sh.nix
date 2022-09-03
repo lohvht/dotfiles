@@ -46,6 +46,33 @@ in
   e() {
     # use $EDITOR, otherwise if not found fallback to vim
     local editor="''${EDITOR:-vi}"
+    local nowait=1
+    while getopts w: name
+    do
+      case $name in
+        w)
+          nowait=0
+          ;;
+      esac
+    done
+    # Clear out flags consumed
+    shift $(($OPTIND - 1))
+
+    if [ $nowait -eq 1 ]; then
+      # This stripped editor removes anything after the --wait flag if it exist in $EDITOR
+      # This assumes that the $EDITOR function with the wait command has the wait flag set
+      # as `--wait`
+      # This also assumes that other flags after the --wait flag will be ignored
+      # e.g.
+      # EDITOR="code --wait --new-window"
+      #
+      # # Will become
+      # stripped_editor_without_waitflag="code"
+      stripped_editor_without_waitflag="''${editor%% --wait*}"
+      eval $stripped_editor_without_waitflag $@
+      return 0
+    fi
+    echo "Waiting for editor to close"
     eval $editor $@
   }
 
