@@ -79,7 +79,14 @@
   options.customHomeProfile = {
     GUI = {
       enable = lib.mkEnableOption "check if we should include GUI options for home manager profiles";
-      gaming.enable = lib.mkEnableOption "check if we include gaming related options";
+      gaming = {
+        enable = lib.mkEnableOption "check if we include gaming related options";
+        animeGameLauncherRunnerName = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+          description = "The runner name for anime game launcher";
+        };
+      };
     };
     git = {
       username = lib.mkOption {

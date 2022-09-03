@@ -13,8 +13,13 @@
     disks = [{ name = "System"; mountedPath = "/"; }];
   };
   customHomeProfile = {
-    GUI.enable = true;
-    GUI.gaming.enable = true;
+    GUI = {
+      enable = true;
+      gaming = {
+        enable = true;
+        animeGameLauncherRunnerName = "lutris-GE-Proton7-26-x86_64";
+      };
+    };
     golang.enable = true;
     python.enable = true;
     ruby.enable = true;
