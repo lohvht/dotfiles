@@ -144,6 +144,7 @@ in
         k = "kubectl ";
         # Nix aliases
         nxcd = "cd ${NXPKGS_CFG_PATH}";
+        nxe = "e ${NXPKGS_CFG_PATH}";
         nxrp = "nix repl";
         nxclean = "nix-store --gc";
         nxcleandeep = "nix-collect-garbage -d";
