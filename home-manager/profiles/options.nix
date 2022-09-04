@@ -87,6 +87,7 @@
           description = "The runner name for anime game launcher";
         };
       };
+      nextcloudClient.enable = lib.mkEnableOption "check if we include gaming related options";
     };
     git = {
       username = lib.mkOption {

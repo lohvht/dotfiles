@@ -7,6 +7,8 @@ let
   # The defaults here are usually the same and its *USUALLY* safe to go ahead and delete to reinstall
   # These settings if we somehow bork the relevant configuration
   agl_root = "${config.home.homeDirectory}/.local/share/anime-game-launcher";
+
+  nextcloud_client_pkg = guilib.nixGLWrap pkgs.nextcloud-client;
 in
 {
   imports = [
@@ -15,6 +17,23 @@ in
     ./conky.nix
   ];
   config = lib.mkIf cfg.enable (lib.mkMerge [
+    (lib.mkIf (pkgs.stdenv.isLinux && cfg.nextcloudClient.enable) {
+      home.packages = [
+        nextcloud_client_pkg
+      ];
+      services.nextcloud-client = {
+        enable = true;
+        package = nextcloud_client_pkg;
+        startInBackground = true;
+      };
+      # TODO: Find a way to nixify this without exposing too much
+      # # See https://github.com/nextcloud/desktop/blob/71dbd1103f96ea909e79e8c2d4f87331b248d73a/doc/conffile.rst
+      # # for configuration option
+      # xdg.configFile."Nextcloud/nextcloud.cfg".text = ''
+      #   [General]
+      #   showExperimentalOptions=true
+      # '';
+    })
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable && cfg.gaming.animeGameLauncherRunnerName != null) {
       home.shellAliases = {
         genshin_start = ''WINEPREFIX='${agl_root}/game' ${agl_root}/runners/${cfg.gaming.animeGameLauncherRunnerName}/bin/wine64 ${agl_root}/game/drive_c/Program\ Files/Genshin\ Impact/GenshinImpact.exe'';
