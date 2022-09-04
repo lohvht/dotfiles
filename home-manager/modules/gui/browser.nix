@@ -1,5 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }@inputs:
 let
+  guilib = import ./lib.nix inputs;
+
   cfg = config.customHomeProfile.GUI;
   # https://nur.nix-community.org/repos/rycee/
   inherit (pkgs.nur.repos.rycee) firefox-addons;
@@ -31,7 +33,7 @@ let
     "signon.rememberSignons" = false;
   };
 
-  custom_firefox_pkg = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+  wrapped_firefox_pkg = pkgs.wrapFirefox pkgs.firefox-unwrapped {
     extraPolicies = {
       # Policies here: https://github.com/mozilla/policy-templates
       AppAutoUpdate = false;
@@ -74,6 +76,10 @@ let
       lockPref("security.identityblock.show_extended_validation", true);
     '';
   };
+  # NOTE: We have to do this and use a separate bin firefox-nixGL instead of just using firefox via `guilib.nixGLWrap`
+  #       The home-manager program.firefox.package doesnt accept anything else as it needs the `override` attribute key
+  #       which the wrapper doesnt have.
+  custom_firefox_pkg = guilib.nixGLWrapOpts wrapped_firefox_pkg { binSuffix = "-nixGL"; };
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
@@ -83,7 +89,7 @@ in
           text = ''
             [Desktop Entry]
             Categories=Network;WebBrowser
-            Exec=nixGL firefox -P Default %U
+            Exec=firefox-nixGL -P Default %U
             GenericName=Web Browser
             Icon=${custom_firefox_pkg}/share/icons/hicolor/128x128/apps/firefox.png
             MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp
@@ -96,17 +102,20 @@ in
             [Desktop Action private_window]
             Name=Open a Private Window
             Icon=${custom_firefox_pkg}/share/icons/hicolor/128x128/apps/firefox.png
-            Exec=nixGL firefox -P Private %U
+            Exec=firefox-nixGL -P Private %U
           '';
           executable = true;
         };
       };
     })
     {
+      home.packages = [
+        custom_firefox_pkg
+      ];
       programs.firefox = {
         enable = true;
         # https://nixos.org/manual/nixpkgs/stable/#build-wrapped-firefox-with-extensions-and-policies
-        package = custom_firefox_pkg;
+        package = wrapped_firefox_pkg;
         extensions = [
           firefox-addons.ublock-origin
           firefox-addons.bitwarden
