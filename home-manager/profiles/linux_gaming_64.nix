@@ -19,6 +19,7 @@
         enable = true;
         animeGameLauncherRunnerName = "lutris-GE-Proton7-26-x86_64";
       };
+      nextcloudClient.enable = true;
     };
     golang.enable = true;
     python.enable = true;
