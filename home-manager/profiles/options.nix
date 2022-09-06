@@ -110,5 +110,10 @@
     python.enable = lib.mkEnableOption "enable python configuration";
     rust.enable = lib.mkEnableOption "enable rust configuration";
     ruby.enable = lib.mkEnableOption "enable ruby configuration";
+    cloudProviders = {
+      aws = {
+        enable = lib.mkEnableOption "enable AWS CLI integration";
+      };
+    };
   };
 }
