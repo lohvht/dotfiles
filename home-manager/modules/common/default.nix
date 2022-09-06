@@ -140,8 +140,6 @@ in
         # SSH config
         #######
         showssh = "cat ~/.ssh/config| grep Host";
-        # kubernetes
-        k = "kubectl ";
         # Nix aliases
         nxcd = "cd ${NXPKGS_CFG_PATH}";
         nxe = "e ${NXPKGS_CFG_PATH}";

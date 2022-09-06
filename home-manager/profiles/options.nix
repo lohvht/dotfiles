@@ -115,5 +115,10 @@
         enable = lib.mkEnableOption "enable AWS CLI integration";
       };
     };
+    cloudDevelopment = {
+      k8s = {
+        enable = lib.mkEnableOption "enable tools used for cloud development";
+      };
+    };
   };
 }
