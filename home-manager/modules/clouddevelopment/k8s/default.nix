@@ -24,6 +24,7 @@ in
       home.packages = [
         pkgs.kubectl
         pkgs.kind
+        pkgs.kubernetes-helm
       ];
       home.shellAliases = {
         # kubernetes
