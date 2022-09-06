@@ -12,5 +12,6 @@
     ./rust
     ./ruby
     ./cloudproviders
+    ./clouddevelopment
   ];
 }
