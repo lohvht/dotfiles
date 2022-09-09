@@ -21,7 +21,6 @@
     nixgl.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nixgl.inputs.flake-utils.follows = "flake-utils";
     nur.url = "github:nix-community/NUR";
-    nur.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
   outputs =
     { self
