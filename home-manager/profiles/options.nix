@@ -117,8 +117,9 @@
     };
     cloudDevelopment = {
       k8s = {
-        enable = lib.mkEnableOption "enable tools used for cloud development";
+        enable = lib.mkEnableOption "enable tools used for k8s development";
       };
+      terraform.enable = lib.mkEnableOption "enable tools used for terraform development";
     };
   };
 }
