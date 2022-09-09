@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 let
+  isGUIEnable = config.customHomeProfile.GUI.enable;
   cfg = config.customHomeProfile.cloudDevelopment.terraform;
   shell_extracommon_str = ''
     ########## Module CloudDevelopment.terraform Init Extra Start ##########
@@ -17,5 +18,12 @@ in
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
     }
+    (lib.mkIf isGUIEnable {
+      programs.vscode = {
+        extensions = [
+          pkgs.vscode-extensions.hashicorp.terraform
+        ];
+      };
+    })
   ]);
 }
