@@ -2,5 +2,6 @@
 {
   imports = [
     ./k8s
+    ./terraform
   ];
 }
