@@ -12,6 +12,7 @@ in
     {
       home.packages = [
         pkgs.awscli2
+        pkgs.aws-vault
       ];
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
