@@ -51,6 +51,7 @@ in
         pkgs.unzip # uncompress `.zip` files.
         pkgs.zip # compress `.zip` files.
         pkgs.pre-commit # precommit hooks
+        pkgs.git-crypt # git-crypt, for file level encryption
         # Man pages
         pkgs.man
         pkgs.man-pages
