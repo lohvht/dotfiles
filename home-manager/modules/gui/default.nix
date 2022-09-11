@@ -2,12 +2,22 @@
 let
   guilib = import ./lib.nix inputs;
   cfg = config.customHomeProfile.GUI;
+
   # NOTE: *that* an-anime-game-launcher specific, assume that installation is done in linux via the
   # appropriate channels (not going to link here, but lookup 'n-anime-game-launcher')
   # The defaults here are usually the same and its *USUALLY* safe to go ahead and delete to reinstall
   # These settings if we somehow bork the relevant configuration
   agl_root = "${config.home.homeDirectory}/.local/share/anime-game-launcher";
-
+  shell_extracommon_str = ''
+    ########## Module Gaming Init Extra Start ##########
+    genshin_start() {
+      local restore=$PWD
+      cd /tmp
+      WINEPREFIX='${agl_root}/game' nohup ${agl_root}/runners/${cfg.gaming.animeGameLauncherRunnerName}/bin/wine64 ${agl_root}/game/drive_c/Program\ Files/Genshin\ Impact/GenshinImpact.exe &
+      cd $restore
+    }
+    ########## Module Gaming Init Extra End ##########
+  '';
   nextcloud_client_pkg = guilib.nixGLWrap pkgs.nextcloud-client;
 in
 {
@@ -35,9 +45,8 @@ in
       # '';
     })
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable && cfg.gaming.animeGameLauncherRunnerName != null) {
-      home.shellAliases = {
-        genshin_start = ''WINEPREFIX='${agl_root}/game' ${agl_root}/runners/${cfg.gaming.animeGameLauncherRunnerName}/bin/wine64 ${agl_root}/game/drive_c/Program\ Files/Genshin\ Impact/GenshinImpact.exe'';
-      };
+      programs.bash.initExtra = shell_extracommon_str;
+      programs.zsh.initExtra = shell_extracommon_str;
     })
     {
       home.packages = [
