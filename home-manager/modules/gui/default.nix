@@ -57,6 +57,7 @@ in
         pkgs.discord
         pkgs.thunderbird
         pkgs.slack
+        pkgs.obsidian
       ];
       programs.alacritty = {
         # Alacritty is a terminal emulator
