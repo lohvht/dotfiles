@@ -22,6 +22,13 @@ in
       programs.vscode = {
         extensions = [
           pkgs.vscode-extensions.hashicorp.terraform
+        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "HCL";
+            publisher = "HashiCorp";
+            version = "0.2.1";
+            sha256 = "15ydllrridf1kc7867h0r7ykc2mnn5d94d1nvklzx0nnkq64pl75";
+          }
         ];
       };
     })
