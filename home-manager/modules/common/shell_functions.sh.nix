@@ -180,19 +180,31 @@ in
   # `nix-hash --flat --base32 --type sha256 /nix/store/{EXT_NAME_HASH}.zip`
   # and use this string instead
   function get_vsixpkg() {
-      N="$1.$2"
+      local insecure=""
+      # getopts will only require an extra colon after your option if we need to use args, otherwise can just omit if its just a single flag. 
+      while getopts k name
+      do
+        case $name in
+          k)
+            insecure="-k"
+            ;;
+        esac
+      done
+      # Clear out flags consumed
+      shift $(($OPTIND - 1))
 
+      local N="$1.$2"
       # Create a tempdir for the extension download.
-      EXTTMP=$(mktemp -d -t vscode_exts_XXXXXXXX)
+      local EXTTMP=$(mktemp -d -t vscode_exts_XXXXXXXX)
 
-      URL="https://$1.gallery.vsassets.io/_apis/public/gallery/publisher/$1/extension/$2/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+      local URL="https://$1.gallery.vsassets.io/_apis/public/gallery/publisher/$1/extension/$2/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
 
       # Quietly but delicately curl down the file, blowing up at the first sign of trouble.
-      curl --silent --show-error --retry 3 --fail -X GET -o "$EXTTMP/$N.zip" "$URL"
+      curl --silent --show-error --retry 3 --fail $insecure -X GET -o "$EXTTMP/$N.zip" "$URL"
       # Unpack the file we need to stdout then pull out the version
-      VER=$(jq -r '.version' <(unzip -qc "$EXTTMP/$N.zip" "extension/package.json"))
+      local VER=$(jq -r '.version' <(unzip -qc "$EXTTMP/$N.zip" "extension/package.json"))
       # Calculate the SHA
-      SHA=$(nix-hash --flat --base32 --type sha256 "$EXTTMP/$N.zip")
+      local SHA=$(nix-hash --flat --base32 --type sha256 "$EXTTMP/$N.zip")
 
       # Clean up.
       rm -Rf "$EXTTMP"
