@@ -52,6 +52,7 @@ in
       home.packages = [
         pkgs.nixgl.auto.nixGLDefault
         pkgs.bitwarden
+        pkgs._1password-gui
         pkgs.teams
         pkgs.zoom-us
         pkgs.discord
