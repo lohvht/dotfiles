@@ -52,6 +52,8 @@ in
         pkgs.zip # compress `.zip` files.
         pkgs.pre-commit # precommit hooks
         pkgs.git-crypt # git-crypt, for file level encryption
+        pkgs.openvpn3
+        pkgs.openconnect
         # Man pages
         pkgs.man
         pkgs.man-pages
