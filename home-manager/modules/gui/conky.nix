@@ -134,7 +134,7 @@ let
             in
             ''
               ##------------Disk${idxStr}-------------##
-              ''${goto 10}''${color}${disk.name}: ''${color6}''${fs_used ${disk.mountedPath}}''${color} / ''${color2}''${fs_size ${disk.mountedPath}}''${color}''${alignr 10}Available: ''${color6}''${fs_free_perc /}%''${color}''
+              ''${goto 10}''${color}${disk.name}: ''${color6}''${fs_used ${disk.mountedPath}}''${color} / ''${color2}''${fs_size ${disk.mountedPath}}''${color}''${alignr 10}Available: ''${color6}''${fs_free_perc ${disk.mountedPath}}%''${color}''
         )
         hardwareCfg.disks;
 
