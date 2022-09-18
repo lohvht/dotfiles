@@ -37,7 +37,7 @@ in
           ignoreSpace = true; # i.e. setopt HIST_IGNORE_SPACE
           expireDuplicatesFirst = true; # i.e. setopt HIST_EXPIRE_DUPS_FIRST
           extended = true; # i.e. setopt EXTENDED_HISTORY
-          share = true; # i.e. setopt SHARE_HISTORY
+          share = false; # i.e. setopt SHARE_HISTORY
         };
 
         enableAutosuggestions = true;
