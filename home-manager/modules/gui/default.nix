@@ -7,13 +7,34 @@ let
   # appropriate channels (not going to link here, but lookup 'n-anime-game-launcher')
   # The defaults here are usually the same and its *USUALLY* safe to go ahead and delete to reinstall
   # These settings if we somehow bork the relevant configuration
+  # We need to set the config here ourselves, mimicking the logic from here:
+  # https://github.com/an-anime-team/an-anime-game-launcher/blob/1297490df7034af3b5385cc269659f23fb61abe2/src/ts/launcher/states/Launch.ts
+  # Because we cannot run the game directly somehow (due to the telemetry code & how in our local system we cannot call it)
   agl_root = "${config.home.homeDirectory}/.local/share/anime-game-launcher";
+
+  agl_env_vars = builtins.concatStringsSep " " [
+    "WINEPREFIX='${agl_root}/game'"
+    # hud
+    "MANGOHUD=1"
+    # dxvk async
+    "DXVK_ASYNC=1"
+    # Wine synchro, see here: https://github.com/AdelKS/LinuxGamingGuide#wine-tkg
+    "WINEESYNC=1"
+  ];
+  agl_wine_executable = "${agl_root}/runners/${cfg.gaming.animeGameLauncherRunnerName}/bin/wine64";
+  agl_gamedir = ''${agl_root}/game/drive_c/Program\ Files/Genshin\ Impact'';
+  agl_game_exe = "${agl_gamedir}/GenshinImpact.exe";
+  command = builtins.concatStringsSep " " [
+    "gamemoderun" # If game mode is installed
+    agl_wine_executable
+    "${agl_gamedir}/unlockfps.bat" # ${agl_gamedir}/launcher.bat ==> original launcher.bat, replace when unlockfps gives error "Do not place unlocker as the same folder as the game"
+  ];
   shell_extracommon_str = ''
     ########## Module Gaming Init Extra Start ##########
     genshin_start() {
       local restore=$PWD
-      cd /tmp
-      WINEPREFIX='${agl_root}/game' nohup ${agl_root}/runners/${cfg.gaming.animeGameLauncherRunnerName}/bin/wine64 ${agl_root}/game/drive_c/Program\ Files/Genshin\ Impact/GenshinImpact.exe &
+      cd ${agl_gamedir}
+      ${agl_env_vars} nohup ${command} &
       cd $restore
     }
     ########## Module Gaming Init Extra End ##########
