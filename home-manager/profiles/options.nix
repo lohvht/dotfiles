@@ -65,12 +65,9 @@
           Where this disk was mounted.
           example:
             mountedPath = "/";
-            pcie_bus_id = = "00";
 
         `devicePath`
           Actual device path TODO: NOT IN USE YET.
-          enum:
-            ["amdgpu" "nouveau" "nvidia"]
           example:
             devicePath = "/dev/nvme0n1p1";
       '';
