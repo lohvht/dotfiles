@@ -2,6 +2,7 @@
 let
   gitCfg = config.customHomeProfile.git;
   isGUIEnable = config.customHomeProfile.GUI.enable;
+  isCorsairKBMSupportEnable = config.customHomeProfile.corsairKeyboardMouseSupport.enable;
   NXPKGS_CFG_PATH = "~/.config/nixpkgs";
 in
 {
@@ -19,6 +20,11 @@ in
     (lib.mkIf pkgs.stdenv.isLinux {
       # Make it easier for generic non-nixos linuxes
       targets.genericLinux.enable = true;
+    })
+    (lib.mkIf (pkgs.stdenv.isLinux && isCorsairKBMSupportEnable) {
+      home.packages = [
+        pkgs.ckb-next
+      ];
     })
     {
       # Let Home Manager install and manage itself.
