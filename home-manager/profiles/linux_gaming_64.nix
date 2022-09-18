@@ -24,6 +24,7 @@
       };
       nextcloudClient.enable = true;
     };
+    corsairKeyboardMouseSupport.enable = true;
     golang.enable = true;
     python.enable = true;
     ruby.enable = true;
