@@ -10,7 +10,10 @@
     cpuMake = "ryzen";
     gpus = [{ name = "Radeon RX 5700/5700 XT"; pcie_bus_id = "0b"; pcie_device_id = "00"; driver = "amdgpu"; }];
     networkInterface = "wlp4s0";
-    disks = [{ name = "System"; mountedPath = "/"; }];
+    disks = [
+      { name = "System"; mountedPath = "/"; }
+      { name = "HDD1"; mountedPath = "${config.home.homeDirectory}/HDD/HDD1"; }
+    ];
   };
   customHomeProfile = {
     GUI = {
