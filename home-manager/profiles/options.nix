@@ -86,6 +86,18 @@
       };
       nextcloudClient.enable = lib.mkEnableOption "check if we include gaming related options";
     };
+    corsairKeyboardMouseSupport.enable = lib.mkEnableOption ''
+      if true, adds corsair keyboard and mouse support
+
+      Take note that whenever this is first enabled, the daemon must also be started and enabled for the driver to work:
+        sudo systemctl enable $HOME/.nix-profile/lib/systemd/system/ckb-next-daemon.service && sudo systemctl start ckb-next-daemon
+
+      After running the abe command, go ahead and start the cbk-next command to open up the settings.
+
+      Similarly when setting it to false, you should also stop and remove the ckb daemon
+        sudo systemctl disable ckb-next-daemon && sudo systemctl stop ckb-next-daemon
+        
+    '';
     git = {
       username = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
