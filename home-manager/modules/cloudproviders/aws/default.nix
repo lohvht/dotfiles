@@ -14,6 +14,7 @@ in
         pkgs.awscli2
         pkgs.aws-vault
         pkgs.aws-iam-authenticator
+        pkgs.eksctl
       ];
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
