@@ -13,6 +13,7 @@ in
       home.packages = [
         pkgs.awscli2
         pkgs.aws-vault
+        pkgs.aws-iam-authenticator
       ];
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;

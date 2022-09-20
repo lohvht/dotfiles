@@ -74,8 +74,9 @@ in
           "explorer.confirmDelete" = false;
           "terminal.integrated.fontFamily" = "MesloLGS NF";
           "terminal.integrated.fontSize" = 12;
-          "workbench.iconTheme" = "Monokai Pro (Filter Spectrum) Icons";
-          "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
+          "workbench.colorTheme" = "One Dark Pro Darker";
+          # "workbench.iconTheme" = "Monokai Pro (Filter Spectrum) Icons";
+          # "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
           "search.followSymlinks" = false;
           "todohighlight.keywords" = [
             {
@@ -138,11 +139,17 @@ in
             version = "0.0.17";
             sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
           }
+          # {
+          #   name = "theme-monokai-pro-vscode";
+          #   publisher = "monokai";
+          #   version = "1.1.21";
+          #   sha256 = "16pznay32d9pd1gigcrzww1rnni0sq1r8hg28awvvw9wnqn0hlk4";
+          # }
           {
-            name = "theme-monokai-pro-vscode";
-            publisher = "monokai";
-            version = "1.1.21";
-            sha256 = "16pznay32d9pd1gigcrzww1rnni0sq1r8hg28awvvw9wnqn0hlk4";
+            name = "Material-theme";
+            publisher = "zhuangtongfa";
+            version = "3.15.5";
+            sha256 = "0crrzpdy8fy4l1nim93qscmlpz2jhyb6hf0gh1rzqgfnk9w431xi";
           }
           {
             publisher = "bcanzanella";
