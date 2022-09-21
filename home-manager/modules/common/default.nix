@@ -103,6 +103,12 @@ in
       ];
       home.file.".vimrc".text = builtins.readFile ./.vimrc;
       home.shellAliases = {
+        # TODO: lohvht@21sept2022: Create either an alias or a shell function to handle help with all of my aliases
+        #                          either by printing out to stdout / creating a man page etc etc
+        #                          The sheer number of aliases/shell functions that I have are getting too much for me
+        #                          to remember potentially useful commands that I might have forgotten.
+        #                          If a tool is to be written for this, make sure to split the shell function into categories
+        #                          i.e. git related, python related, general,,, 
         ls = "ls -GFh --color=auto";
         # some more ls aliases;
         ll = "ls -alF --color=auto";
@@ -140,8 +146,10 @@ in
         gstal = "git stash list";
         gstaa = "git stash apply";
         gstad = "git stash drop";
-        gstas = "git stash save ";
+        gstam = "git stash save "; # i.e git stash with a message
+        gstams = "git stash save --staged "; # i.e. git stash all staged files with a message
         gsta = "git stash ";
+        gstas = "git stash --staged"; # i.e. git stash all staged files
         ######
         # Port checking command
         ######
@@ -184,8 +192,10 @@ in
           stal = "stash list";
           staa = "stash apply";
           stad = "stash drop";
-          stas = "stash save ";
+          stam = "stash save ";
+          stams = "stash save --staged ";
           sta = "stash ";
+          stas = "stash --staged";
           rb = "rebase ";
           rbi = "rebase -i ";
           pullrb = "pull --rebase";
