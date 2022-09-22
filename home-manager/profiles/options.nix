@@ -89,6 +89,9 @@
     corsairKeyboardMouseSupport.enable = lib.mkEnableOption ''
       if true, adds corsair keyboard and mouse support
 
+      TODO: Maybe use home manager's systemd support? need to check if the daemon can be run in userspace first
+      May need to set the systemctl path, like mentioned here: https://github.com/nix-community/home-manager/blob/master/modules/systemd.nix#L113-L115      
+
       Take note that whenever this is first enabled, the daemon must also be started and enabled for the driver to work:
         sudo systemctl enable $HOME/.nix-profile/lib/systemd/system/ckb-next-daemon.service && sudo systemctl start ckb-next-daemon
 

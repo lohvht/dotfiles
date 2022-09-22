@@ -61,6 +61,18 @@ in
         pkgs.git-crypt # git-crypt, for file level encryption
         pkgs.openvpn3
         pkgs.openconnect
+        # TODO: WIP to add docker to the list of auto installed packages.
+        #       I believe a simple sketch to getting docker up and running are as follows:
+        #         1) Print command to be run (shown below) or directly request for sudo
+        #         2) create a `docker` group => 
+        #         3) start socket service => sudo systemctl enable $HOME/.nix-profile/etc/systemd/system/docker.socket && sudo systemctl start docker.socket
+        #         4) Start docker service => sudo systemctl enable $HOME/.nix-profile/etc/systemd/system/docker.service && sudo systemctl start docker.service
+        #
+        #       The link below shows a way to run an activation script that can run through the steps laid out above (or print out the command that needs to be run, if required)
+        #       This portion should give us a better idea on automating systemd startups in general as well.
+        #         https://github.com/nix-community/home-manager/blob/2e41a1bab32e49568a037ddd962ebbe01c8c2f40/modules/systemd.nix#L281-L328
+        # pkgs.docker
+
         # Man pages
         pkgs.man
         pkgs.man-pages
