@@ -62,6 +62,7 @@ in
         pkgs.git-extras # extra functionality for git, such as adding co-authorship to last commit, repo summary etc etc
         pkgs.openvpn3
         pkgs.openconnect
+        pkgs.global
         # TODO: WIP to add docker to the list of auto installed packages.
         #       I believe a simple sketch to getting docker up and running are as follows:
         #         1) Print command to be run (shown below) or directly request for sudo
