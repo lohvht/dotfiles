@@ -59,6 +59,7 @@ in
         pkgs.zip # compress `.zip` files.
         pkgs.pre-commit # precommit hooks
         pkgs.git-crypt # git-crypt, for file level encryption
+        pkgs.git-extras # extra functionality for git, such as adding co-authorship to last commit, repo summary etc etc
         pkgs.openvpn3
         pkgs.openconnect
         # TODO: WIP to add docker to the list of auto installed packages.
@@ -162,6 +163,9 @@ in
         gstams = "git stash save --staged "; # i.e. git stash all staged files with a message
         gsta = "git stash ";
         gstas = "git stash --staged"; # i.e. git stash all staged files
+        # TODO: Expand this coauthor to include reading from a list of registered co-authors, so that we can add by alias instead of
+        #       always specifying a username / email
+        gca = "git coauthor"; # git coauthor <username> <email>
         ######
         # Port checking command
         ######
@@ -211,6 +215,7 @@ in
           rb = "rebase ";
           rbi = "rebase -i ";
           pullrb = "pull --rebase";
+          ca = "coauthor";
         };
         extraConfig = {
           init.defaultBranch = "main";
