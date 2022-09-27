@@ -79,8 +79,8 @@ in
           {
             name = "rails-db-schema";
             publisher = "aki77";
-            version = "0.2.5";
-            sha256 = "15l437ck4fvag40v91fr33z6ay0k8sq5pc1rci1gmg30fa86q3kn";
+            version = "0.2.6";
+            sha256 = "16nmbg3p1z1mr3027m46j8m09g1l3w2d529g27aydw5i1v6d84f4";
           }
           {
             name = "solargraph";

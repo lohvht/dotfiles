@@ -74,7 +74,7 @@ in
           "explorer.confirmDelete" = false;
           "terminal.integrated.fontFamily" = "MesloLGS NF";
           "terminal.integrated.fontSize" = 12;
-          "workbench.colorTheme" = "One Dark Pro Darker";
+          "workbench.colorTheme" = "monokai-charcoal (white)";
           # "workbench.iconTheme" = "Monokai Pro (Filter Spectrum) Icons";
           # "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
           "search.followSymlinks" = false;
@@ -112,12 +112,38 @@ in
           pkgs.vscode-extensions.jnoortheen.nix-ide
           pkgs.vscode-extensions.ibm.output-colorizer
           pkgs.vscode-extensions.formulahendry.auto-rename-tag
+          pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
+          pkgs.vscode-extensions.sanaajani.taskrunnercode
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # NOTE: We can use the shell function `get_vsixpkg $publisher $extension_name` to easily get the required updated
           # version as well as the required SHA info.
           {
-            publisher = "jgclark";
+            name = "code-gnu-global";
+            publisher = "austin";
+            version = "0.2.2";
+            sha256 = "1fz89m6ja25aif6wszg9h2fh5vajk6bj3lp1mh0l2b04nw2mzhd5";
+          }
+          {
+            name = "remote-containers";
+            publisher = "ms-vscode-remote";
+            version = "0.254.0";
+            sha256 = "1bq4f26fqhvrr424dpy06x1wvi0ad34vmzdzn83wsq4rvm08h7hk";
+          }
+          {
+            name = "doxdocgen";
+            publisher = "cschlosser";
+            version = "1.4.0";
+            sha256 = "1d95znf2vsdzv9jqiigh9zm62dp4m9jz3qcfaxn0n0pvalbiyw92";
+          }
+          {
+            name = "Doxygen";
+            publisher = "bbenoist";
+            version = "1.0.0";
+            sha256 = "0kclb60mnaj3c5lmpwmhkbnx4g8gr4wy66lkcklkwm555nkgw48n";
+          }
+          {
             name = "vscode-todo-highlight";
+            publisher = "jgclark";
             version = "2.0.4";
             sha256 = "18zm1w4ziq3i7fn2rcd095va7nqnbdmsvr82lj27s33zrd2wwzzr";
           }
@@ -130,8 +156,8 @@ in
           {
             name = "cmake-tools";
             publisher = "ms-vscode";
-            version = "1.12.24";
-            sha256 = "1dlg9yyvcf70k6ykvz0s7zlhm7qjvj6mv34bnl3gdwc1282rs42c";
+            version = "1.13.8";
+            sha256 = "1lak94fr48gqsfz9355pgwr8b1scngjk6byi737q3k1sgjxbz6cl";
           }
           {
             name = "cmake";
@@ -139,14 +165,20 @@ in
             version = "0.0.17";
             sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
           }
-          # {
-          #   name = "theme-monokai-pro-vscode";
-          #   publisher = "monokai";
-          #   version = "1.1.21";
-          #   sha256 = "16pznay32d9pd1gigcrzww1rnni0sq1r8hg28awvvw9wnqn0hlk4";
-          # }
           {
-            name = "Material-theme";
+            name = "theme-monokai-pro-vscode";
+            publisher = "monokai";
+            version = "1.1.21";
+            sha256 = "16pznay32d9pd1gigcrzww1rnni0sq1r8hg28awvvw9wnqn0hlk4";
+          }
+          {
+            name = "monokai-charcoal-high-contrast";
+            publisher = "74th";
+            version = "3.4.0";
+            sha256 = "05y8dwqqmixy9k59xmdpwgjbvvc6w7lh8apgnijy0li0xrs11i9f";
+          }
+          {
+            name = "material-theme";
             publisher = "zhuangtongfa";
             version = "3.15.5";
             sha256 = "0crrzpdy8fy4l1nim93qscmlpz2jhyb6hf0gh1rzqgfnk9w431xi";
