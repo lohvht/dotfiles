@@ -66,6 +66,8 @@ in
           { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when = ""; }
         ]);
         userSettings = {
+          "window.title" = "\${activeEditorMedium}\${separator}\${rootName}";
+          "workbench.editor.labelFormat" = "medium";
           "terminal.integrated.shellIntegration.enabled" = false;
           "workbench.settings.editor" = "json";
           "update.mode" = "none";
