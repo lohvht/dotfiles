@@ -78,7 +78,7 @@ in
         # Man pages
         pkgs.man
         pkgs.man-pages
-        pkgs.posix_man_pages
+        pkgs.man-pages-posix
         pkgs.stdman
         pkgs.cacert # A bundle of X.509 certificates of public Certificate Authorities (CA)
         pkgs.vim # vim
