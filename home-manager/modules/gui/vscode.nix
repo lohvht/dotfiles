@@ -68,6 +68,8 @@ in
         userSettings = {
           "window.title" = "\${activeEditorMedium}\${separator}\${rootName}";
           "workbench.editor.labelFormat" = "medium";
+          "remote.SSH.useFlock" = false;
+          "remote.SSH.localServerDownload" = "always";
           "terminal.integrated.shellIntegration.enabled" = false;
           "workbench.settings.editor" = "json";
           "update.mode" = "none";
