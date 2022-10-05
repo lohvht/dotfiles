@@ -20,7 +20,7 @@
       enable = true;
       gaming = {
         enable = true;
-        animeGameLauncherRunnerName = "lutris-GE-Proton7-26-x86_64";
+        animeGameLauncherRunnerName = "lutris-GE-Proton7-30-x86_64";
       };
       nextcloudClient.enable = true;
     };
