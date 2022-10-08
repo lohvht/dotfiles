@@ -84,6 +84,14 @@
           description = "The runner name for anime game launcher";
         };
       };
+      vscode = {
+        enable = lib.mkEnableOption "check if vscode should be used and the default editor should be set to code";
+        crashReporterUUID = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+          description = "The crash reporter UUID to set. if not set, default to a default hardcoded one. You should override this option by generating a UUID via `uuidgen`";
+        };
+      };
       nextcloudClient.enable = lib.mkEnableOption "check if we include gaming related options";
     };
     corsairKeyboardMouseSupport.enable = lib.mkEnableOption ''

@@ -1,9 +1,31 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.customHomeProfile.GUI;
+  # utility for openvsx extensions
+  mkOpenVSXExt = { publisher, name, version, sha256 }: {
+    inherit name publisher version;
+    vsix = builtins.fetchurl {
+      inherit sha256;
+      url = "https://open-vsx.org/api/${publisher}/${name}/${version}/file/${publisher}.${name}-${version}.vsix";
+      name = "${publisher}-${name}.zip";
+    };
+  };
+
+  # configuration
+  isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
+  cfg = config.customHomeProfile.GUI.vscode;
+  crUUID = if cfg.crashReporterUUID == null then "473f1188-f798-49bf-91b2-a80a8ab1a498" else cfg.crashReporterUUID;
 in
 {
-  config = lib.mkIf cfg.enable (lib.mkMerge [
+  config = lib.mkIf isVSCodeEnable (lib.mkMerge [
+    {
+      warnings = if cfg.crashReporterUUID != null then [ ] else [
+        ''
+          You have not provided a UUID for customHomeProfile.GUI.vscode.crashReporterUUID
+          While a default value will be provided, it is advised to specify a generated UUID value.
+          You may generate one via `uuidgen`.
+        ''
+      ];
+    }
     (lib.mkIf pkgs.stdenv.isLinux {
       home.file = {
         ".local/share/applications/Codium.desktop" = {
@@ -29,6 +51,33 @@ in
             Name=New Empty Window
           '';
           executable = true;
+        };
+        ".vscode-oss/argv.json" = {
+          text = ''
+            // This configuration file allows you to pass permanent command line arguments to VS Code.
+            // Only a subset of arguments is currently supported to reduce the likelihood of breaking
+            // the installation.
+            //
+            // PLEASE DO NOT CHANGE WITHOUT UNDERSTANDING THE IMPACT
+            //
+            // NOTE: Changing this file requires a restart of VS Code.
+            {
+              // Use software rendering instead of hardware accelerated rendering.
+              // This can help in cases where you see rendering issues in VS Code.
+              // "disable-hardware-acceleration": true,
+
+              // Allows to disable crash reporting.
+              // Should restart the app if the value is changed.
+              "enable-crash-reporter": false,
+
+              // Unique id used for correlating crash reports sent from this instance.
+              // Do not edit this value.
+              "crash-reporter-id": "${crUUID}",
+              "enable-proposed-api": [
+                  "jeanp413.open-remote-ssh",
+              ]
+            }
+          '';
         };
       };
     })
@@ -116,7 +165,8 @@ in
           pkgs.vscode-extensions.jnoortheen.nix-ide
           pkgs.vscode-extensions.ibm.output-colorizer
           pkgs.vscode-extensions.formulahendry.auto-rename-tag
-          pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
+          # NOTE: Incompatible with vscodium
+          # pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
           pkgs.vscode-extensions.sanaajani.taskrunnercode
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # NOTE: We can use the shell function `get_vsixpkg $publisher $extension_name` to easily get the required updated
@@ -127,12 +177,19 @@ in
             version = "0.2.2";
             sha256 = "1fz89m6ja25aif6wszg9h2fh5vajk6bj3lp1mh0l2b04nw2mzhd5";
           }
-          {
-            name = "remote-containers";
-            publisher = "ms-vscode-remote";
-            version = "0.254.0";
-            sha256 = "1bq4f26fqhvrr424dpy06x1wvi0ad34vmzdzn83wsq4rvm08h7hk";
-          }
+          # NOTE: Incompatible with vscodium
+          # {
+          #   name = "remote-containers";
+          #   publisher = "ms-vscode-remote";
+          #   version = "0.254.0";
+          #   sha256 = "1bq4f26fqhvrr424dpy06x1wvi0ad34vmzdzn83wsq4rvm08h7hk";
+          # }
+          (mkOpenVSXExt {
+            name = "open-remote-ssh";
+            publisher = "jeanp413";
+            version = "0.0.16";
+            sha256 = "0m1ypf8crdmyf9qzm0904sz7rgb9xd4l4hyna9y9zfw6cq82cbd3";
+          })
           {
             name = "doxdocgen";
             publisher = "cschlosser";

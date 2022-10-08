@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  isGUIEnable = config.customHomeProfile.GUI.enable;
+  isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
   cfg = config.customHomeProfile.golang;
 
   GOPATH = "${config.home.homeDirectory}/go";
@@ -28,7 +28,7 @@ in
         package = pkgs.go;
       };
     }
-    (lib.mkIf isGUIEnable {
+    (lib.mkIf isVSCodeEnable {
       programs.vscode = {
         userSettings = {
           "go.formatTool" = "goimports";

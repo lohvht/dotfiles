@@ -22,6 +22,9 @@
         enable = true;
         animeGameLauncherRunnerName = "lutris-GE-Proton7-30-x86_64";
       };
+      vscode = {
+        enable = true;
+      };
       nextcloudClient.enable = true;
     };
     corsairKeyboardMouseSupport.enable = true;
