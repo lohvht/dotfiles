@@ -4,6 +4,7 @@
   imports = [
     # List your module files here
     ./common
+    ./sshagent
     ./gui
     ./golang
     ./latex
