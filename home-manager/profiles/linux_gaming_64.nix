@@ -24,14 +24,15 @@
       };
       vscode = {
         enable = true;
+        crashReporterUUID = "13fcbd5c-0f51-4819-9701-70b7b4e5cf06";
       };
       nextcloudClient.enable = true;
     };
     corsairKeyboardMouseSupport.enable = true;
     golang.enable = true;
     python.enable = true;
-    ruby.enable = true;
-    node.enable = true;
+    # ruby.enable = true;
+    # node.enable = true;
     latex.enable = true;
     # NOTE: Replace the usernames here
     git.userEmail = "vic94loh@hotmail.com";
