@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  isGUIEnable = config.customHomeProfile.GUI.enable;
+  isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
   cfg = config.customHomeProfile.ruby;
 
   RBENV_ROOT = "${config.home.homeDirectory}/.rbenv";
@@ -57,7 +57,7 @@ in
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
     }
-    (lib.mkIf isGUIEnable {
+    (lib.mkIf isVSCodeEnable {
       programs.vscode = {
         userSettings = {
           # "ruby.useBundler" = false; #run non-lint commands with bundle exec

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  isGUIEnable = config.customHomeProfile.GUI.enable;
+  isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
   cfg = config.customHomeProfile.latex;
 in
 {
@@ -17,7 +17,7 @@ in
         };
       };
     }
-    (lib.mkIf isGUIEnable {
+    (lib.mkIf isVSCodeEnable {
       programs.vscode = {
         userSettings = {
           "latex-workshop.latex.autoBuild.run" = "onFileChange";

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  isGUIEnable = config.customHomeProfile.GUI.enable;
+  isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
   cfg = config.customHomeProfile.python;
 
   PYENV_ROOT = "${config.home.homeDirectory}/.pyenv";
@@ -67,7 +67,7 @@ in
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
     }
-    (lib.mkIf isGUIEnable {
+    (lib.mkIf isVSCodeEnable {
       programs.vscode = {
         userSettings = {
           "python.languageServer" = "Pylance";

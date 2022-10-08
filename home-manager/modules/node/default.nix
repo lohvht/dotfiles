@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.customHomeProfile.node;
-  isGUIEnable = config.customHomeProfile.GUI.enable;
+  isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
   NVM_DIR = "${config.home.homeDirectory}/.nvm";
   shell_extracommon_str = ''
     ########## Module Node Init Extra Start ##########
@@ -27,7 +27,7 @@ in
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
     }
-    (lib.mkIf (isGUIEnable && cfg.includeFrontendTools) {
+    (lib.mkIf (isVSCodeEnable && cfg.includeFrontendTools) {
       programs.vscode = {
         extensions = [
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [

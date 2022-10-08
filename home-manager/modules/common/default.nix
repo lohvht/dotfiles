@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   gitCfg = config.customHomeProfile.git;
-  isGUIEnable = config.customHomeProfile.GUI.enable;
+  isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
   isCorsairKBMSupportEnable = config.customHomeProfile.corsairKeyboardMouseSupport.enable;
   NXPKGS_CFG_PATH = "~/.config/nixpkgs";
 in
@@ -34,7 +34,7 @@ in
 
       home.sessionVariables = {
         SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-        EDITOR = if isGUIEnable then "code --wait --new-window" else "vim";
+        EDITOR = if isVSCodeEnable then "code --wait --new-window" else "vim";
         # colored GCC warnings and errors
         GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
       };
