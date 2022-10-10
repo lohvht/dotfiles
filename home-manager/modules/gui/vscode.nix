@@ -152,6 +152,7 @@ in
           "search.searchOnType" = false;
           "diffEditor.ignoreTrimWhitespace" = false;
           "cmake.configureOnOpen" = true;
+          "nginx-conf-hint.syntax" = "sublime";
         };
         extensions = [
           pkgs.vscode-extensions.eamodio.gitlens
@@ -256,6 +257,13 @@ in
             version = "0.0.2";
             sha256 = "1gml41bc77qlydnvk1rkaiv95rwprzqgj895kxllqy4ps8ly6nsd";
           }
+          {
+            name = "vscode-nginx-conf";
+            publisher = "ahmadalli";
+            version = "0.1.3";
+            sha256 = "10z0him4kl9q6h1nip7d3dp9nv0a1dkh3x6zqc6nilfw959v3358";
+          }
+
         ];
       };
     }
