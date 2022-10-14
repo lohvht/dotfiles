@@ -16,6 +16,7 @@
     ];
   };
   customHomeProfile = {
+    systemCtlPath = "/usr/bin/systemctl";
     GUI = {
       enable = true;
       gaming = {

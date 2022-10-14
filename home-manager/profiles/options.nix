@@ -74,6 +74,11 @@
     };
   };
   options.customHomeProfile = {
+    systemCtlPath = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "systemctl path";
+    };
     GUI = {
       enable = lib.mkEnableOption "check if we should include GUI options for home manager profiles";
       gaming = {
@@ -139,6 +144,7 @@
       k8s = {
         enable = lib.mkEnableOption "enable tools used for k8s development";
       };
+      docker.enable = lib.mkEnableOption "enable tools used for docker installation";
       terraform.enable = lib.mkEnableOption "enable tools used for terraform development";
     };
   };
