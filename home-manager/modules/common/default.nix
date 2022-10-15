@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }@inputs:
 let
-  cfglib = import ../cfglib.nix inputs;
+  cfglib = import ../cfglib inputs;
 
   gitCfg = config.customHomeProfile.git;
   isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
