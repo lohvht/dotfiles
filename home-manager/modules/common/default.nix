@@ -140,7 +140,6 @@ in
         egrep = "egrep --color=auto";
         g = "git ";
         py = "python ";
-        docker-compose = "docker compose";
         ########
         # Git related
         ########
