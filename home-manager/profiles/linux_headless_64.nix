@@ -3,14 +3,20 @@
   imports = [
     ./options.nix
   ];
+  linuxInfo = {
+    distro = "ubuntu";
+  };
   customHomeProfile = {
+    systemCtlPath = "/usr/bin/systemctl";
     GUI.enable = false;
     golang.enable = true;
     python.enable = true;
-    node.enable = true;
-    latex.enable = true;
+    cloudDevelopment = {
+      docker.enable = true;
+      terraform.enable = true;
+    };
     # NOTE: Replace the usernames here
-    git.userEmail = "example@example.com";
-    git.username = "Example Name";
+    git.userEmail = "vic94loh@hotmail.com";
+    git.username = "Victor Loh";
   };
 }
