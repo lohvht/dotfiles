@@ -16,9 +16,7 @@ let
     })
     (mkSvcActiScHelper { serviceFile = "docker.service"; })
   ];
-  systemCtl = ;
-
-    cfg = config.customHomeProfile.cloudDevelopment.docker;
+  cfg = config.customHomeProfile.cloudDevelopment.docker;
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
