@@ -188,7 +188,10 @@ in
         hmgens = "home-manager generations";
         hmls = ''awk '/^        ###### HOMECONFIG PROFILES START/{p=1;next};/^        ###### HOMECONFIG PROFILES END/{p=0};p' ${NXPKGS_CFG_PATH}/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}' '';
       };
-      programs.man = { enable = true; generateCaches = true; };
+      programs.man = {
+        enable = true;
+        # generateCaches = true;
+      };
       programs.direnv = { enable = true; enableBashIntegration = true; enableZshIntegration = true; nix-direnv.enable = true; };
       programs.git = {
         # TODO: Add fancy git related stuff such as contributors tag, pre-commit hooks etc 
