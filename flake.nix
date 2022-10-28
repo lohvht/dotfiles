@@ -13,8 +13,9 @@
     # # failures on Linux systems.
     # nixpkgs-darwin-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
 
-    home-manager.url = "github:nix-community/home-manager/release-22.05";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    home-manager.inputs.utils.follows = "flake-utils";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nixgl.url = "github:guibou/nixGL";
@@ -46,17 +47,19 @@
                                       }@args:
         nixpkgs-unstable.lib.nameValuePair homeProfileName (
           home-manager.lib.homeManagerConfiguration ({
-            # Using $USER and $HOME may be impure but it works generally as a sane default.
-            # If needed, users should replace them with args passed in
-            username = builtins.getEnv "USER";
-            homeDirectory = /. + builtins.getEnv "HOME";
-            system = system;
             pkgs = nixpkgs-unstable.legacyPackages.${system};
-            configuration = import ./home-manager/home.nix;
-            extraModules = [
+            modules = [
+              ./home-manager/home.nix
               ./home-manager/profiles/${homeProfileName}.nix
               # Adds overlays
               { nixpkgs.overlays = builtins.attrValues default_overlays; }
+              {
+                # Using $USER and $HOME may be impure but it works generally as a sane default.
+                # If needed, users should replace them with args passed in
+                home.username = builtins.getEnv "USER";
+                home.homeDirectory = /. + builtins.getEnv "HOME";
+                home.stateVersion = "22.05";
+              }
             ];
           } // builtins.removeAttrs args [ "system" ])
         );
