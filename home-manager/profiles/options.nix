@@ -74,6 +74,11 @@
     };
   };
   options.customHomeProfile = {
+    sslCertsFile = lib.mkOption {
+      type = lib.types.str;
+      default = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+      description = "The SSL certs path to use";
+    };
     systemCtlPath = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;

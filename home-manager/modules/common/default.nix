@@ -46,7 +46,7 @@ in
       fonts.fontconfig.enable = true;
 
       home.sessionVariables = {
-        SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+        SSL_CERT_FILE = config.customHomeProfile.sslCertsFile;
         EDITOR = if isVSCodeEnable then "code --wait --new-window" else "vim";
         # colored GCC warnings and errors
         GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
