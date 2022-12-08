@@ -130,6 +130,7 @@ in
           firefox-addons.https-everywhere
           firefox-addons.privacy-badger
           firefox-addons.unpaywall
+          firefox-addons.multi-account-containers
         ];
         profiles.default = {
           name = "Default";
