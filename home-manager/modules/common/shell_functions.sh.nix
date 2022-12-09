@@ -229,14 +229,18 @@ builtins.concatStringsSep "" (
           shift $(($OPTIND - 1))
 
           local N="$1.$2"
+          local VERSION=latest
+          if [ -n "$3" ]; then
+            VERSION=$3
+          fi
           # Create a tempdir for the extension download.
           local EXTTMP=$(mktemp -d -t vscode_exts_XXXXXXXX)
 
-          local URL="https://$1.gallery.vsassets.io/_apis/public/gallery/publisher/$1/extension/$2/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+          local URL="https://$1.gallery.vsassets.io/_apis/public/gallery/publisher/$1/extension/$2/$VERSION/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
           local VER=""
           if [ $is_oss -eq 1 ]; then
             # If using Open VSX, we need to get the URL first and then wget with this URL
-            local open_vsx_metadata="$(curl --silent --show-error --retry 3 --fail https://open-vsx.org/api/$1/$2/latest)"
+            local open_vsx_metadata="$(curl --silent --show-error --retry 3 --fail https://open-vsx.org/api/$1/$2/$VERSION)"
             URL="$(echo $open_vsx_metadata | jq -r '.files.download')"
             VER="$(echo $open_vsx_metadata | jq -r '.version')"
           fi
