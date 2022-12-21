@@ -65,6 +65,19 @@ in
       #   showExperimentalOptions=true
       # '';
     })
+    # (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable) {
+    #   home.packages = [
+    #     (guilib.nixGLWrap (pkgs.lutris.override {
+    #       extraLibraries = pkgs: [
+    #         # List library dependencies here
+    #         pkgs.dxvk
+    #       ];
+    #       extraPkgs = pkgs: [
+    #         # List package dependencies here
+    #       ];
+    #     }))
+    #   ];
+    # })
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable && cfg.gaming.animeGameLauncherRunnerName != null) {
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;

@@ -21,7 +21,7 @@
       enable = true;
       gaming = {
         enable = true;
-        animeGameLauncherRunnerName = "lutris-GE-Proton7-31-x86_64";
+        animeGameLauncherRunnerName = "lutris-GE-Proton7-34-x86_64";
       };
       vscode = {
         enable = true;
@@ -29,6 +29,7 @@
       };
       nextcloudClient.enable = true;
     };
+    cloudDevelopment.k8s.enable = true;
     corsairKeyboardMouseSupport.enable = true;
     golang.enable = true;
     python.enable = true;
