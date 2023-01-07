@@ -1,5 +1,4 @@
 {
-  "containers_v4": {},
   "panels_v4": [
       {
           "type": "bookmarks",
@@ -90,7 +89,7 @@
       "tabsTreeLimit": "none",
       "hideFoldedTabs": true,
       "autoFoldTabs": true,
-      "autoFoldTabsExcept": "none",
+      "autoFoldTabsExcept": 1,
       "autoExpandTabs": true,
       "rmChildTabs": "all",
       "tabsChildCount": true,
@@ -149,6 +148,5 @@
   "cssVars": {},
   "sidebarCSS": "",
   "groupCSS": "",
-  "snapshots_v4": [],
   "ver": "4.10.2"
 }

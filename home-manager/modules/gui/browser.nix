@@ -109,7 +109,7 @@ in
           #main-window #TabsToolbar {
             height: 29px !important;
             overflow: hidden;
-            transition: height .3s .3s !important;
+            transition: height .1s .1s !important;
           }
           #main-window[titlepreface*="${side_bery_preface_value}"] #TabsToolbar {
             height: 0 !important;
