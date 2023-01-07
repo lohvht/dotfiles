@@ -34,7 +34,7 @@ let
     "signon.rememberSignons" = false;
   };
 
-  wrapped_firefox_pkg = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+  wrapped_firefox_pkg = (pkgs.wrapFirefox pkgs.firefox-unwrapped {
     extraPolicies = {
       # Policies here: https://github.com/mozilla/policy-templates
       Certificates = {
@@ -80,6 +80,11 @@ let
       // Show more ssl cert infos
       lockPref("security.identityblock.show_extended_validation", true);
     '';
+  }).override {
+    cfg = {
+      enableFXCastBridge = true; # Enable chromecast for firefox
+      enablePlasmaBrowserIntegration = true; # enable KDE plasma integration
+    };
   };
   # NOTE: We have to do this and use a separate bin firefox-nixGL instead of just using firefox via `guilib.nixGLWrap`
   #       The home-manager program.firefox.package doesnt accept anything else as it needs the `override` attribute key
@@ -111,6 +116,9 @@ in
           '';
           executable = true;
         };
+      };
+      home.sessionVariables = {
+        MOZ_USE_XINPUT2 = "1"; # Make Firefox use xinput2, improving touchscreen support, enable touchpad gestures and enables smoothscrolling
       };
     })
     {
