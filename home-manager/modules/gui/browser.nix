@@ -14,7 +14,9 @@ let
     "privacy.trackingprotection.enabled" = true;
     "privacy.trackingprotection.socialtracking.enabled" = true;
     "general.autoScroll" = true;
-    "webgl.force-enable" = true;
+    # "webgl.force-enable" = true; # This could be wrong, doublecheck
+    "webgl.force-enabled" = true;
+    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     "security.enterprise_roots.enabled" = true;
   };
   ffprivate_settings = {
@@ -90,11 +92,32 @@ let
   #       The home-manager program.firefox.package doesnt accept anything else as it needs the `override` attribute key
   #       which the wrapper doesnt have.
   custom_firefox_pkg = guilib.nixGLWrapOpts wrapped_firefox_pkg { binSuffix = "-nixGL"; };
+
+  # This needs to be set also via Sidebery Settings > Help > Preface Value
+  # Ensure that the sidebery export has this value
+  side_bery_preface_value = "SIDEBERYPREFACEVAL";
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
     (lib.mkIf pkgs.stdenv.isLinux {
       home.file = {
+        # Do remember to do the sidebery import
+        ".local/firefox-custom/sidebery-export.json".text = builtins.readFile ./firefox-sidebery-export.json;
+        # For the default profile, we will do dynamic native tabs for sidebery, as highlighted here
+        # https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)
+        ".mozilla/firefox/default/chrome/userChrome.css".text = ''
+          #main-window #TabsToolbar {
+            height: 29px !important;
+            overflow: hidden;
+            transition: height .3s .3s !important;
+          }
+          #main-window[titlepreface*="${side_bery_preface_value}"] #TabsToolbar {
+            height: 0 !important;
+          }
+          #main-window[titlepreface*="${side_bery_preface_value}"] #tabbrowser-tabs {
+            z-index: 0 !important;
+          }
+        '';
         ".local/share/applications/firefox.desktop" = {
           text = ''
             [Desktop Entry]
