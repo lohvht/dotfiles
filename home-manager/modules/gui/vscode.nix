@@ -186,10 +186,10 @@ in
           #   sha256 = "1bq4f26fqhvrr424dpy06x1wvi0ad34vmzdzn83wsq4rvm08h7hk";
           # }
           (mkOpenVSXExt {
-            name = "open-remote-ssh";
             publisher = "jeanp413";
-            version = "0.0.16";
-            sha256 = "0m1ypf8crdmyf9qzm0904sz7rgb9xd4l4hyna9y9zfw6cq82cbd3";
+            name = "open-remote-ssh";
+            version = "0.0.22";
+            sha256 = "1nkxy2d5zj02jkk67q8fyrbi53xb9kcyb6x40skb2gk4jjarmz7s";
           })
           {
             name = "doxdocgen";
@@ -216,10 +216,10 @@ in
             sha256 = "0dxsdahyivx1ghxs6l9b93filfm8vl5q2sa4g21fiklgdnaf7pxl";
           }
           {
-            name = "cmake-tools";
             publisher = "ms-vscode";
-            version = "1.13.8";
-            sha256 = "1lak94fr48gqsfz9355pgwr8b1scngjk6byi737q3k1sgjxbz6cl";
+            name = "cmake-tools";
+            version = "1.13.33";
+            sha256 = "1x0ji8dgmr64fkvh8nz953xcyaarfqbfkf3q2p157xm7pl3zv9k0";
           }
           {
             name = "cmake";
@@ -248,8 +248,8 @@ in
           {
             publisher = "bcanzanella";
             name = "openmatchingfiles";
-            version = "0.5.2";
-            sha256 = "0wpv77jir5k77ml0x1y21gk4kxk53vnkxrqg4v35clhdhszzh6fq";
+            version = "0.5.4";
+            sha256 = "0n8ffxqa9mwmg3y01rik67n2zi7pcqb2pmw6nyi84h897r5jfi52";
           }
           {
             name = "vscode-direnv";

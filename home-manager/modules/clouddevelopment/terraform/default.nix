@@ -26,8 +26,8 @@ in
           {
             name = "HCL";
             publisher = "HashiCorp";
-            version = "0.2.1";
-            sha256 = "15ydllrridf1kc7867h0r7ykc2mnn5d94d1nvklzx0nnkq64pl75";
+            version = "0.3.2";
+            sha256 = "0snjivxdhr3s0lqarrzdzkv2f4qv28plbr3s9zpx7nqqfs97f4bk";
           }
         ];
       };

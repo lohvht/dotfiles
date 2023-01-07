@@ -83,10 +83,10 @@ in
             sha256 = "16nmbg3p1z1mr3027m46j8m09g1l3w2d529g27aydw5i1v6d84f4";
           }
           {
-            name = "solargraph";
             publisher = "castwide";
-            version = "0.23.0";
-            sha256 = "0ivawyq16712j2q4wic3y42lbqfml5gs24glvlglpi0kcgnii96n";
+            name = "solargraph";
+            version = "0.24.0";
+            sha256 = "0pcd4gwzg4rla5mz6kj4dqq30pyvsv6290an15yr89wxwcvk6qzf";
           }
           {
             name = "vscode-ruby";
@@ -94,12 +94,12 @@ in
             version = "0.28.0";
             sha256 = "1gab5cka87zw7i324rz9gmv423rf5sylsq1q1dhfkizmrpwzaxqz";
           }
-          # {
-          #   name = "ruby";
-          #   publisher = "rebornix";
-          #   version = "0.28.1";
-          #   sha256 = "179g7nc6mf5rkha75v7rmb3vl8x4zc6qk1m0wn4pgylkxnzis18w";
-          # }
+          {
+            name = "ruby";
+            publisher = "rebornix";
+            version = "0.28.1";
+            sha256 = "179g7nc6mf5rkha75v7rmb3vl8x4zc6qk1m0wn4pgylkxnzis18w";
+          }
         ];
       };
     })

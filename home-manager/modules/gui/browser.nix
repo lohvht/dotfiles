@@ -122,15 +122,22 @@ in
         # https://nixos.org/manual/nixpkgs/stable/#build-wrapped-firefox-with-extensions-and-policies
         package = wrapped_firefox_pkg;
         extensions = [
-          firefox-addons.ublock-origin
-          firefox-addons.bitwarden
+          firefox-addons.ublock-origin # adblocker
+          firefox-addons.bitwarden # bitwarden password manager
           firefox-addons.darkreader
-          firefox-addons.decentraleyes
+          firefox-addons.decentraleyes # Protects you against tracking through "free", centralised, content delivery
           firefox-addons.disable-javascript
-          firefox-addons.https-everywhere
-          firefox-addons.privacy-badger
-          firefox-addons.unpaywall
-          firefox-addons.multi-account-containers
+          firefox-addons.privacy-badger # stops advertisers/3rd party trackers from tracking
+          firefox-addons.unpaywall # attempt to unpaywall research articles
+          firefox-addons.sponsorblock # block sponsor sections of YT videos
+          firefox-addons.sourcegraph # View gitlab/other code repo source code for 20+ languages
+          firefox-addons.skip-redirect # attempt to skip multiple redirects by redirecting to final destination directly
+          firefox-addons.sidebery # tab mgmt
+          firefox-addons.plasma-integration # KDE plasma integration
+          firefox-addons.don-t-fuck-with-paste # Restore Copy/Paste for websites that mess around with those
+          firefox-addons.display-_anchors # Display invisible anchor link
+          firefox-addons.clearurls # attempt to remove tracking elements when clicking URLs
+          firefox-addons.bypass-paywalls-clean # attempts to unpaywall paywalled articles
         ];
         profiles.default = {
           name = "Default";

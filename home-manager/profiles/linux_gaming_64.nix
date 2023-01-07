@@ -30,6 +30,7 @@
       nextcloudClient.enable = true;
     };
     cloudDevelopment.k8s.enable = true;
+    cloudDevelopment.terraform.enable = true;
     corsairKeyboardMouseSupport.enable = true;
     golang.enable = true;
     python.enable = true;

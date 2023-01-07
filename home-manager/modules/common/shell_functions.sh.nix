@@ -261,8 +261,8 @@ builtins.concatStringsSep "" (
           if [ $is_oss -eq 1 ]; then
             cat <<-EOF
         (mkOpenVSXExt {
-          name = "$2";
           publisher = "$1";
+          name = "$2";
           version = "$VER";
           sha256 = "$SHA";
         })
@@ -270,8 +270,8 @@ builtins.concatStringsSep "" (
           else      
             cat <<-EOF
         {
-          name = "$2";
           publisher = "$1";
+          name = "$2";
           version = "$VER";
           sha256 = "$SHA";
         }

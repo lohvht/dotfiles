@@ -37,7 +37,7 @@ in
         # use the same directory for virtualenvs as virtualenvwrapper
         PIP_VIRTUALENV_BASE = "$WORKON_HOME";
         # makes pip detect an active virtualenv and install to it
-        PIP_RESPECT_VIRTUALENV = true;
+        PIP_RESPECT_VIRTUALENV = "true";
         PYTHONDONTWRITEBYTECODE = 1;
       };
       home.packages = [
