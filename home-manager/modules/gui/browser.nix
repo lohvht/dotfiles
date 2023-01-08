@@ -105,19 +105,9 @@ in
         ".local/firefox-custom/sidebery-export.json".text = builtins.readFile ./firefox-sidebery-export.json;
         # For the default profile, we will do dynamic native tabs for sidebery, as highlighted here
         # https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)
-        ".mozilla/firefox/default/chrome/userChrome.css".text = ''
-          #main-window #TabsToolbar {
-            height: 29px !important;
-            overflow: hidden;
-            transition: height .1s .1s !important;
-          }
-          #main-window[titlepreface*="${side_bery_preface_value}"] #TabsToolbar {
-            height: 0 !important;
-          }
-          #main-window[titlepreface*="${side_bery_preface_value}"] #tabbrowser-tabs {
-            z-index: 0 !important;
-          }
-        '';
+        # Extra sidebery styles we apply here too, usually taken here:
+        # https://github.com/mbnuqw/sidebery/wiki/Sidebery-Styles-Snippets
+        ".mozilla/firefox/default/chrome/userChrome.css".text = builtins.readFile ./firefox-userchrome.css;
         ".local/share/applications/firefox.desktop" = {
           text = ''
             [Desktop Entry]

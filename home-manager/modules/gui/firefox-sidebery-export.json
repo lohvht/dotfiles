@@ -24,6 +24,25 @@
           "dropTabCtx": "none",
           "moveTabCtx": "none",
           "moveTabCtxNoChild": true
+      },
+      {
+          "type": "tabs",
+          "id": "eWnZLMm1zACk",
+          "name": "Default >",
+          "icon": "icon_circle",
+          "color": "green",
+          "customIconSrc": "",
+          "customIcon": "",
+          "lockedTabs": false,
+          "lockedPanel": false,
+          "skipOnSwitching": false,
+          "noEmpty": false,
+          "newTabCtx": "none",
+          "dropTabCtx": "none",
+          "moveTabCtx": "none",
+          "moveTabCtxNoChild": true,
+          "urlRulesActive": false,
+          "urlRules": ""
       }
   ],
   "settings": {
@@ -116,13 +135,13 @@
       "animationSpeed": "fast",
       "theme": "tactile",
       "style": "auto",
-      "sidebarCSS": false,
+      "sidebarCSS": true,
       "groupCSS": false,
       "snapNotify": true,
       "snapExcludePrivate": false,
-      "snapInterval": 0,
+      "snapInterval": 15,
       "snapIntervalUnit": "min",
-      "snapLimit": 0,
+      "snapLimit": 5,
       "snapLimitUnit": "snap",
       "hScrollThroughPanels": false,
       "scrollThroughTabs": "none",
@@ -146,7 +165,7 @@
   "tabsMenu": [],
   "bookmarksMenu": [],
   "cssVars": {},
-  "sidebarCSS": "",
+  "sidebarCSS": "#root {\n  --tabs-height: 36px !important;\n  --tabs-title-padding: 8px;\n  --tabs-font-size: 12px;\n  --tabs-title-lines: 2;\n\n  --nav-btn-width: 22px;\n  --name-font-size: 12px;\n  --count-font-size: 10px;\n}\n\n.Tab .t-box {\n  align-items: center;\n  max-height: calc(var(--tabs-height) - var(--tabs-title-padding));\n  overflow: hidden;\n}\n\n.Tab .title {\n  font-size: var(--tabs-font-size);\n  white-space: pre-wrap;\n  line-height: calc((var(--tabs-height) - var(--tabs-title-padding)) / var(--tabs-title-lines));\n}\n\n.NavigationBar .panel-btn {\n  display: flex;\n  flex-direction: column-reverse;\n  padding: 6px 0;\n  height: auto;\n}\n\n.NavigationBar .panels-box .panel-btn[data-type=\"add\"] {\n  height: var(--nav-btn-width);\n}\n\n.NavigationBar .panels-box .panel-btn:not([data-type=\"add\"]) > svg,\n.NavigationBar .panels-box .panel-btn > img {\n  display: none;\n}\n\n.NavigationBar .panel-btn .update-badge {\n  top: 1px;\n  left: 1px;\n}\n\n.NavigationBar .panel-btn .ok-badge,\n.NavigationBar .panel-btn .err-badge,\n.NavigationBar .panel-btn .progress-spinner {\n  display: none;\n}\n\n.NavigationBar .panel-btn .len {\n  position: relative;\n  font-size: var(--count-font-size);\n  writing-mode: sideways-lr;\n  text-orientation: mixed;\n  background-color: transparent;\n  padding: 0;\n  margin: 0 2px 0 0;\n  top: 0;\n  right: 0;\n  color: var(--container-fg, var(--nav-btn-fg));\n}\n.NavigationBar .panel-btn .len:before {\n  content: \": \";\n  font-size: var(--name-font-size);\n}\n\n.NavigationBar .panel-btn .name {\n  position: relative;\n  display: block;\n  padding: 0;\n  margin: 0 2px 0 0;\n  font-size: var(--name-font-size);\n  color: var(--container-fg, var(--nav-btn-fg));\n  writing-mode: sideways-lr;\n  text-orientation: mixed;\n}",
   "groupCSS": "",
   "ver": "4.10.2"
 }
