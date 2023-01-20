@@ -166,6 +166,7 @@ in
           pkgs.vscode-extensions.jnoortheen.nix-ide
           pkgs.vscode-extensions.ibm.output-colorizer
           pkgs.vscode-extensions.formulahendry.auto-rename-tag
+          pkgs.vscode-extensions.tamasfe.even-better-toml
           # NOTE: Incompatible with vscodium
           # pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
           pkgs.vscode-extensions.sanaajani.taskrunnercode
