@@ -21,7 +21,7 @@
       enable = true;
       gaming = {
         enable = true;
-        animeGameLauncherRunnerName = "lutris-GE-Proton7-34-x86_64";
+        animeGameLauncherRunnerName = "lutris-GE-Proton7-35-x86_64";
       };
       vscode = {
         enable = true;
