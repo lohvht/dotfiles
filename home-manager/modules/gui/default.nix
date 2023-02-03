@@ -94,17 +94,6 @@ in
         pkgs.slack
         pkgs.obsidian
       ];
-      programs.alacritty = {
-        # Alacritty is a terminal emulator
-        # TODO: add in alacritty settings a la
-        # https://github.com/alacritty/alacritty
-        # Below are some examples on how
-        # https://github.com/davidtwco/veritas/blob/6f2c676a76ef2885c9102aeaea874c361dbcaf61/home/configs/alacritty.nix
-        # https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/
-        # https://pezcoder.medium.com/how-i-migrated-from-iterm-to-alacritty-c50a04705f95
-        enable = true;
-        package = guilib.nixGLWrap pkgs.alacritty;
-      };
     }
   ]);
 }
