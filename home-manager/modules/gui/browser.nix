@@ -101,7 +101,7 @@ in
   config = lib.mkIf cfg.enable (lib.mkMerge [
     (lib.mkIf pkgs.stdenv.isLinux {
       home.file = {
-        # Do remember to do the sidebery import
+        # NOTE: Do remember to do the sidebery import
         ".local/firefox-custom/sidebery-export.json".text = builtins.readFile ./firefox-sidebery-export.json;
         # For the default profile, we will do dynamic native tabs for sidebery, as highlighted here
         # https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)

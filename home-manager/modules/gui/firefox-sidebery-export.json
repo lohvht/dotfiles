@@ -52,7 +52,7 @@
       "tabsCheck": true,
       "tabsFix": "notify",
       "markWindow": true,
-      "markWindowPreface": "SIDEBERYPREFACEVAL",
+      "markWindowPreface": "SIDEBERYPREFACEVAL: ",
       "ctxMenuNative": false,
       "autoHideCtxMenu": "none",
       "ctxMenuRenderInact": true,
