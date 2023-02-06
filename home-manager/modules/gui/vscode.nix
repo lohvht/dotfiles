@@ -170,6 +170,7 @@ in
           # NOTE: Incompatible with vscodium
           # pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
           pkgs.vscode-extensions.sanaajani.taskrunnercode
+          pkgs.vscode-extensions.mkhl.direnv
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # NOTE: We can use the shell function `get_vsixpkg $publisher $extension_name` to easily get the required updated
           # version as well as the required SHA info.
@@ -251,12 +252,6 @@ in
             name = "openmatchingfiles";
             version = "0.5.4";
             sha256 = "0n8ffxqa9mwmg3y01rik67n2zi7pcqb2pmw6nyi84h897r5jfi52";
-          }
-          {
-            name = "vscode-direnv";
-            publisher = "Rubymaniac";
-            version = "0.0.2";
-            sha256 = "1gml41bc77qlydnvk1rkaiv95rwprzqgj895kxllqy4ps8ly6nsd";
           }
           {
             name = "vscode-nginx-conf";
