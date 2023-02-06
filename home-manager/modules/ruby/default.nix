@@ -60,13 +60,10 @@ in
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {
         userSettings = {
-          # "ruby.useBundler" = false; #run non-lint commands with bundle exec
+          "ruby.useBundler" = true; #run non-lint commands with bundle exec
+          "solargraph.useBundler" = true;
           "ruby.useLanguageServer" = true; # use the internal language server (see below)
-          # "ruby.lint" = {
-          #   rubocop.useBundler = false; # enable rubocop via bundler
-          #   reek.useBundler = false; # enable reek via bundler
-          # };
-          # "ruby.format" = "rubocop"; # use rubocop for formatting
+          "ruby.intellisense" = "rubyLocate";
         };
         extensions = [
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -94,12 +91,12 @@ in
             version = "0.28.0";
             sha256 = "1gab5cka87zw7i324rz9gmv423rf5sylsq1q1dhfkizmrpwzaxqz";
           }
-          {
-            name = "ruby";
-            publisher = "rebornix";
-            version = "0.28.1";
-            sha256 = "179g7nc6mf5rkha75v7rmb3vl8x4zc6qk1m0wn4pgylkxnzis18w";
-          }
+          # {
+          #   name = "ruby";
+          #   publisher = "rebornix";
+          #   version = "0.28.1";
+          #   sha256 = "179g7nc6mf5rkha75v7rmb3vl8x4zc6qk1m0wn4pgylkxnzis18w";
+          # }
         ];
       };
     })
