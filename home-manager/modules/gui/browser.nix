@@ -96,6 +96,26 @@ let
   # This needs to be set also via Sidebery Settings > Help > Preface Value
   # Ensure that the sidebery export has this value
   side_bery_preface_value = "SIDEBERYPREFACEVAL";
+
+  extensions = [
+    firefox-addons.ublock-origin # adblocker
+    firefox-addons.bitwarden # bitwarden password manager
+    firefox-addons.onepassword-password-manager
+    firefox-addons.darkreader
+    firefox-addons.decentraleyes # Protects you against tracking through "free", centralised, content delivery
+    firefox-addons.disable-javascript
+    firefox-addons.privacy-badger # stops advertisers/3rd party trackers from tracking
+    firefox-addons.unpaywall # attempt to unpaywall research articles
+    firefox-addons.sponsorblock # block sponsor sections of YT videos
+    firefox-addons.sourcegraph # View gitlab/other code repo source code for 20+ languages
+    firefox-addons.skip-redirect # attempt to skip multiple redirects by redirecting to final destination directly
+    firefox-addons.sidebery # tab mgmt
+    firefox-addons.plasma-integration # KDE plasma integration
+    firefox-addons.don-t-fuck-with-paste # Restore Copy/Paste for websites that mess around with those
+    firefox-addons.display-_anchors # Display invisible anchor link
+    firefox-addons.clearurls # attempt to remove tracking elements when clicking URLs
+    firefox-addons.bypass-paywalls-clean # attempts to unpaywall paywalled articles
+  ];
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
@@ -142,34 +162,17 @@ in
         enable = true;
         # https://nixos.org/manual/nixpkgs/stable/#build-wrapped-firefox-with-extensions-and-policies
         package = wrapped_firefox_pkg;
-        extensions = [
-          firefox-addons.ublock-origin # adblocker
-          firefox-addons.bitwarden # bitwarden password manager
-          firefox-addons.onepassword-password-manager
-          firefox-addons.darkreader
-          firefox-addons.decentraleyes # Protects you against tracking through "free", centralised, content delivery
-          firefox-addons.disable-javascript
-          firefox-addons.privacy-badger # stops advertisers/3rd party trackers from tracking
-          firefox-addons.unpaywall # attempt to unpaywall research articles
-          firefox-addons.sponsorblock # block sponsor sections of YT videos
-          firefox-addons.sourcegraph # View gitlab/other code repo source code for 20+ languages
-          firefox-addons.skip-redirect # attempt to skip multiple redirects by redirecting to final destination directly
-          firefox-addons.sidebery # tab mgmt
-          firefox-addons.plasma-integration # KDE plasma integration
-          firefox-addons.don-t-fuck-with-paste # Restore Copy/Paste for websites that mess around with those
-          firefox-addons.display-_anchors # Display invisible anchor link
-          firefox-addons.clearurls # attempt to remove tracking elements when clicking URLs
-          firefox-addons.bypass-paywalls-clean # attempts to unpaywall paywalled articles
-        ];
         profiles.default = {
           name = "Default";
           settings = ffcommon_settings;
           isDefault = true;
+          extensions = extensions;
         };
         profiles.private = {
           id = 1;
           name = "Private";
           settings = ffcommon_settings // ffprivate_settings;
+          extensions = extensions;
         };
       };
     }
