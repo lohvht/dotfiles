@@ -29,6 +29,9 @@ in
     {
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
+      home.sessionPath = [
+        "${config.home.homeDirectory}/.cargo/bin"
+      ];
       home.packages = [
         pkgs.rustup
       ];
