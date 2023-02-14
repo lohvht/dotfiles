@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
-  # TODO: Rust installation not ready yet
   cfg = config.customHomeProfile.rust;
+  isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
 
   shell_extracommon_str = ''
     ########## Module Rust Init Extra Start ##########
@@ -36,5 +36,12 @@ in
         pkgs.rustup
       ];
     }
+    (lib.mkIf isVSCodeEnable {
+      programs.vscode = {
+        extensions = [
+          pkgs.vscode-extensions.rust-lang.rust-analyzer
+        ];
+      };
+    })
   ]);
 }
