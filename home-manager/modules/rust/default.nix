@@ -34,6 +34,7 @@ in
       ];
       home.packages = [
         pkgs.rustup
+        pkgs.rust-analyzer
       ];
     }
     (lib.mkIf isVSCodeEnable {
