@@ -78,6 +78,7 @@ in
         pkgs.openconnect
         pkgs.global
         pkgs.netcat # nc command, can use this to test for open ports, i.e. `nc 127.0.0.1 6443`
+        pkgs.cmake
 
         # Man pages
         pkgs.man
