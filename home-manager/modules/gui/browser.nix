@@ -99,8 +99,6 @@ let
 
   extensions = [
     firefox-addons.ublock-origin # adblocker
-    firefox-addons.bitwarden # bitwarden password manager
-    firefox-addons.onepassword-password-manager
     firefox-addons.darkreader
     firefox-addons.decentraleyes # Protects you against tracking through "free", centralised, content delivery
     firefox-addons.disable-javascript

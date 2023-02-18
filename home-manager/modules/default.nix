@@ -14,5 +14,6 @@
     ./ruby
     ./cloudproviders
     ./clouddevelopment
+    ./passwordmanagers
   ];
 }

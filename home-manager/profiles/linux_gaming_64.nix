@@ -38,6 +38,7 @@
     # ruby.enable = true;
     # node.enable = true;
     latex.enable = true;
+    passwordManagers.bitwarden.enable = true;
     # NOTE: Replace the usernames here
     git.userEmail = "vic94loh@hotmail.com";
     git.username = "Victor Loh";

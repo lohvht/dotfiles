@@ -56,8 +56,6 @@ in
       ];
       systemd.user.systemctlPath = cfglib.systemCtlPathInfo.path;
       home.packages = [
-        pkgs.bitwarden-cli # password manager CLI
-        pkgs._1password # 1password password manager cli
         pkgs.glibcLocales # Locales!
         pkgs.file # Determine file type.
         pkgs.which # Show full path of shell commands.

@@ -152,5 +152,9 @@
       docker.enable = lib.mkEnableOption "enable tools used for docker installation";
       terraform.enable = lib.mkEnableOption "enable tools used for terraform development";
     };
+    passwordManagers = {
+      _1password.enable = lib.mkEnableOption "enable 1password";
+      bitwarden.enable = lib.mkEnableOption "enable bitwarden";
+    };
   };
 }
