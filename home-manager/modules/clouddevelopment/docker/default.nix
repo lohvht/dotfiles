@@ -19,8 +19,8 @@ let
   cfg = config.customHomeProfile.cloudDevelopment.docker;
 in
 {
-  config = (lib.mkMerge [
-    (lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    {
       home.packages = [
         pkgs.docker
         pkgs.docker-compose
@@ -28,8 +28,6 @@ in
       home.shellAliases = {
         docker-compose = "docker compose";
       };
-    })
-    {
       home.activation.reloadDockerSystemd = lib.hm.dag.entryAfter [ "linkGeneration" ] (cfglib.serviceActivationScript serviceFiles);
     }
   ]);
