@@ -120,7 +120,6 @@ in
           "remote.SSH.useFlock" = false;
           "remote.SSH.localServerDownload" = "always";
           "terminal.integrated.shellIntegration.enabled" = false;
-          "workbench.settings.editor" = "json";
           "update.mode" = "none";
           "editor.rulers" = [ 72 80 100 120 140 160 ];
           "editor.tabSize" = 2;
