@@ -78,25 +78,23 @@ in
         pkgs.netcat # nc command, can use this to test for open ports, i.e. `nc 127.0.0.1 6443`
         pkgs.cmake
 
-        # Man pages
-        pkgs.man
-        pkgs.man-pages
-        pkgs.man-pages-posix
+        # # Man pages
+        # pkgs.man
+        # pkgs.man-pages
+        # pkgs.man-pages-posix
         pkgs.stdman
         pkgs.cacert # A bundle of X.509 certificates of public Certificate Authorities (CA)
         pkgs.vim # vim
         pkgs.gnumake
         pkgs.less
         pkgs.lesspipe
-        pkgs.htop # Interactive process viewer.
-        pkgs.iotop # Top-like I/O monitor.
-        pkgs.powertop # Power consumption and management diagnosis tool.
+        # pkgs.htop # Interactive process viewer.
+        # pkgs.powertop # Power consumption and management diagnosis tool.
         pkgs.lshw # List hardware.
         pkgs.usbutils # Tools for working with usb devices (`lsusb`, etc.)
         pkgs.inetutils # Collection of common network programs, ping, ifconfig, hostname, traceroute etc
         pkgs.psmisc # Collection of utilities using proc filesystem (`pstree`, `killall`, etc.)
         pkgs.gnugrep
-        pkgs.ripgrep
         pkgs.wget # Non-interactive network downloader.
         pkgs.curl
         pkgs.nix-prefetch-git
