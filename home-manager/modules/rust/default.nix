@@ -39,7 +39,24 @@ in
     }
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {
+        userSettings = {
+          "rust-analyzer.imports.granularity.enforce" = true;
+          "rust-analyzer.cargo.autoreload" = true;
+          "rust-analyzer.check.command" = "clippy";
+          "[rust]" = {
+            "editor.codeActionsOnSave" = {
+              "source.organizeImports" = true;
+            };
+            "editor.formatOnType" = true;
+            "editor.formatOnSave" = true;
+          };
+        };
         extensions = [
+          # NOTE: If vscode extension has errors, check Output > Rust Analyzer Language Server
+          # chances are the error will be there. You'll probably just need to add the rust-src
+          # component for the actual `rust-analyzer` via
+          # `rustup component add rust-src`
+          # as highlighted here: https://rust-analyzer.github.io/manual.html#installation
           pkgs.vscode-extensions.rust-lang.rust-analyzer
         ];
       };
