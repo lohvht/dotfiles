@@ -27,6 +27,11 @@
         enable = true;
         crashReporterUUID = "13fcbd5c-0f51-4819-9701-70b7b4e5cf06";
       };
+      communications.ms_teams.enable = false;
+      communications.zoom.enable = false;
+      communications.discord.enable = true;
+      communications.thunderbird.enable = true;
+      communications.slack.enable = true;
       nextcloudClient.enable = true;
     };
     # cloudDevelopment.k8s.enable = true;

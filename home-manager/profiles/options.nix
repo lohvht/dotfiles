@@ -102,7 +102,14 @@
           description = "The crash reporter UUID to set. if not set, default to a default hardcoded one. You should override this option by generating a UUID via `uuidgen`";
         };
       };
-      nextcloudClient.enable = lib.mkEnableOption "check if we include gaming related options";
+      communications = {
+        ms_teams.enable = lib.mkEnableOption "install Microsoft Teams";
+        zoom.enable = lib.mkEnableOption "install zoom";
+        discord.enable = lib.mkEnableOption "install discord";
+        thunderbird.enable = lib.mkEnableOption "install thunderbird email client";
+        slack.enable = lib.mkEnableOption "Install slack";
+      };
+      nextcloudClient.enable = lib.mkEnableOption "install nextcloud client";
     };
     corsairKeyboardMouseSupport.enable = lib.mkEnableOption ''
       if true, adds corsair keyboard and mouse support

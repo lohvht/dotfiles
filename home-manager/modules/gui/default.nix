@@ -82,14 +82,34 @@ in
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
     })
+    (lib.mkIf cfg.communications.ms_teams.enable {
+      home.packages = [
+        pkgs.teams
+      ];
+    })
+    (lib.mkIf cfg.communications.zoom.enable {
+      home.packages = [
+        pkgs.zoom-us
+      ];
+    })
+    (lib.mkIf cfg.communications.discord.enable {
+      home.packages = [
+        pkgs.discord
+      ];
+    })
+    (lib.mkIf cfg.communications.thunderbird.enable {
+      home.packages = [
+        pkgs.thunderbird
+      ];
+    })
+    (lib.mkIf cfg.communications.slack.enable {
+      home.packages = [
+        pkgs.slack
+      ];
+    })
     {
       home.packages = [
         pkgs.nixgl.auto.nixGLDefault
-        pkgs.teams
-        pkgs.zoom-us
-        pkgs.discord
-        pkgs.thunderbird
-        pkgs.slack
         pkgs.obsidian
       ];
     }
