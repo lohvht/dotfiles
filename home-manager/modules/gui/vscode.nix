@@ -157,17 +157,12 @@ in
           pkgs.vscode-extensions.eamodio.gitlens
           pkgs.vscode-extensions.ms-azuretools.vscode-docker
           pkgs.vscode-extensions.ms-vscode.cpptools
-          pkgs.vscode-extensions.tyriar.sort-lines
-          pkgs.vscode-extensions.zxh404.vscode-proto3
           pkgs.vscode-extensions.tomoki1207.pdf
           pkgs.vscode-extensions.mikestead.dotenv
           pkgs.vscode-extensions.mechatroner.rainbow-csv
           pkgs.vscode-extensions.jnoortheen.nix-ide
           pkgs.vscode-extensions.ibm.output-colorizer
-          pkgs.vscode-extensions.formulahendry.auto-rename-tag
           pkgs.vscode-extensions.tamasfe.even-better-toml
-          # NOTE: Incompatible with vscodium
-          # pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
           pkgs.vscode-extensions.sanaajani.taskrunnercode
           pkgs.vscode-extensions.mkhl.direnv
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -179,31 +174,12 @@ in
             version = "0.2.2";
             sha256 = "1fz89m6ja25aif6wszg9h2fh5vajk6bj3lp1mh0l2b04nw2mzhd5";
           }
-          # NOTE: Incompatible with vscodium
-          # {
-          #   name = "remote-containers";
-          #   publisher = "ms-vscode-remote";
-          #   version = "0.254.0";
-          #   sha256 = "1bq4f26fqhvrr424dpy06x1wvi0ad34vmzdzn83wsq4rvm08h7hk";
-          # }
           (mkOpenVSXExt {
             publisher = "jeanp413";
             name = "open-remote-ssh";
             version = "0.0.22";
             sha256 = "1nkxy2d5zj02jkk67q8fyrbi53xb9kcyb6x40skb2gk4jjarmz7s";
           })
-          {
-            name = "doxdocgen";
-            publisher = "cschlosser";
-            version = "1.4.0";
-            sha256 = "1d95znf2vsdzv9jqiigh9zm62dp4m9jz3qcfaxn0n0pvalbiyw92";
-          }
-          {
-            name = "Doxygen";
-            publisher = "bbenoist";
-            version = "1.0.0";
-            sha256 = "0kclb60mnaj3c5lmpwmhkbnx4g8gr4wy66lkcklkwm555nkgw48n";
-          }
           {
             name = "vscode-todo-highlight";
             publisher = "jgclark";
@@ -228,29 +204,11 @@ in
             version = "0.0.17";
             sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
           }
-          # {
-          #   name = "theme-monokai-pro-vscode";
-          #   publisher = "monokai";
-          #   version = "1.1.21";
-          #   sha256 = "16pznay32d9pd1gigcrzww1rnni0sq1r8hg28awvvw9wnqn0hlk4";
-          # }
           {
             name = "monokai-charcoal-high-contrast";
             publisher = "74th";
             version = "3.4.0";
             sha256 = "05y8dwqqmixy9k59xmdpwgjbvvc6w7lh8apgnijy0li0xrs11i9f";
-          }
-          # {
-          #   name = "material-theme";
-          #   publisher = "zhuangtongfa";
-          #   version = "3.15.5";
-          #   sha256 = "0crrzpdy8fy4l1nim93qscmlpz2jhyb6hf0gh1rzqgfnk9w431xi";
-          # }
-          {
-            publisher = "bcanzanella";
-            name = "openmatchingfiles";
-            version = "0.5.4";
-            sha256 = "0n8ffxqa9mwmg3y01rik67n2zi7pcqb2pmw6nyi84h897r5jfi52";
           }
           {
             name = "vscode-nginx-conf";
