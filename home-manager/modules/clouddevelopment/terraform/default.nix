@@ -15,6 +15,10 @@ in
         pkgs.terraform
         pkgs.terragrunt
       ];
+      home.shellAliases = {
+        tf = "terraform";
+        tg = "terragrunt";
+      };
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
     }
