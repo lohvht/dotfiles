@@ -26,6 +26,9 @@ in
   config = (lib.mkMerge [
     {
       home.file.".p10k.zsh".text = builtins.readFile ./.p10k.zsh;
+      home.packages = [
+        pkgs.zsh-powerlevel10k
+      ];
       programs.zsh = {
         enable = true;
         # if only directory path is entered, cd there.

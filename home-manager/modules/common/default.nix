@@ -100,7 +100,6 @@ in
         pkgs.nix-prefetch-git
         pkgs.jq
         pkgs.tmux
-        pkgs.zsh-powerlevel10k
         pkgs.meslo-lgs-nf # The Meslo Nerd Font patched for Powerlevel10k
         # More fonts
         pkgs.meslo-lg
