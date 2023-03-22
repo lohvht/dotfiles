@@ -27,8 +27,6 @@
         enable = true;
         crashReporterUUID = "13fcbd5c-0f51-4819-9701-70b7b4e5cf06";
       };
-      communications.ms_teams.enable = false;
-      communications.zoom.enable = false;
       communications.discord.enable = true;
       communications.thunderbird.enable = true;
       communications.slack.enable = true;
@@ -37,9 +35,9 @@
     # cloudDevelopment.k8s.enable = true;
     # cloudDevelopment.terraform.enable = true;
     corsairKeyboardMouseSupport.enable = true;
-    golang.enable = true;
+    # golang.enable = true;
     rust.enable = true;
-    python.enable = true;
+    # python.enable = true;
     # ruby.enable = true;
     # node.enable = true;
     latex.enable = true;
