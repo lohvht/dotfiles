@@ -105,7 +105,6 @@ let
     firefox-addons.privacy-badger # stops advertisers/3rd party trackers from tracking
     firefox-addons.unpaywall # attempt to unpaywall research articles
     firefox-addons.sponsorblock # block sponsor sections of YT videos
-    firefox-addons.sourcegraph # View gitlab/other code repo source code for 20+ languages
     firefox-addons.skip-redirect # attempt to skip multiple redirects by redirecting to final destination directly
     firefox-addons.sidebery # tab mgmt
     firefox-addons.plasma-integration # KDE plasma integration
