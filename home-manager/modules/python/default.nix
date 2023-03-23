@@ -66,6 +66,12 @@ in
       };
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
+      programs.zsh.oh-my-zsh.plugins = [
+        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenv
+        "virtualenv"
+        # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenvwrapper
+        "virtualenvwrapper"
+      ];
     }
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {

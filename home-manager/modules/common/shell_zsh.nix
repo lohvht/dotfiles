@@ -117,12 +117,6 @@ in
           # Custom plugins may be added to $ZSH_CUSTOM/plugins/
           # Example format: plugins=(rails git textmate ruby lighthouse)
           # Add wisely, as too many plugins slow down shell startup.
-          plugins = [
-            # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenv
-            "virtualenv"
-            # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenvwrapper
-            "virtualenvwrapper"
-          ];
         };
 
         profileExtra = ''
