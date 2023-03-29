@@ -46,6 +46,7 @@ pkgs.mkShell {
     wget
     curl
     ripgrep
+    mysql
   ];
   shellHook = ''
     # Put any shell code that you'll like to run here
