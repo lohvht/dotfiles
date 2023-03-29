@@ -72,6 +72,7 @@ in
         pkgs.pre-commit # precommit hooks
         pkgs.git-crypt # git-crypt, for file level encryption
         pkgs.git-extras # extra functionality for git, such as adding co-authorship to last commit, repo summary etc etc
+        pkgs.meld # extra difftool for git. Run via `git difftool --tool=meld origin/branch-name`
         pkgs.openvpn3
         pkgs.openconnect
         pkgs.global
