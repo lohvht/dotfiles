@@ -154,7 +154,7 @@ in
           "nginx-conf-hint.syntax" = "sublime";
         };
         extensions = [
-          # pkgs.vscode-extensions.eamodio.gitlens
+          pkgs.vscode-extensions.eamodio.gitlens
           pkgs.vscode-extensions.ms-azuretools.vscode-docker
           pkgs.vscode-extensions.ms-vscode.cpptools
           pkgs.vscode-extensions.tomoki1207.pdf
@@ -166,12 +166,12 @@ in
           pkgs.vscode-extensions.sanaajani.taskrunnercode
           pkgs.vscode-extensions.mkhl.direnv
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            publisher = "eamodio";
-            name = "gitlens";
-            version = "2023.3.1705";
-            sha256 = "06qb0c3c6nh8c4qvjcm0kr5nn3xj2qq1kbwmjlyvy67w9hzmir7p";
-          }
+          # {
+          #   publisher = "eamodio";
+          #   name = "gitlens";
+          #   version = "2023.3.1705";
+          #   sha256 = "06qb0c3c6nh8c4qvjcm0kr5nn3xj2qq1kbwmjlyvy67w9hzmir7p";
+          # }
           # NOTE: We can use the shell function `get_vsixpkg $publisher $extension_name` to easily get the required updated
           # version as well as the required SHA info.
           {
