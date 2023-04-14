@@ -111,7 +111,6 @@ let
     firefox-addons.don-t-fuck-with-paste # Restore Copy/Paste for websites that mess around with those
     firefox-addons.display-_anchors # Display invisible anchor link
     firefox-addons.clearurls # attempt to remove tracking elements when clicking URLs
-    firefox-addons.bypass-paywalls-clean # attempts to unpaywall paywalled articles
   ];
 in
 {
