@@ -33,8 +33,8 @@ in
           source = pkgs.fetchFromGitHub {
             owner = "rbenv";
             repo = "rbenv";
-            rev = "v1.2.0";
-            sha256 = "1mwvcs1kgqwnbmbljqi5a8acy2mxrlm2h86b2p0v995w8bj35xlv";
+            rev = "a632465cf4007d0a5b419ed5c5a7bd87349d7b14";
+            sha256 = "0ganmwf37lblm1zlwb7r20bph68qwbnms85hrdzbcc0fihkjjpra";
           };
         };
         "${RBENV_ROOT}/plugins/ruby-build" = {
@@ -42,8 +42,8 @@ in
           source = pkgs.fetchFromGitHub {
             owner = "rbenv";
             repo = "ruby-build";
-            rev = "v20221004";
-            sha256 = "1ndqh5y5hgwp1f0vm5h8zrmfhfgzphfy104apsaj5k6bq9yqd2xr";
+            rev = "v20230330";
+            sha256 = "0axkp07xapakkb1lc5yiqq5hr5kjwbyvwyrh6ygx889zlipsxznj";
           };
         };
       };
