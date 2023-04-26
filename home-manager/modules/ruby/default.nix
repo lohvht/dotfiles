@@ -61,7 +61,7 @@ in
       programs.vscode = {
         userSettings = {
           "ruby.useBundler" = true; #run non-lint commands with bundle exec
-          "solargraph.useBundler" = true;
+          "solargraph.useBundler" = false;
           "ruby.useLanguageServer" = true; # use the internal language server (see below)
           "ruby.intellisense" = "rubyLocate";
         };
