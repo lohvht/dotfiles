@@ -201,6 +201,10 @@ builtins.concatStringsSep "" (
           # next line of output begins at a new line.
           echo
       }
+
+      rng() {
+        od -vAn -N$1 -tu$1 < /dev/urandom
+      }
     ''
   ]) ++ (pkgs.lib.optionals isVSCodeEnable [
     ''
