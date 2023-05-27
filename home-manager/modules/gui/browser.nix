@@ -95,7 +95,7 @@ let
 
   # This needs to be set also via Sidebery Settings > Help > Preface Value
   # Ensure that the sidebery export has this value
-  side_bery_preface_value = "SIDEBERYPREFACEVAL";
+  side_bery_preface_value = "​";
 
   extensions = [
     firefox-addons.ublock-origin # adblocker
