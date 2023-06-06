@@ -165,6 +165,7 @@ in
           pkgs.vscode-extensions.tamasfe.even-better-toml
           pkgs.vscode-extensions.sanaajani.taskrunnercode
           pkgs.vscode-extensions.mkhl.direnv
+          pkgs.vscode-extensions.ms-vscode.hexeditor
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # {
           #   publisher = "eamodio";

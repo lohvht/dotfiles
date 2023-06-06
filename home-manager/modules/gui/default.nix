@@ -111,6 +111,7 @@ in
       home.packages = [
         pkgs.nixgl.auto.nixGLDefault
         pkgs.obsidian
+        pkgs.wxhexeditor
       ];
     }
   ]);
