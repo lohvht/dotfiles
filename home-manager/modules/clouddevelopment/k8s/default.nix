@@ -26,6 +26,7 @@ in
         pkgs.kind
         pkgs.kubernetes-helm
         pkgs.trivy # container scanner
+        pkgs.grype # container scanner
       ];
       home.shellAliases = {
         # kubernetes
