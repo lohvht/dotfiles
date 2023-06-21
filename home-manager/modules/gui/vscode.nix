@@ -122,11 +122,11 @@ in
           "terminal.integrated.shellIntegration.enabled" = false;
           "update.mode" = "none";
           "editor.rulers" = [ 72 80 100 120 140 160 ];
-          "editor.tabSize" = 2;
           "explorer.confirmDelete" = false;
           "terminal.integrated.fontFamily" = "MesloLGS NF";
           "terminal.integrated.fontSize" = 12;
           "workbench.colorTheme" = "monokai-charcoal (white)";
+          "terminal.integrated.enableMultiLinePasteWarning" = false;
           # "workbench.iconTheme" = "Monokai Pro (Filter Spectrum) Icons";
           # "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
           "search.followSymlinks" = false;
