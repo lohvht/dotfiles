@@ -45,7 +45,7 @@ in
 
         enableAutosuggestions = true;
         enableCompletion = true;
-        enableSyntaxHighlighting = true;
+        syntaxHighlighting.enable = true;
 
         sessionVariables = {
           DEFAULT_USER = "`whoami`";
