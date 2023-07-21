@@ -152,6 +152,7 @@ in
           "diffEditor.ignoreTrimWhitespace" = false;
           "cmake.configureOnOpen" = true;
           "nginx-conf-hint.syntax" = "sublime";
+          "debug.allowBreakpointsEverywhere" = true;
         };
         extensions = [
           pkgs.vscode-extensions.eamodio.gitlens
