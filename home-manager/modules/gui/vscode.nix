@@ -153,6 +153,7 @@ in
           "cmake.configureOnOpen" = true;
           "nginx-conf-hint.syntax" = "sublime";
           "debug.allowBreakpointsEverywhere" = true;
+          "files.insertFinalNewline" = true;
         };
         extensions = [
           pkgs.vscode-extensions.eamodio.gitlens
