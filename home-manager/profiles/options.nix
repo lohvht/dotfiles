@@ -110,6 +110,9 @@
         slack.enable = lib.mkEnableOption "Install slack";
       };
       nextcloudClient.enable = lib.mkEnableOption "install nextcloud client";
+      development = {
+        postman.enable = lib.mkEnableOption "install Postman";
+      };
     };
     corsairKeyboardMouseSupport.enable = lib.mkEnableOption ''
       if true, adds corsair keyboard and mouse support

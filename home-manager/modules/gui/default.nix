@@ -107,6 +107,11 @@ in
         pkgs.slack
       ];
     })
+    (lib.mkIf cfg.development.postman.enable {
+      home.packages = [
+        pkgs.postman
+      ];
+    })
     {
       home.packages = [
         pkgs.nixgl.auto.nixGLDefault
