@@ -168,6 +168,7 @@ in
           pkgs.vscode-extensions.sanaajani.taskrunnercode
           pkgs.vscode-extensions.mkhl.direnv
           pkgs.vscode-extensions.ms-vscode.hexeditor
+          pkgs.vscode-extensions.zxh404.vscode-proto3
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # {
           #   publisher = "eamodio";
