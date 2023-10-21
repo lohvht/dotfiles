@@ -102,6 +102,11 @@ in
           } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
         ".local/bin/code".source = config.lib.file.mkOutOfStoreSymlink "${pkgs.vscodium}/bin/codium";
       };
+      # TODO: Attempt to try this number 3 option out in WSL as WSLg exists:
+      # https://stackoverflow.com/questions/72011852/how-to-setup-windows-subsystem-linux-wsl-2-with-vscodium-on-windows-10
+      home.sessionVariables = {
+        DONT_PROMPT_WSL_INSTALL = "1";
+      };
       programs.vscode = {
         enable = true;
         package = pkgs.vscodium;
