@@ -125,6 +125,7 @@ let
     "security.remote_settings.crlite_filters.enabled" = true;
     "security.ssl.treat_unsafe_negotiation_as_broken" = true;
     "security.tls.enable_0rtt_data" = false;
+    "signon.rememberSignons" = false;
     "toolkit.coverage.endpoint.base" = "";
     "toolkit.coverage.opt-out" = true;
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
@@ -158,7 +159,6 @@ let
     "privacy.clearOnShutdown.openWindows" = true;
     "privacy.clearOnShutdown.sessions" = true;
     "privacy.clearOnShutdown.siteSettings" = true;
-    "signon.rememberSignons" = false;
   };
   # For the default profile, we will do dynamic native tabs for sidebery, as highlighted here
   # https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)
