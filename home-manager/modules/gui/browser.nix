@@ -7,23 +7,148 @@ let
   inherit (pkgs.nur.repos.rycee) firefox-addons;
 
   ffcommon_settings = {
+    "app.normandy.api_url" = "";
+    "app.normandy.enabled" = false;
+    "app.shield.optoutstudies.enabled" = false;
+    "apz.overscroll.enabled" = true; # DEFAULT NON-LINUX
+    "beacon.enabled" = false;
+    "breakpad.reportURL" = "";
+    "browser.cache.disk.enable" = false;
+    "browser.cache.jsbc_compression_level" = 5;
+    "browser.cache.memory.capacity" = 256000; # default= -1 (32768)
+    "browser.cache.memory.max_entry_size" = 10240; # default=5120 (5 MB)
+    "browser.contentblocking.category" = "strict";
+    "browser.crashReports.unsubmittedCheck.autoSubmit2" = false;
+    "browser.download.open_pdf_attachments_inline" = true;
+    "browser.download.start_downloads_in_tmp_dir" = true;
+    "browser.helperApps.deleteTempFileOnExit" = true;
+    "browser.newtab.preload" = false;
+    "browser.newtabpage.activity-stream.default.sites" = "";
+    "browser.newtabpage.activity-stream.feeds.discoverystreamfeed" = false;
+    "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+    "browser.newtabpage.activity-stream.feeds.snippets" = false;
+    "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+    "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
     "browser.newtabpage.activity-stream.showSponsored" = false;
+    "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+    "browser.newtabpage.activity-stream.telemetry" = false;
+    "browser.newtabpage.enabled" = false;
+    "browser.ping-centre.telemetry" = false;
+    "browser.privatebrowsing.forceMediaMemoryCache" = true;
+    "browser.sessionstore.interval" = 120000;
+    "browser.tabs.crashReporting.sendReport" = false;
     "browser.tabs.warnOnClose" = false;
+    "browser.xul.error_pages.expert_bad_cert" = true;
+    "content.notify.interval" = 100000;
+    "datareporting.healthreport.uploadEnabled" = false;
+    "datareporting.policy.dataSubmissionEnabled" = false;
+    "dom.disable_open_during_load" = true;
+    "dom.enable_web_task_scheduling" = true;
+    "dom.event.clipboardevents.enabled" = false;
+    "dom.event.contextmenu.enabled" = false;
+    "dom.popup_allowed_events" = "click dblclick mousedown pointerdown";
+    "dom.security.https_first" = true;
+    "dom.security.https_only_mode_error_page_user_suggestions" = true;
+    "dom.security.https_only_mode_send_http_background_request" = false;
+    "dom.security.https_only_mode" = true; # https://www.eff.org/https-everywhere/set-https-default-your-browser
+    "dom.security.sanitizer.enabled" = true;
     "extensions.pocket.enabled" = false;
+    "extensions.postDownloadThirdPartyPrompt" = false;
+    "general.autoScroll" = true;
+    "general.smoothScroll.currentVelocityWeighting" = 1.0;
+    "general.smoothScroll.msdPhysics.continuousMotionMaxDeltaMS" = 12;
+    "general.smoothScroll.msdPhysics.enabled" = true;
+    "general.smoothScroll.msdPhysics.motionBeginSpringConstant" = 600;
+    "general.smoothScroll.msdPhysics.regularSpringConstant" = 650;
+    "general.smoothScroll.msdPhysics.slowdownMinDeltaMS" = 25;
+    "general.smoothScroll.msdPhysics.slowdownMinDeltaRatio" = 2.0;
+    "general.smoothScroll.msdPhysics.slowdownSpringConstant" = 250;
+    "general.smoothScroll.stopDecelerationWeighting" = 1.0;
+    "general.smoothScroll" = true; # DEFAULT
+    "geo.provider.network.url" = "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%";
+    "gfx.canvas.accelerated.cache-items" = 32768;
+    "gfx.canvas.accelerated.cache-size" = 4096;
+    "gfx.content.skia-font-cache-size" = 80;
+    "image.mem.decode_bytes_at_a_time" = 65536;
+    "layout.css.grid-template-masonry-value.enabled" = true;
+    "layout.css.has-selector.enabled" = true;
+    "media.autoplay.default" = 5;
+    "media.cache_readahead_limit" = 7200;
+    "media.cache_resume_threshold" = 3600;
+    "media.memory_cache_max_size" = 131072; # default=8192; AF=65536
+    "media.memory_caches_combined_limit_kb" = 1048576; # default=524288
+    "media.memory_caches_combined_limit_pc_sysmem" = 10; # default=5
+    "media.peerconnection.ice.default_address_only" = true;
+    "media.peerconnection.ice.no_host" = true;
+    "media.peerconnection.ice.proxy_only_if_behind_proxy" = true;
+    "mousewheel.default.delta_multiplier_y" = 300; # 250-400; adjust this number to your liking
+    "network.buffer.cache.count" = 128;
+    "network.buffer.cache.size" = 262144;
+    "network.captive-portal-service.enabled" = false;
+    "network.connectivity-service.enabled" = false;
+    "network.dns.disablePrefetch" = true;
+    "network.dns.max_high_priority_threads" = 8;
+    "network.dnsCacheExpiration" = 3600;
+    "network.http.max-connections" = 1800;
+    "network.http.max-persistent-connections-per-server" = 10;
+    "network.http.max-urgent-start-excessive-connections-per-host" = 5;
+    "network.http.pacing.requests.enabled" = false;
+    "network.http.referer.XOriginPolicy" = 2;
+    "network.http.referer.XOriginTrimmingPolicy" = 2;
+    "network.http.sendRefererHeader" = 1; # send the header only when clicking on links and similar elements
+    "network.predictor.enabled" = false;
+    "network.prefetch-next" = false;
+    "network.ssl_tokens_cache_capacity" = 10240;
+    "pdfjs.enableScripting" = false;
+    "permissions.default.desktop-notification" = 2;
+    "permissions.default.geo" = 2;
+    "permissions.manager.defaultsUrl" = "";
     "privacy.donottrackheader.enabled" = true;
+    "privacy.firstparty.isolate" = true; # First party isolation (also called "double keying") can prevent third parties from tracking users across multiple sites.
+    "privacy.globalprivacycontrol.enabled" = true;
+    "privacy.globalprivacycontrol.functionality.enabled" = true;
+    "privacy.partition.always_partition_third_party_non_cookie_storage.exempt_sessionstorage" = true;
+    "privacy.partition.always_partition_third_party_non_cookie_storage" = true;
+    "privacy.partition.network_state.ocsp_cache" = true;
+    "privacy.partition.serviceWorkers" = true;
     "privacy.trackingprotection.enabled" = true;
     "privacy.trackingprotection.socialtracking.enabled" = true;
-    "general.autoScroll" = true;
-    # "webgl.force-enable" = true; # This could be wrong, doublecheck
-    "webgl.force-enabled" = true;
-    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+    "privacy.userContext.enabled" = true;
+    "security.cert_pinning.enforcement_level" = 2;
     "security.enterprise_roots.enabled" = true;
+    "security.mixed_content.block_display_content" = true;
+    "security.mixed_content.upgrade_display_content.image" = true;
+    "security.mixed_content.upgrade_display_content" = true;
+    "security.OCSP.enabled" = 0;
+    "security.pki.crlite_mode" = 2;
+    "security.pki.sha1_enforcement_level" = 1;
+    "security.remote_settings.crlite_filters.enabled" = true;
+    "security.ssl.treat_unsafe_negotiation_as_broken" = true;
+    "security.tls.enable_0rtt_data" = false;
+    "toolkit.coverage.endpoint.base" = "";
+    "toolkit.coverage.opt-out" = true;
+    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+    "toolkit.telemetry.archive.enabled" = false;
+    "toolkit.telemetry.bhrPing.enabled" = false;
+    "toolkit.telemetry.coverage.opt-out" = true;
+    "toolkit.telemetry.enabled" = false;
+    "toolkit.telemetry.firstShutdownPing.enabled" = false;
+    "toolkit.telemetry.newProfilePing.enabled" = false;
+    "toolkit.telemetry.server" = "data:,";
+    "toolkit.telemetry.shutdownPingSender.enabled" = false;
+    "toolkit.telemetry.unified" = false;
+    "toolkit.telemetry.updatePing.enabled" = false;
+    "webchannel.allowObject.urlWhitelist" = "";
+    "webgl.force-enabled" = true;
+    "widget.use-xdg-desktop-portal.file-picker" = true;
+    # "webgl.force-enable" = true; # This could be wrong, doublecheck
   };
   ffprivate_settings = {
+    "browser.download.manager.addToRecentDocs" = false;
+    "browser.download.useDownloadDir" = false;
     "browser.privatebrowsing.autostart" = true;
     "browser.startup.homepage" = "about:blank";
-    # https://www.eff.org/https-everywhere/set-https-default-your-browser
-    "dom.security.https_only_mode" = true;
+    "media.peerconnection.enabled" = false;
     "privacy.clearOnShutdown.cache" = true;
     "privacy.clearOnShutdown.cookies" = true;
     "privacy.clearOnShutdown.downloads" = true;
@@ -35,6 +160,11 @@ let
     "privacy.clearOnShutdown.siteSettings" = true;
     "signon.rememberSignons" = false;
   };
+  # For the default profile, we will do dynamic native tabs for sidebery, as highlighted here
+  # https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)
+  # Extra sidebery styles we apply here too, usually taken here:
+  # https://github.com/mbnuqw/sidebery/wiki/Sidebery-Styles-Snippets
+  firefox_userchrome = builtins.readFile ./firefox-userchrome.css;
 
   wrapped_firefox_pkg = (pkgs.wrapFirefox pkgs.firefox-unwrapped {
     extraPolicies = {
@@ -44,8 +174,8 @@ let
       };
       ImportEnterpriseRoots = true;
       AppAutoUpdate = false;
+      HardwareAcceleration = true;
       DisableAppUpdate = true;
-      DisableBuiltinPDFViewer = true;
       DisableFirefoxStudies = true;
       DisablePocket = true;
       DisableTelemetry = true;
@@ -83,10 +213,10 @@ let
       lockPref("security.identityblock.show_extended_validation", true);
     '';
   }).override {
-    cfg = {
-      enableFXCastBridge = true; # Enable chromecast for firefox
-      enablePlasmaBrowserIntegration = true; # enable KDE plasma integration
-    };
+    nativeMessagingHosts = [
+      pkgs.fx-cast-bridge # Enable chromecast for firefox
+      pkgs.plasma5Packages.plasma-browser-integration # enable KDE plasma integration
+    ];
   };
   # NOTE: We have to do this and use a separate bin firefox-nixGL instead of just using firefox via `guilib.nixGLWrap`
   #       The home-manager program.firefox.package doesnt accept anything else as it needs the `override` attribute key
@@ -119,11 +249,6 @@ in
       home.file = {
         # NOTE: Do remember to do the sidebery import
         ".local/firefox-custom/sidebery-export.json".text = builtins.readFile ./firefox-sidebery-export.json;
-        # For the default profile, we will do dynamic native tabs for sidebery, as highlighted here
-        # https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)
-        # Extra sidebery styles we apply here too, usually taken here:
-        # https://github.com/mbnuqw/sidebery/wiki/Sidebery-Styles-Snippets
-        ".mozilla/firefox/default/chrome/userChrome.css".text = builtins.readFile ./firefox-userchrome.css;
         ".local/share/applications/firefox.desktop" = {
           text = ''
             [Desktop Entry]
@@ -163,12 +288,14 @@ in
           settings = ffcommon_settings;
           isDefault = true;
           extensions = extensions;
+          userChrome = firefox_userchrome;
         };
         profiles.private = {
           id = 1;
           name = "Private";
           settings = ffcommon_settings // ffprivate_settings;
           extensions = extensions;
+          userChrome = firefox_userchrome;
         };
       };
     }
