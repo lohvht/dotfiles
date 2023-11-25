@@ -155,6 +155,27 @@
         enable = lib.mkEnableOption "enable AWS CLI integration";
       };
     };
+    blurayCd = {
+      makemkv.enable = lib.mkEnableOption ''
+        enable makemkv that rips to mkv. May require that the `sg` kernel
+        module is loaded, for certain drives
+
+        dynamically via
+        `modprobe sg`
+
+        or via the command below, followed by a restart of the system
+        `echo sg > /etc/modules-load.d/sg.conf`
+
+        makemkv has a free trial over their beta every 30 days, check back
+        here if it expires:
+        https://forum.makemkv.com/forum/viewtopic.php?f=5&t=1053
+
+        For more info regarding this, read the FAQ about BETA and permanent keys
+        https://forum.makemkv.com/forum/viewtopic.php?f=1&t=20579
+      '';
+      handbrake.enable = lib.mkEnableOption "enable transcoder tools";
+      abcde.enable = lib.mkEnableOption "enable audio CD ripping tool abcde";
+    };
     cloudDevelopment = {
       k8s = {
         enable = lib.mkEnableOption "enable tools used for k8s development";

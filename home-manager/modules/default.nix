@@ -15,5 +15,6 @@
     ./cloudproviders
     ./clouddevelopment
     ./passwordmanagers
+    ./bluray_cd
   ];
 }

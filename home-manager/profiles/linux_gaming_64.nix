@@ -42,6 +42,11 @@
     # node.enable = true;
     latex.enable = true;
     passwordManagers.bitwarden.enable = true;
+    blurayCd = {
+      makemkv.enable = true;
+      handbrake.enable = true;
+      abcde.enable = true;
+    };
     # NOTE: Replace the usernames here
     git.userEmail = "vic94loh@hotmail.com";
     git.username = "Victor Loh";
