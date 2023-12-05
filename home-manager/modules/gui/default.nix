@@ -107,9 +107,9 @@ in
         pkgs.slack
       ];
     })
-    (lib.mkIf cfg.development.postman.enable {
+    (lib.mkIf cfg.development.aplClient.enable {
       home.packages = [
-        pkgs.postman
+        pkgs.bruno
       ];
     })
     {
