@@ -15,7 +15,6 @@
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    home-manager.inputs.utils.follows = "flake-utils";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     nixgl.url = "github:guibou/nixGL";
