@@ -155,7 +155,6 @@ in
           };
           "search.searchOnType" = false;
           "diffEditor.ignoreTrimWhitespace" = false;
-          "cmake.configureOnOpen" = true;
           "nginx-conf-hint.syntax" = "sublime";
           "debug.allowBreakpointsEverywhere" = true;
           "files.insertFinalNewline" = true;
@@ -175,6 +174,9 @@ in
           pkgs.vscode-extensions.ms-vscode.hexeditor
           pkgs.vscode-extensions.zxh404.vscode-proto3
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          # TODO: Replace the whole of pkgs.vscode-utils.extensionsFromVscodeMarketplace
+          # block + extensions above with this:
+          # https://github.com/nix-community/nix-vscode-extensions
           # {
           #   publisher = "eamodio";
           #   name = "gitlens";
@@ -206,18 +208,6 @@ in
             publisher = "wmaurer";
             version = "1.0.0";
             sha256 = "0dxsdahyivx1ghxs6l9b93filfm8vl5q2sa4g21fiklgdnaf7pxl";
-          }
-          {
-            publisher = "ms-vscode";
-            name = "cmake-tools";
-            version = "1.13.33";
-            sha256 = "1x0ji8dgmr64fkvh8nz953xcyaarfqbfkf3q2p157xm7pl3zv9k0";
-          }
-          {
-            name = "cmake";
-            publisher = "twxs";
-            version = "0.0.17";
-            sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
           }
           {
             name = "monokai-charcoal-high-contrast";
