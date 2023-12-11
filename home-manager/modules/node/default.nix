@@ -71,12 +71,6 @@ in
         extensions = [
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
-            name = "pug";
-            publisher = "amandeepmittal";
-            version = "1.0.1";
-            sha256 = "0041jnxirgibs75481hn6dk5kw2kc4yy82f5jlgv7l47hlmhqww4";
-          }
-          {
             name = "vscode-html-css";
             publisher = "ecmel";
             version = "1.13.1";
