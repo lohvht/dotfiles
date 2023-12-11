@@ -76,29 +76,55 @@ in
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {
         userSettings = {
-          "python.languageServer" = "Pylance";
           "files.exclude"."**/*.pyc" = true;
           "workbench.editorAssociations"."*.ipynb" = "jupyter-notebook";
           "notebook.cellToolbarLocation" = {
             "default" = "right";
             "jupyter-notebook" = "left";
           };
+          "python.analysis.typeCheckingMode" = "strict";
           "[python]" = {
+            "editor.codeActionsOnSave" = {
+              "source.organizeImports" = true;
+            };
             "editor.insertSpaces" = true;
-            "editor.tabSize" = 2;
           };
         };
         extensions = [
-          pkgs.vscode-extensions.ms-python.python
-          pkgs.vscode-extensions.ms-python.vscode-pylance
           pkgs.vscode-extensions.ms-toolsai.jupyter
           pkgs.vscode-extensions.ms-toolsai.jupyter-renderers
+          pkgs.vscode-extensions.ms-python.isort
+          pkgs.vscode-extensions.ms-python.black-formatter
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            publisher = "ms-python";
+            name = "python";
+            version = "2023.23.13391009";
+            sha256 = "0kk3kgzq7nh5b7h3a4jvsvj66279ad44jgwdzxnw05lljhar3afa";
+          }
+          {
+            publisher = "ms-pyright";
+            name = "pyright";
+            version = "1.1.339";
+            sha256 = "0mkaywrbxg437pfbawkg0al1c9b9z6mzjg9kanz93blaf0md2pdw";
+          }
           {
             name = "jupyter-keymap";
             publisher = "ms-toolsai";
             version = "1.0.0";
             sha256 = "0wkwllghadil9hk6zamh9brhgn539yhz6dlr97bzf9szyd36dzv8";
+          }
+          {
+            publisher = "ms-python";
+            name = "pylint";
+            version = "2023.11.13201006";
+            sha256 = "11j7aff4y69pvb2r9m5777qbsf0sq1v8ydc8i56nf762lf6hzhkx";
+          }
+          {
+            publisher = "ms-python";
+            name = "flake8";
+            version = "2023.11.13331010";
+            sha256 = "1i99mrkm4b9gdwb78c1ibygj7dqn27hsx7100y3s8n7k8wgs0f48";
           }
         ];
       };
