@@ -179,6 +179,7 @@
     cloudDevelopment = {
       k8s = {
         enable = lib.mkEnableOption "enable tools used for k8s development";
+        argocd.enable = lib.mkEnableOption "Add argocd tools";
       };
       docker.enable = lib.mkEnableOption "enable tools used for docker installation";
       terraform.enable = lib.mkEnableOption "enable tools used for terraform development";

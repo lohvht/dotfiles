@@ -27,6 +27,7 @@ in
         pkgs.kubernetes-helm
         pkgs.trivy # container scanner
         pkgs.grype # container scanner
+        pkgs.kustomize
       ];
       home.shellAliases = {
         # kubernetes
@@ -35,5 +36,12 @@ in
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
     }
+    (lib.mkIf cfg.argocd.enable {
+      home.packages = [
+        pkgs.argocd
+        pkgs.argo-rollouts
+      ];
+    })
+
   ]);
 }
