@@ -85,7 +85,7 @@ in
           "python.analysis.typeCheckingMode" = "basic";
           "[python]" = {
             "editor.codeActionsOnSave" = {
-              "source.organizeImports" = true;
+              "source.organizeImports" = "explicit";
             };
             "editor.insertSpaces" = true;
           };

@@ -38,7 +38,7 @@ in
             "editor.snippetSuggestions" = "none";
             "editor.formatOnSave" = true;
             "editor.codeActionsOnSave" = {
-              "source.organizeImports" = true;
+              "source.organizeImports" = "explicit";
             };
           };
           "go.lintOnSave" = "package";

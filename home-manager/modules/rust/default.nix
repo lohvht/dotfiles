@@ -44,7 +44,7 @@ in
           "rust-analyzer.check.command" = "clippy";
           "[rust]" = {
             "editor.codeActionsOnSave" = {
-              "source.organizeImports" = true;
+              "source.organizeImports" = "explicit";
             };
             "editor.formatOnType" = true;
             "editor.formatOnSave" = true;
