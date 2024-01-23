@@ -158,8 +158,17 @@ in
           "nginx-conf-hint.syntax" = "sublime";
           "debug.allowBreakpointsEverywhere" = true;
           "files.insertFinalNewline" = true;
+          "coverage-gutters.coverageFileNames" = [
+            "coverage/tests.lcov"
+            "lcov.info"
+            "cov.xml"
+            "coverage.xml"
+            "jacoco.xml"
+            "coverage.cobertura.xml"
+          ];
         };
         extensions = [
+          pkgs.vscode-extensions.ms-vscode.live-server
           pkgs.vscode-extensions.eamodio.gitlens
           pkgs.vscode-extensions.ms-azuretools.vscode-docker
           pkgs.vscode-extensions.ms-vscode.cpptools
@@ -197,6 +206,12 @@ in
             version = "0.0.22";
             sha256 = "1nkxy2d5zj02jkk67q8fyrbi53xb9kcyb6x40skb2gk4jjarmz7s";
           })
+          {
+            publisher = "ryanluker";
+            name = "vscode-coverage-gutters";
+            version = "2.11.1";
+            sha256 = "122558k6jkxmhahh8cs3qjznadydwm5286m02bg5q0k4j0bk9vrm";
+          }
           {
             name = "vscode-todo-highlight";
             publisher = "jgclark";
