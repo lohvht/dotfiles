@@ -227,6 +227,10 @@ in
         };
         extraConfig = {
           init.defaultBranch = "main";
+          diff = {
+            colormoved = "default";
+            colormovedws = "allow-indentation-change";
+          };
         };
       };
     }
