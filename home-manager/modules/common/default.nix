@@ -118,6 +118,13 @@ in
         pkgs.roboto
         pkgs.roboto-mono
         pkgs.roboto-slab
+        pkgs.noto-fonts
+        pkgs.noto-fonts-cjk-sans
+        pkgs.noto-fonts-cjk-serif
+        pkgs.dejavu_fonts
+        pkgs.liberation_ttf
+        pkgs.open-sans
+        pkgs.wqy_zenhei
       ];
       home.file.".vimrc".text = builtins.readFile ./.vimrc;
       home.shellAliases = {
