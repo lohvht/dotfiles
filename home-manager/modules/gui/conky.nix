@@ -182,7 +182,7 @@ in
           own_window_argb_visual = true,
           own_window_argb_value = 192,
           own_window_transparent = no,
-          own_window_type = 'normal',
+          own_window_type = 'dock',
           own_window_hints = 'undecorated,below,skip_taskbar,sticky,skip_pager',
           own_window_colour = '000000',
           draw_shades = no,
