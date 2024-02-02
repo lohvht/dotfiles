@@ -17,6 +17,22 @@ let
     complete -o default -F __start_kubectl k
     ########## Module CloudDevelopment.K8S Init Extra End ##########
   '';
+
+  argocd_competions_str = ''
+    ########## Module CloudDevelopment.K8S.Argocd Init Extra Start ##########
+    if [ -n "$ZSH_VERSION" ]; then
+      source <(kubectl argo rollouts completion zsh)
+      source <(argocd completion zsh)
+    elif [ -n "$BASH_VERSION" ]; then
+      # NOTE: we may need to run the following `source /usr/share/bash-completion/bash_completion` 
+      source <(kubectl argo rollouts completion bash)
+      source <(argocd completion bash)
+    else
+      source <(kubectl argo rollouts completion bash)
+      source <(argocd completion bash)
+    fi
+    ########## Module CloudDevelopment.K8S Init Extra End ##########
+  '';
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
@@ -41,6 +57,8 @@ in
         pkgs.argocd
         pkgs.argo-rollouts
       ];
+      programs.bash.initExtra = argocd_competions_str;
+      programs.zsh.initExtra = argocd_competions_str;
     })
 
   ]);
