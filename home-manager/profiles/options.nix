@@ -155,6 +155,9 @@
         enable = lib.mkEnableOption "enable AWS CLI integration";
       };
     };
+    databases = {
+      mariadb.enable = lib.mkEnableOption "Add MariaDB to config. Mostly used to allow access to a MariaDB/MySQL client";
+    };
     blurayCd = {
       makemkv.enable = lib.mkEnableOption ''
         enable makemkv that rips to mkv. May require that the `sg` kernel
