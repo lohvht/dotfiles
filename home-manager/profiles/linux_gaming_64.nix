@@ -34,6 +34,7 @@
     };
     # cloudDevelopment.k8s.enable = true;
     # cloudDevelopment.terraform.enable = true;
+    databases.mariadb.enable = true;
     corsairKeyboardMouseSupport.enable = false;
     # golang.enable = true;
     rust.enable = true;
