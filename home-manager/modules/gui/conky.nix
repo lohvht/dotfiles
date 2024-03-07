@@ -166,6 +166,7 @@ in
       '';
       xdg.configFile."conky/conky.conf".text = ''
         conky.config = {
+          out_to_wayland = true,
           alignment = 'top_right',
           use_xft = true,
           xftalpha = 0.8,
