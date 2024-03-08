@@ -80,6 +80,7 @@ in
         pkgs.openjdk # open source Java for certain dependencies on Java
         pkgs.sops # mozilla Secrets OPerationS - for encrypting files locally.
         pkgs.universal-ctags # A maintained version of ctags - tool for fast source code browsing
+        pkgs.shellcheck
 
         # # Man pages
         # pkgs.man
