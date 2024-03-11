@@ -205,6 +205,14 @@ builtins.concatStringsSep "" (
       rng() {
         od -vAn -N$1 -tu$1 < /dev/urandom
       }
+
+      b64e() {
+        printf "%s" "$1" | base64 -w 0
+      }
+
+      b64d() {
+        printf "%s" "$1" | base64 -d -w 0
+      }
     ''
   ]) ++ (pkgs.lib.optionals isVSCodeEnable [
     ''
