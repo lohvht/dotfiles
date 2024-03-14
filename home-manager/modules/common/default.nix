@@ -168,6 +168,7 @@ in
         gdmas = "git diff origin/master...";
         gdmai = "git diff origin/main...";
         grsl = "git reset HEAD~1 --soft";
+        grsd = "git reset HEAD~1 --hard";
         grmrg = "git reset --merge ORIG_HEAD";
         gstal = "git stash list";
         gstaa = "git stash apply";
@@ -220,6 +221,7 @@ in
           dmas = "diff origin/master...";
           dmai = "diff origin/main...";
           rsl = "reset HEAD~1 --soft";
+          rsd = "reset HEAD~1 --hard";
           rmrg = "reset --merge ORIG_HEAD";
           stal = "stash list";
           staa = "stash apply";
