@@ -43,7 +43,7 @@ in
           share = false; # i.e. setopt SHARE_HISTORY
         };
 
-        enableAutosuggestions = true;
+        autosuggestion.enable = true;
         enableCompletion = true;
         syntaxHighlighting.enable = true;
 
