@@ -38,6 +38,7 @@ in
         PIP_VIRTUALENV_BASE = "$WORKON_HOME";
         # makes pip detect an active virtualenv and install to it
         PIP_RESPECT_VIRTUALENV = "true";
+        VIRTUALENVWRAPPER_PYTHON = "${pkgs.python3}/bin/python";
         PYTHONDONTWRITEBYTECODE = 1;
       };
       home.packages = [
