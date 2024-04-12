@@ -110,6 +110,12 @@ in
             sha256 = "0mkaywrbxg437pfbawkg0al1c9b9z6mzjg9kanz93blaf0md2pdw";
           }
           {
+            publisher = "ms-python";
+            name = "mypy-type-checker";
+            version = "2023.9.10961015";
+            sha256 = "0ndpgshv22f8cm5j741mqrlw6iksc6ny2qsb469v3wg4ga5dw5c3";
+          }
+          {
             name = "jupyter-keymap";
             publisher = "ms-toolsai";
             version = "1.0.0";
