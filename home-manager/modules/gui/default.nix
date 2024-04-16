@@ -107,7 +107,7 @@ in
         pkgs.slack
       ];
     })
-    (lib.mkIf cfg.development.aplClient.enable {
+    (lib.mkIf cfg.development.apiClient.enable {
       home.packages = [
         pkgs.bruno
       ];

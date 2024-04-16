@@ -111,7 +111,7 @@
       };
       nextcloudClient.enable = lib.mkEnableOption "install nextcloud client";
       development = {
-        aplClient.enable = lib.mkEnableOption "install an API client, the current client used is `bruno`";
+        apiClient.enable = lib.mkEnableOption "install an API client, the current client used is `bruno`";
       };
     };
     corsairKeyboardMouseSupport.enable = lib.mkEnableOption ''
