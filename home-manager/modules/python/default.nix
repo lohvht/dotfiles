@@ -83,7 +83,6 @@ in
             "default" = "right";
             "jupyter-notebook" = "left";
           };
-          "python.analysis.typeCheckingMode" = "basic";
           "[python]" = {
             "editor.codeActionsOnSave" = {
               "source.organizeImports" = "explicit";
