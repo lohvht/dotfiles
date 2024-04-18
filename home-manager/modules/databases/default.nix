@@ -2,5 +2,6 @@
 {
   imports = [
     ./mariadb
+    ./postgres
   ];
 }

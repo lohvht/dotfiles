@@ -156,6 +156,7 @@
       };
     };
     databases = {
+      postgres.enable = lib.mkEnableOption "Add Postgres to config. Mostly used to allow access to a Postgres client (psql)";
       mariadb.enable = lib.mkEnableOption "Add MariaDB to config. Mostly used to allow access to a MariaDB/MySQL client";
     };
     blurayCd = {
