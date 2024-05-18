@@ -78,6 +78,12 @@ in
     #     }))
     #   ];
     # })
+    (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable) {
+      programs.mangohud = {
+        enable = true;
+        enableSessionWide = true;
+      };
+    })
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable && cfg.gaming.animeGameLauncherRunnerName != null) {
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
