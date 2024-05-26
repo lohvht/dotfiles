@@ -171,6 +171,7 @@ in
             "source.fixAll.shellcheck" = "explicit";
           };
           "shellcheck.run" = "onSave";
+          "git.inputValidation" = true;
         };
         extensions = [
           pkgs.vscode-extensions.ms-vscode.live-server
