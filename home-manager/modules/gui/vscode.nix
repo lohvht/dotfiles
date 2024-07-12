@@ -211,8 +211,8 @@ in
           (mkOpenVSXExt {
             publisher = "jeanp413";
             name = "open-remote-ssh";
-            version = "0.0.22";
-            sha256 = "1nkxy2d5zj02jkk67q8fyrbi53xb9kcyb6x40skb2gk4jjarmz7s";
+            version = "0.0.46";
+            sha256 = "0hrxdivwspg8xyf3g08rnhwa2m91v5pr7clp9yd4aicw3psrx007";
           })
           {
             publisher = "ryanluker";
@@ -221,16 +221,10 @@ in
             sha256 = "122558k6jkxmhahh8cs3qjznadydwm5286m02bg5q0k4j0bk9vrm";
           }
           {
-            name = "vscode-todo-highlight";
             publisher = "jgclark";
-            version = "2.0.4";
-            sha256 = "18zm1w4ziq3i7fn2rcd095va7nqnbdmsvr82lj27s33zrd2wwzzr";
-          }
-          {
-            name = "change-case";
-            publisher = "wmaurer";
-            version = "1.0.0";
-            sha256 = "0dxsdahyivx1ghxs6l9b93filfm8vl5q2sa4g21fiklgdnaf7pxl";
+            name = "vscode-todo-highlight";
+            version = "2.0.8";
+            sha256 = "082p6h9cl6qm0fdl2mdzrcp539qckq0grggy14vd1y86nxl2s9zw";
           }
           {
             name = "monokai-charcoal-high-contrast";
@@ -239,12 +233,11 @@ in
             sha256 = "05y8dwqqmixy9k59xmdpwgjbvvc6w7lh8apgnijy0li0xrs11i9f";
           }
           {
-            name = "vscode-nginx-conf";
             publisher = "ahmadalli";
-            version = "0.1.3";
-            sha256 = "10z0him4kl9q6h1nip7d3dp9nv0a1dkh3x6zqc6nilfw959v3358";
+            name = "vscode-nginx-conf";
+            version = "0.3.5";
+            sha256 = "10f5b14hlkz9gm11vxcqj6mw6nwz2lynh4z5nz2skkgn04qns0pa";
           }
-
         ];
       };
     }

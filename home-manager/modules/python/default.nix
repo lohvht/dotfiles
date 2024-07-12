@@ -95,42 +95,25 @@ in
           pkgs.vscode-extensions.ms-toolsai.jupyter-renderers
           pkgs.vscode-extensions.ms-python.isort
           pkgs.vscode-extensions.ms-python.black-formatter
+          pkgs.vscode-extensions.ms-python.python
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             publisher = "ms-python";
-            name = "python";
-            version = "2023.23.13391009";
-            sha256 = "0kk3kgzq7nh5b7h3a4jvsvj66279ad44jgwdzxnw05lljhar3afa";
-          }
-          {
-            publisher = "ms-pyright";
-            name = "pyright";
-            version = "1.1.339";
-            sha256 = "0mkaywrbxg437pfbawkg0al1c9b9z6mzjg9kanz93blaf0md2pdw";
-          }
-          {
-            publisher = "ms-python";
             name = "mypy-type-checker";
-            version = "2023.9.10961015";
-            sha256 = "0ndpgshv22f8cm5j741mqrlw6iksc6ny2qsb469v3wg4ga5dw5c3";
-          }
-          {
-            name = "jupyter-keymap";
-            publisher = "ms-toolsai";
-            version = "1.0.0";
-            sha256 = "0wkwllghadil9hk6zamh9brhgn539yhz6dlr97bzf9szyd36dzv8";
+            version = "2023.9.11861016";
+            sha256 = "1s6yx62i5cpn250cp7059afflv0ic8pg9appkfvycqlagf9gxc8y";
           }
           {
             publisher = "ms-python";
             name = "pylint";
-            version = "2023.11.13201006";
-            sha256 = "11j7aff4y69pvb2r9m5777qbsf0sq1v8ydc8i56nf762lf6hzhkx";
+            version = "2023.11.13481007";
+            sha256 = "1nr6554sw8iadjd6sn0l45ad0nsrlh0fhch23zrrhdjr7nyvlzxf";
           }
           {
             publisher = "ms-python";
             name = "flake8";
-            version = "2023.11.13331010";
-            sha256 = "1i99mrkm4b9gdwb78c1ibygj7dqn27hsx7100y3s8n7k8wgs0f48";
+            version = "2023.13.11511011";
+            sha256 = "17y7pkxx6aiavgmhk6hpmivfizimq9c3gcsp5psz5x6c17szv0ww";
           }
         ];
       };
