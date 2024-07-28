@@ -141,12 +141,28 @@ in
               "backgroundColor" = "teal";
               "color" = "black";
               "overviewRulerColor" = "teal";
+              "fontWeight" = "bold";
             }
             {
               "text" = "NOTE:";
               "backgroundColor" = "purple";
               "color" = "white";
               "overviewRulerColor" = "purple";
+              "fontWeight" = "bold";
+            }
+            {
+              "text" = "HACK:";
+              "backgroundColor" = "red";
+              "color" = "white";
+              "overviewRulerColor" = "red";
+              "fontWeight" = "bold";
+            }
+            {
+              "text" = "FIXME:";
+              "backgroundColor" = "deeppink";
+              "color" = "white";
+              "overviewRulerColor" = "deeppink";
+              "fontWeight" = "bold";
             }
           ];
           "workbench.colorCustomizations" = { };
@@ -223,8 +239,8 @@ in
           {
             publisher = "jgclark";
             name = "vscode-todo-highlight";
-            version = "2.0.8";
-            sha256 = "082p6h9cl6qm0fdl2mdzrcp539qckq0grggy14vd1y86nxl2s9zw";
+            version = "2.0.4";
+            sha256 = "18zm1w4ziq3i7fn2rcd095va7nqnbdmsvr82lj27s33zrd2wwzzr";
           }
           {
             name = "monokai-charcoal-high-contrast";
