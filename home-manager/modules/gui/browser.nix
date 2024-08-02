@@ -243,7 +243,6 @@ let
     firefox-addons.clearurls # attempt to remove tracking elements when clicking URLs
     firefox-addons.user-agent-string-switcher
     # firefox-addons.bypass-paywalls-clean
-    firefox-addons.faststream
   ];
 in
 {
