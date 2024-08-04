@@ -124,6 +124,10 @@ in
         pkgs.obsidian
         pkgs.wxhexeditor
       ];
+      xdg.systemDirs.data = [
+        "/home/vloh/.local/share/flatpak/exports/share"
+        "/var/lib/flatpak/exports/share"
+      ];
     }
   ]);
 }
