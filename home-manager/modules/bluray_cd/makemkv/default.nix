@@ -5,16 +5,19 @@ let
     ########## Module blurayCd.makemkv Init Extra Start ##########
     ########## Module blurayCd.makemkv Init Extra End ##########
   '';
+  isGUIEnabled = config.customHomeProfile.GUI.enable;
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
-      home.packages = [
-        pkgs.makemkv
-        pkgs.mkvtoolnix-cli
-      ];
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initExtra = shell_extracommon_str;
     }
+    (lib.mkIf isGUIEnabled {
+      home.packages = [
+        pkgs.makemkv
+        pkgs.mkvtoolnix
+      ];
+    })
   ]);
 }
