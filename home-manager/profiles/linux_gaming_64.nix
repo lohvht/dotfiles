@@ -38,7 +38,7 @@
     corsairKeyboardMouseSupport.enable = false;
     # golang.enable = true;
     rust.enable = true;
-    # python.enable = true;
+    python.enable = true;
     # ruby.enable = true;
     # node.enable = true;
     latex.enable = true;
