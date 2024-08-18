@@ -95,7 +95,13 @@ let
     "network.http.pacing.requests.enabled" = false;
     "network.http.referer.XOriginPolicy" = 2;
     "network.http.referer.XOriginTrimmingPolicy" = 2;
-    "network.http.sendRefererHeader" = 1; # send the header only when clicking on links and similar elements
+    # NOTE: network.http.sendRefererHeader
+    #   controls whether or not to send a referrer regardless of origin
+    #     0 = never send the header
+    #     1 = send the header only when clicking on links and similar elements
+    #     2 = (default) send on all requests (e.g. images, links, etc.)
+    # Setting this to 1 / 0 can break some websites, stay at 2 for now
+    "network.http.sendRefererHeader" = 2;
     "network.predictor.enabled" = false;
     "network.prefetch-next" = false;
     "network.ssl_tokens_cache_capacity" = 10240;
