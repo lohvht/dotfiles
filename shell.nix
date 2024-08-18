@@ -34,19 +34,7 @@ let
 in
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
-    cacert
-    vim
-    nix
-    which
-    less
-    lesspipe
-    home-manager
-    git
-    nix-prefetch-git # To check thee sha256 checksum needed for mkDerivation: e.g, `nix-prefetch-git --url https://github.com/example/example.git --rev v2.3.3`
-    wget
-    curl
-    ripgrep
-    mysql
+    # nix-prefetch-git # To check thee sha256 checksum needed for mkDerivation: e.g, `nix-prefetch-git --url https://github.com/example/example.git --rev v2.3.3`
   ];
   shellHook = ''
     # Put any shell code that you'll like to run here
