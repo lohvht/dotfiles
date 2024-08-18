@@ -235,19 +235,14 @@ let
 
   extensions = [
     firefox-addons.ublock-origin # adblocker
-    firefox-addons.darkreader
     firefox-addons.decentraleyes # Protects you against tracking through "free", centralised, content delivery
-    firefox-addons.disable-javascript
-    firefox-addons.privacy-badger # stops advertisers/3rd party trackers from tracking
     firefox-addons.unpaywall # attempt to unpaywall research articles
     firefox-addons.sponsorblock # block sponsor sections of YT videos
     firefox-addons.skip-redirect # attempt to skip multiple redirects by redirecting to final destination directly
     firefox-addons.sidebery # tab mgmt
     firefox-addons.plasma-integration # KDE plasma integration
     firefox-addons.don-t-fuck-with-paste # Restore Copy/Paste for websites that mess around with those
-    firefox-addons.display-_anchors # Display invisible anchor link
     firefox-addons.clearurls # attempt to remove tracking elements when clicking URLs
-    firefox-addons.user-agent-string-switcher
     # firefox-addons.bypass-paywalls-clean
     firefox-addons.old-reddit-redirect
   ];
