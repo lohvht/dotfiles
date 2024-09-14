@@ -43,10 +43,11 @@ let
           cNumStr = builtins.toString cNum;
           # If its an intel core, it should have the individual coretemps listed under the coretemps kernel module
           # Ryzen doesnt and only has the average temperature
+          gotoJump = if (cNum == cNum1) then "100" else "250";
           individualCoreTemp =
             if
               (hardwareCfg.cpuMake == "ryzen" || hardwareCfg.cpuMake == null)
-            then "" else "\${goto 80}\${color1}\${execi 1 ${pkgs.lm_sensors}/bin/sensors |grep 'Core ${builtins.toString (cNum - 1)}'|awk '{print $3}'}";
+            then "" else "\${goto ${gotoJump}}\${color1}\${execi 1 ${pkgs.lm_sensors}/bin/sensors |grep 'Core ${builtins.toString (cNum - 1)}:'|awk '{print $3}'}";
         in
         "\${color}C${cNumStr}: \${color2}\${cpu cpu${cNumStr}}%${individualCoreTemp}\${color}";
 
@@ -57,7 +58,7 @@ let
         "\${color5}\${cpugraph cpu${cNumStr} 20,140 ${colour_orange} ${colour_pinkred} -t}\${color}";
 
       line_one_parts = [ "\${goto 10}" (cpu_header cNum1) ] ++ (pkgs.lib.optionals (cNum2 != null) [ "\${goto 170}" (cpu_header cNum2) ]);
-      line_two_parts = [ "\${goto 10}" (cpu_bar_footer cNum1) ] ++ (pkgs.lib.optionals (cNum2 != null) [ "\${goto 170}" (cpu_bar_footer cNum2) ]);
+      line_two_parts = [ "\${goto 10}" (cpu_bar_footer cNum1) ] ++ (pkgs.lib.optionals (cNum2 != null) [ "\${alignr 10}" (cpu_bar_footer cNum2) ]);
     in
     ''
       ${builtins.concatStringsSep "" line_one_parts}
@@ -84,18 +85,52 @@ let
                 in
                 ''${pkgs.radeontop}/bin/radeontop -b ${gpu.pcie_bus_id} -l1 -d - | grep -o "${metricName} ${unitsToGrep}" | sed -e 's/${metricName} //' | cut -d " " -f ${builtins.toString(selectedUnitIndex + 1)} | sed -e 's/${builtins.elemAt units selectedUnitIndex}$//' '';
 
-              currentPowerCMD = if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'PPT:' | awk '{print $2}'" else "";
-              maxPowerCMD = if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'PPT:' | sed -e 's/.*(cap = //' -e  's/ W)$//'" else "";
-              loadCMD = if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "gpu" ["%"] 0}" else "";
-              vRAMCMD = if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "gpu" ["%"] 0}" else "";
-              graphicsSpeedCMD = if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "sclk" ["%" "ghz"] 1}" else "";
-              memSpeedCMD = if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "mclk" ["%" "ghz"] 1}" else "";
-              currTempCMD = if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'edge' | awk '{print $2}'" else "";
-              fanspeedCMD = if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'fan1' | awk '{print $2 \" \" $3}'" else "";
+              nvidiaSmiExtract = metricName:
+                ''nvidia-smi --query-gpu=pci.bus_id,${metricName} --format=csv,noheader | grep ':${gpu.pcie_bus_id}:${gpu.pcie_device_id}.0' | awk -F', ' '{print $2}' '';
+
+              sedRemoveUnitSuffix = units: "| sed -e 's/\s*${units}$//' | xargs";
+
+              gpuName =
+                if gpu.name != null then gpu.name
+                else if gpu.driver == "nvidia" then ''''${exec ${nvidiaSmiExtract "gpu_name"}}''
+                else "";
+
+              currentPowerCMD =
+                if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'PPT:' | awk '{print $2}'"
+                else if gpu.driver == "nvidia" then ''${nvidiaSmiExtract "power.draw"} ${sedRemoveUnitSuffix "W"}''
+                else "";
+              maxPowerCMD =
+                if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'PPT:' | sed -e 's/.*(cap = //' -e  's/ W)$//'"
+                else if gpu.driver == "nvidia" then ''${nvidiaSmiExtract "power.max_limit"}${sedRemoveUnitSuffix "W"}''
+                else "";
+              loadCMD =
+                if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "gpu" ["%"] 0}"
+                else if gpu.driver == "nvidia" then ''${nvidiaSmiExtract "utilization.gpu"}${sedRemoveUnitSuffix "%"}''
+                else "";
+              vRAMCMD =
+                if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "gpu" ["%"] 0}"
+                else if gpu.driver == "nvidia" then ''${nvidiaSmiExtract "utilization.memory"}${sedRemoveUnitSuffix "%"}''
+                else "";
+              graphicsSpeedCMD =
+                if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "sclk" ["%" "ghz"] 1}"
+                else if gpu.driver == "nvidia" then ''${nvidiaSmiExtract "clocks.current.graphics"}${sedRemoveUnitSuffix "MHz"} | awk '{print $1 / 1000}' ''
+                else "";
+              memSpeedCMD =
+                if gpu.driver == "amdgpu" then "${amdgpuRadeontopExtract "mclk" ["%" "ghz"] 1}"
+                else if gpu.driver == "nvidia" then ''${nvidiaSmiExtract "clocks.current.memory"}${sedRemoveUnitSuffix "MHz"} | awk '{print $1 / 1000}' ''
+                else "";
+              currTempCMD =
+                if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'edge' | awk '{print $2}'"
+                else if gpu.driver == "nvidia" then ''${nvidiaSmiExtract "temperature.gpu"} | awk '{print $1"C"}' ''
+                else "";
+              fanspeedCMD =
+                if gpu.driver == "amdgpu" then "${pkgs.lm_sensors}/bin/sensors ${gpu.driver}-pci-${gpu.pcie_bus_id}${gpu.pcie_device_id} | grep 'fan1' | awk '{print $2 \" \" $3}'"
+                else if gpu.driver == "nvidia" then ''${nvidiaSmiExtract "fan.speed"}''
+                else "";
             in
             ''
               ##------------Card${idxStr}-------------##
-              ''${alignc}''${font ${font_header3_unbold}}GPU${idxStr}: ''${color6}${gpu.name}''${font}''${color}
+              ''${alignc}''${font ${font_header3_unbold}}GPU${idxStr}: ''${color6}${gpuName}''${font}''${color}
               ''${goto 10}Power: ''${color6}''${execi 1 ${currentPowerCMD}} W''${color}''${goto 170}Max Power: ''${color1}''${alignr 10}''${execi 1 ${maxPowerCMD}} W''${color}
               ''${goto 10}GPU Load: ''${color2}''${execi 1 ${loadCMD}}%''${color}''${goto 170}GPU VRAM: ''${color2}''${alignr 10}''${execi 1 ${vRAMCMD}}%''${color}
               ''${goto 10}''${color5}''${execigraph 1 "${loadCMD}"  20,140 ${colour_orange} ${colour_pinkred} -t}''${alignr 10}''${execigraph 1 "${vRAMCMD}"  20,140 ${colour_orange} ${colour_pinkred} -t}''${color}
@@ -119,10 +154,10 @@ let
     ''${goto 10}''${font}Internal IP: ''${color6}''${alignr 10}''${addr ${hardwareCfg.networkInterface}}''${color}
     #''${goto 10}Network''${alignr 10 10}SSID: ''${wireless_essid ${hardwareCfg.networkInterface}}''${color}
     #''${goto 10}Signal:''${goto 70}''${color}''${wireless_link_bar wlan0}''${color}''${alignr 10 10}''${wireless_link_qual_perc ${hardwareCfg.networkInterface}}%''${color}
-    #''${goto 10}''${font}External: ''${font ${font_header3}}''${alignr 10 10}''${exec curl ipinfo.io/ip}''${color}
+    #''${goto 10}''${font}External: ''${font ${font_header3}}''${alignr 10 10}''${execi 600 curl ipinfo.io/ip}''${color}
     ''${goto 10}''${font}Up Spd:   ''${color2}''${upspeed ${hardwareCfg.networkInterface}}''${goto 170}''${color}Down Spd: ''${alignr 10}''${color2}''${downspeed ${hardwareCfg.networkInterface}}''${color}
     ''${goto 10}Total Up: ''${color2}''${totalup ${hardwareCfg.networkInterface}}''${goto 170}''${color}Total Dn: ''${alignr 10}''${color2}''${totaldown ${hardwareCfg.networkInterface}}''${color}
-    ''${goto 15}''${color5}''${upspeedgraph ${hardwareCfg.networkInterface} 20,140 ${colour_orange} ${colour_pinkred} -t}   ''${color5}''${downspeedgraph ${hardwareCfg.networkInterface} 20,140 ${colour_orange} ${colour_pinkred} -t}'';
+    ''${goto 15}''${color5}''${upspeedgraph ${hardwareCfg.networkInterface} 20,140 ${colour_orange} ${colour_pinkred} -t}  ''${alignr 10} ''${color5}''${downspeedgraph ${hardwareCfg.networkInterface} 20,140 ${colour_orange} ${colour_pinkred} -t}'';
 
   conky_text_disks_section =
     let
@@ -228,6 +263,7 @@ in
         ''${color4}''${hr}''${color}
         ''${alignc}''${color6}''${font ${font_header3_unbold}}''${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //' -e 's/ @ .*//' | uniq }''${color} @ ''${color6}''${freq_g 1}GHz''${font}
         ${conky_avg_cpu_temp_str}
+        ''${goto 10}''${color}Threads/Cores: ''${alignr 10}''${color6}''${exec cat /proc/cpuinfo | grep 'core id' | wc -l}''${color}''${font}
         ''${goto 10}''${color}Active Governor: ''${alignr 10}''${color6}''${execi 1 cut -b 1-20 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor}''${color}''${font}
         #Cores
         ${conky_each_cpu_core_str {cNum1=1; cNum2=2;}}
