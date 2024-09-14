@@ -78,6 +78,7 @@
         linux_headless_64 = { };
         darwin_64 = { system = flake-utils.lib.system.x86_64-darwin; };
         linux_gaming_64 = { };
+        linux_thinkpad_64 = { };
         ###### HOMECONFIG PROFILES END
       };
 
