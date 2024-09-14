@@ -7,6 +7,13 @@ let
   inherit (pkgs.nur.repos.rycee) firefox-addons;
 
   ffcommon_settings = {
+    "browser.tabs.inTitlebar" = 0;
+    "gfx.webrender.all" = true;
+    "media.ffmpeg.vaapi.enabled" = true;
+    "media.hardware-video-decoding.force-enabled" = true;
+    "media.rdd-ffmpeg.enabled" = true;
+    "gfx.x11-egl.force-enabled" = true;
+    "widget.dmabuf.force-enabled" = true;
     "app.normandy.api_url" = "";
     "app.normandy.enabled" = false;
     "app.shield.optoutstudies.enabled" = false;
@@ -277,6 +284,7 @@ in
       };
       home.sessionVariables = {
         MOZ_USE_XINPUT2 = "1"; # Make Firefox use xinput2, improving touchscreen support, enable touchpad gestures and enables smoothscrolling
+        MOZ_ENABLE_WAYLAND = "1";
       };
     })
     {
