@@ -38,6 +38,36 @@ let
     ''${goto 10}''${font ${font_header3_unbold}}Packages:''${color2}''${alignr 10}''${execi ${medium_interval_secs} checkupdates | wc -l}''${font}''${color}
     ''${goto 10}''${font ${font_header3_unbold}}AUR Packages:''${color2}''${alignr 10}''${execi ${medium_interval_secs} yay -Qua | wc -l}''${color}'';
 
+  conky_text_battery_power_section =
+    let
+      conky_power_texts = lib.imap0
+        (
+          idx: batteryName:
+            let
+              idxStr = builtins.toString idx;
+              powerSupply = metricName:
+                ''cat /sys/class/power_supply/${batteryName}/${metricName}'';
+
+              powerSupplyUeventRatio = metric1: metric2: units: reason:
+                ''${powerSupply "uevent"} | awk -F= 'BEGIN { one=0; two=0; } $1 == "${metric1}" { one=$2 } $1 == "${metric2}" { two=$2 } END { if (two > 0) { printf "%.2f${units}", one / two } else { print "${reason}" } }' '';
+            in
+            ''
+              ##------------Battery${idxStr}-------------##
+              ''${alignc}''${color6}''${font ${font_header3_unbold}}''${exec ${powerSupply "model_name"}} ''${exec ${powerSupply "technology"}} ''${exec ${powerSupply "type"}}''${font}''${color}
+              ''${goto 10}''${color}Capacity: ''${color6}''${execi ${short_interval_secs} ${powerSupply "capacity"}}%''${color}''${goto 170}''${color}Cap. Lvl: ''${alignr 10}''${color6}''${execi ${short_interval_secs} ${powerSupply "capacity_level"}}''${color}
+              ''${goto 10}''${color}Battery Life: ''${color6}''${execi ${short_interval_secs} ${powerSupplyUeventRatio "POWER_SUPPLY_ENERGY_NOW" "POWER_SUPPLY_POWER_NOW" " Hrs" "N/A"}}''${color}''${goto 170}''${color}Usage: ''${alignr 10}''${color6}''${execi ${short_interval_secs} ${powerSupply "power_now"} | awk '{printf "%.2f", $1 / 1000000}'}W''${color}
+              ''${goto 10}''${color}Status: ''${color6}''${execi ${short_interval_secs} ${powerSupply "status"}}''${color}''
+        )
+        hardwareCfg.batteries;
+
+      resultStr = if (builtins.length conky_power_texts) == 0 then "#" else ''
+        #
+        # Power Section
+        ''${color4}''${hr}''${color}
+        ${builtins.concatStringsSep "\n" conky_power_texts}'';
+    in
+    resultStr;
+
   # Left and right column of CPU core details
   conky_each_cpu_core_str = { cNum1, cNum2 ? null }:
     let
@@ -262,6 +292,7 @@ in
         ''${goto 10}Kernel:''${color2}''${alignr 10}''${kernel}''${color}
         ''${goto 10}Uptime:''${color2}''${alignr 10}$uptime''${font}
         ${conky_package_update_section}
+        ${conky_text_battery_power_section}
         #
         #Processor section
         ''${color4}''${hr}''${color}

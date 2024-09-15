@@ -14,6 +14,13 @@
       default = null;
       description = "What make is the CPU, e.g. amd Ryzen series, or intel etc.";
     };
+    batteries = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = ''
+        list of strings containing the battery names from the path `/sys/class/power_supply/<BATTERY_NAME>`
+      '';
+    };
     gpus = lib.mkOption {
       type = lib.types.listOf lib.types.attrs;
       default = [ ];
