@@ -14,6 +14,7 @@
       { name = "System"; mountedPath = "/"; }
       # { name = "HDD1"; mountedPath = "${config.home.homeDirectory}/HDD/HDD1"; }
     ];
+    batteries = [ "BAT0" ];
   };
   customHomeProfile = {
     systemCtlPath = "/usr/bin/systemctl";
