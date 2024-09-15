@@ -23,6 +23,10 @@ let
   colour_dark_blue = "161925";
   colour_teal = "3bf4bb";
 
+  short_interval_secs = "5";
+  medium_interval_secs = "180";
+  long_interval_secs = "300";
+
   # Conky templated strings
 
   # TODO: only support arch for now
@@ -31,8 +35,8 @@ let
     #Package Section
     ''${color4}''${hr}''${color}
     ''${alignc}''${font ${font_header3_unbold}}''${color6}Packages To Update''${font}''${color}
-    ''${goto 10}''${font ${font_header3_unbold}}Packages:''${color2}''${alignr 10}''${execi 60 checkupdates | wc -l}''${font}''${color}
-    ''${goto 10}''${font ${font_header3_unbold}}AUR Packages:''${color2}''${alignr 10}''${execi 60 yay -Qua | wc -l}''${color}'';
+    ''${goto 10}''${font ${font_header3_unbold}}Packages:''${color2}''${alignr 10}''${execi ${medium_interval_secs} checkupdates | wc -l}''${font}''${color}
+    ''${goto 10}''${font ${font_header3_unbold}}AUR Packages:''${color2}''${alignr 10}''${execi ${medium_interval_secs} yay -Qua | wc -l}''${color}'';
 
   # Left and right column of CPU core details
   conky_each_cpu_core_str = { cNum1, cNum2 ? null }:
@@ -47,7 +51,7 @@ let
           individualCoreTemp =
             if
               (hardwareCfg.cpuMake == "ryzen" || hardwareCfg.cpuMake == null)
-            then "" else "\${goto ${gotoJump}}\${color1}\${execi 1 ${pkgs.lm_sensors}/bin/sensors |grep 'Core ${builtins.toString (cNum - 1)}:'|awk '{print $3}'}";
+            then "" else "\${goto ${gotoJump}}\${color1}\${execi ${short_interval_secs} ${pkgs.lm_sensors}/bin/sensors |grep 'Core ${builtins.toString (cNum - 1)}:'|awk '{print $3}'}";
         in
         "\${color}C${cNumStr}: \${color2}\${cpu cpu${cNumStr}}%${individualCoreTemp}\${color}";
 
@@ -68,7 +72,7 @@ let
   let
     after_pipe_cmd = if hardwareCfg.cpuMake == "ryzen" then "grep 'Tctl:' | sed -e 's/Tctl:\s*//'" else "grep 'Package id' | awk '{print $4}'";
   in
-  "\${goto 10}\${color}Average Temperature: \${alignr 10}\${color6}\${execi 1 ${pkgs.lm_sensors}/bin/sensors | ${after_pipe_cmd}}\${color}";
+  "\${goto 10}\${color}Average Temperature: \${alignr 10}\${color6}\${execi ${short_interval_secs} ${pkgs.lm_sensors}/bin/sensors | ${after_pipe_cmd}}\${color}";
 
   conky_text_gpu_section =
     let
@@ -131,11 +135,11 @@ let
             ''
               ##------------Card${idxStr}-------------##
               ''${alignc}''${font ${font_header3_unbold}}GPU${idxStr}: ''${color6}${gpuName}''${font}''${color}
-              ''${goto 10}Power: ''${color6}''${execi 1 ${currentPowerCMD}} W''${color}''${goto 170}Max Power: ''${color1}''${alignr 10}''${execi 1 ${maxPowerCMD}} W''${color}
-              ''${goto 10}GPU Load: ''${color2}''${execi 1 ${loadCMD}}%''${color}''${goto 170}GPU VRAM: ''${color2}''${alignr 10}''${execi 1 ${vRAMCMD}}%''${color}
-              ''${goto 10}''${color5}''${execigraph 1 "${loadCMD}"  20,140 ${colour_orange} ${colour_pinkred} -t}''${alignr 10}''${execigraph 1 "${vRAMCMD}"  20,140 ${colour_orange} ${colour_pinkred} -t}''${color}
-              ''${goto 10}GPU Spd: ''${color2}''${execi 1 ${graphicsSpeedCMD}}GHz ''${color}''${goto 170}VRAM Spd: ''${alignr 10}''${color2}''${execi 1 ${memSpeedCMD}}GHz''${color}
-              ''${goto 10}Current Temp: ''${color1}''${execi 1 ${currTempCMD}} ''${color}''${goto 170}Fan Spd: ''${alignr 10}''${color2}''${execi 1 ${fanspeedCMD}}''
+              ''${goto 10}Power: ''${color6}''${execi ${short_interval_secs} ${currentPowerCMD}} W''${color}''${goto 170}Max Power: ''${color1}''${alignr 10}''${execi ${short_interval_secs} ${maxPowerCMD}} W''${color}
+              ''${goto 10}GPU Load: ''${color2}''${execi ${short_interval_secs} ${loadCMD}}%''${color}''${goto 170}GPU VRAM: ''${color2}''${alignr 10}''${execi ${short_interval_secs} ${vRAMCMD}}%''${color}
+              ''${goto 10}''${color5}''${execigraph ${short_interval_secs} "${loadCMD}"  20,140 ${colour_orange} ${colour_pinkred} -t}''${alignr 10}''${execigraph ${short_interval_secs} "${vRAMCMD}"  20,140 ${colour_orange} ${colour_pinkred} -t}''${color}
+              ''${goto 10}GPU Spd: ''${color2}''${execi ${short_interval_secs} ${graphicsSpeedCMD}}GHz ''${color}''${goto 170}VRAM Spd: ''${alignr 10}''${color2}''${execi ${short_interval_secs} ${memSpeedCMD}}GHz''${color}
+              ''${goto 10}Current Temp: ''${color1}''${execi ${short_interval_secs} ${currTempCMD}} ''${color}''${goto 170}Fan Spd: ''${alignr 10}''${color2}''${execi ${short_interval_secs} ${fanspeedCMD}}''
         )
         hardwareCfg.gpus;
 
@@ -154,7 +158,7 @@ let
     ''${goto 10}''${font}Internal IP: ''${color6}''${alignr 10}''${addr ${hardwareCfg.networkInterface}}''${color}
     #''${goto 10}Network''${alignr 10 10}SSID: ''${wireless_essid ${hardwareCfg.networkInterface}}''${color}
     #''${goto 10}Signal:''${goto 70}''${color}''${wireless_link_bar wlan0}''${color}''${alignr 10 10}''${wireless_link_qual_perc ${hardwareCfg.networkInterface}}%''${color}
-    #''${goto 10}''${font}External: ''${font ${font_header3}}''${alignr 10 10}''${execi 600 curl ipinfo.io/ip}''${color}
+    #''${goto 10}''${font}External: ''${font ${font_header3}}''${alignr 10 10}''${execi ${long_interval_secs} curl ipinfo.io/ip}''${color}
     ''${goto 10}''${font}Up Spd:   ''${color2}''${upspeed ${hardwareCfg.networkInterface}}''${goto 170}''${color}Down Spd: ''${alignr 10}''${color2}''${downspeed ${hardwareCfg.networkInterface}}''${color}
     ''${goto 10}Total Up: ''${color2}''${totalup ${hardwareCfg.networkInterface}}''${goto 170}''${color}Total Dn: ''${alignr 10}''${color2}''${totaldown ${hardwareCfg.networkInterface}}''${color}
     ''${goto 15}''${color5}''${upspeedgraph ${hardwareCfg.networkInterface} 20,140 ${colour_orange} ${colour_pinkred} -t}  ''${alignr 10} ''${color5}''${downspeedgraph ${hardwareCfg.networkInterface} 20,140 ${colour_orange} ${colour_pinkred} -t}'';
@@ -264,7 +268,7 @@ in
         ''${alignc}''${color6}''${font ${font_header3_unbold}}''${exec cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //' -e 's/ @ .*//' | uniq }''${color} @ ''${color6}''${freq_g 1}GHz''${font}
         ${conky_avg_cpu_temp_str}
         ''${goto 10}''${color}Threads/Cores: ''${alignr 10}''${color6}''${exec cat /proc/cpuinfo | grep 'core id' | wc -l}''${color}''${font}
-        ''${goto 10}''${color}Active Governor: ''${alignr 10}''${color6}''${execi 1 cut -b 1-20 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor}''${color}''${font}
+        ''${goto 10}''${color}Active Governor: ''${alignr 10}''${color6}''${execi ${short_interval_secs} cut -b 1-20 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor}''${color}''${font}
         #Cores
         ${conky_each_cpu_core_str {cNum1=1; cNum2=2;}}
         ${conky_each_cpu_core_str {cNum1=3; cNum2=4;}}
