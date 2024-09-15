@@ -5,7 +5,12 @@
       type = lib.types.nullOr (lib.types.enum [ "arch" "ubuntu" ]);
       # TODO: only support arch for now
       example = "arch";
-      description = "which distro the current linux is running on";
+      description = ''which distro the current linux is running on
+      NOTE: ARCHLINUX installs uses checkupdates to check for updates in the Archlinux Repos, reporting will be 0 if checkupdates is not installed.
+
+      To install it, go ahead and run the following command:
+      pacman -S pacman-contrib
+      '';
     };
   };
   options.systemHardwareInfo = {
