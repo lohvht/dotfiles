@@ -100,7 +100,7 @@ let
 
   conky_avg_cpu_temp_str = if hardwareCfg.cpuMake == null then "#" else
   let
-    after_pipe_cmd = if hardwareCfg.cpuMake == "ryzen" then "grep 'Tctl:' | sed -e 's/Tctl:\s*//'" else "grep 'Package id' | awk '{print $4}'";
+    after_pipe_cmd = if hardwareCfg.cpuMake == "ryzen" then "grep 'Tctl:' | sed -e 's/  :\s*//'" else "grep 'Package id' | awk '{print $4}'";
   in
   "\${goto 10}\${color}Average Temperature: \${alignr 10}\${color6}\${execi ${short_interval_secs} ${pkgs.lm_sensors}/bin/sensors | ${after_pipe_cmd}}\${color}";
 
@@ -300,12 +300,9 @@ in
         ${conky_avg_cpu_temp_str}
         ''${goto 10}''${color}Threads/Cores: ''${alignr 10}''${color6}''${exec cat /proc/cpuinfo | grep 'core id' | wc -l}''${color}''${font}
         ''${goto 10}''${color}Active Governor: ''${alignr 10}''${color6}''${execi ${short_interval_secs} cut -b 1-20 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor}''${color}''${font}
-        #Cores
-        ${conky_each_cpu_core_str {cNum1=1; cNum2=2;}}
-        ${conky_each_cpu_core_str {cNum1=3; cNum2=4;}}
-        ${conky_each_cpu_core_str {cNum1=5; cNum2=6;}}
         # top processes
         ''${goto 10}''${color}Current Average CPU Load: ''${alignr 10}''${color6}''${cpu cpu0}%
+        ''${goto 15}''${color5}''${cpugraph 0 20,280 ${colour_orange} ${colour_pinkred} -t}
         ''${goto 10}''${color1}''${top name 1}''${alignc}''${color2}''${top pid 1}''${alignr 10}''${color}''${top cpu 1}%
         ''${goto 10}''${color1}''${top name 2}''${alignc}''${color2}''${top pid 2}''${alignr 10}''${color}''${top cpu 2}%
         ''${goto 10}''${color1}''${top name 3}''${alignc}''${color2}''${top pid 3}''${alignr 10}''${color}''${top cpu 3}%
