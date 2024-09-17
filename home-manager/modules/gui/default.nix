@@ -57,6 +57,14 @@ in
         package = nextcloud_client_pkg;
         startInBackground = true;
       };
+      systemd.user.services.nextcloud-client = {
+        Unit = {
+          After = pkgs.lib.mkForce "graphical-session.target";
+        };
+        Service = {
+          Environment = pkgs.lib.mkForce "PATH=${config.home.profileDirectory}/bin:/usr/bin";
+        };
+      };
       # TODO: Find a way to nixify this without exposing too much
       # # See https://github.com/nextcloud/desktop/blob/71dbd1103f96ea909e79e8c2d4f87331b248d73a/doc/conffile.rst
       # # for configuration option
