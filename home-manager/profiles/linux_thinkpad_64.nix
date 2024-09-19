@@ -32,6 +32,7 @@
       communications.thunderbird.enable = true;
       communications.slack.enable = true;
       nextcloudClient.enable = true;
+      libreoffice.enable = true;
     };
     # cloudDevelopment.k8s.enable = true;
     # cloudDevelopment.terraform.enable = true;
