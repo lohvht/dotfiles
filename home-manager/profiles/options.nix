@@ -121,6 +121,7 @@
         thunderbird.enable = lib.mkEnableOption "install thunderbird email client";
         slack.enable = lib.mkEnableOption "Install slack";
       };
+      libreoffice.enable = lib.mkEnableOption "install libreoffice";
       nextcloudClient.enable = lib.mkEnableOption "install nextcloud client";
       development = {
         apiClient.enable = lib.mkEnableOption "install an API client, the current client used is `bruno`";

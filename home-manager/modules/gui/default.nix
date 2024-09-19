@@ -48,6 +48,13 @@ in
     ./conky.nix
   ];
   config = lib.mkIf cfg.enable (lib.mkMerge [
+    (lib.mkIf (pkgs.stdenv.isLinux && cfg.libreoffice.enable) {
+      home.packages = [
+        pkgs.libreoffice-qt
+        pkgs.hunspell
+        pkgs.hunspellDicts.en_GB-ise
+      ];
+    })
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.nextcloudClient.enable) {
       home.packages = [
         nextcloud_client_pkg
