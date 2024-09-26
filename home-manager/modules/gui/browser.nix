@@ -252,6 +252,8 @@ let
     firefox-addons.clearurls # attempt to remove tracking elements when clicking URLs
     # firefox-addons.bypass-paywalls-clean
     firefox-addons.old-reddit-redirect
+    firefox-addons.canvasblocker
+    firefox-addons.user-agent-string-switcher
   ];
 in
 {
