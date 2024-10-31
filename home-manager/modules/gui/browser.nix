@@ -7,6 +7,9 @@ let
   inherit (pkgs.nur.repos.rycee) firefox-addons;
 
   ffcommon_settings = {
+    # Attempt to fix sporadic inability to load youtube videos
+    # due to codec
+    "media.mediasource.vp9.enabled" = false;
     "browser.tabs.inTitlebar" = 0;
     "gfx.webrender.all" = true;
     "media.ffmpeg.vaapi.enabled" = true;
