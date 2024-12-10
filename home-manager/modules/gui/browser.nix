@@ -177,7 +177,7 @@ let
     "privacy.clearOnShutdown.siteSettings" = true;
   };
   # For the default profile, we will do dynamic native tabs for sidebery, as highlighted here
-  # https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)
+  # https://github.com/mbnuqw/sidebery/wiki/Firefox-Styles-Snippets-(via-userChrome.css)#completely-hide-native-tabs-strip
   # Extra sidebery styles we apply here too, usually taken here:
   # https://github.com/mbnuqw/sidebery/wiki/Sidebery-Styles-Snippets
   firefox_userchrome = builtins.readFile ./firefox-userchrome.css;
@@ -239,10 +239,6 @@ let
   #       which the wrapper doesnt have.
   custom_firefox_pkg = guilib.nixGLWrapOpts wrapped_firefox_pkg { binSuffix = "-nixGL"; };
 
-  # This needs to be set also via Sidebery Settings > Help > Preface Value
-  # Ensure that the sidebery export has this value
-  side_bery_preface_value = "​";
-
   extensions = [
     firefox-addons.ublock-origin # adblocker
     firefox-addons.decentraleyes # Protects you against tracking through "free", centralised, content delivery
@@ -251,11 +247,9 @@ let
     firefox-addons.skip-redirect # attempt to skip multiple redirects by redirecting to final destination directly
     firefox-addons.sidebery # tab mgmt
     firefox-addons.plasma-integration # KDE plasma integration
-    firefox-addons.don-t-fuck-with-paste # Restore Copy/Paste for websites that mess around with those
     firefox-addons.clearurls # attempt to remove tracking elements when clicking URLs
     # firefox-addons.bypass-paywalls-clean
     firefox-addons.old-reddit-redirect
-    firefox-addons.canvasblocker
     firefox-addons.user-agent-string-switcher
   ];
 in
