@@ -56,7 +56,7 @@ let
               ''${alignc}''${color6}''${font ${font_header3_unbold}}''${exec ${powerSupply "model_name"}} ''${exec ${powerSupply "technology"}} ''${exec ${powerSupply "type"}}''${font}''${color}
               ''${goto 10}''${color}Capacity: ''${color6}''${execi ${short_interval_secs} ${powerSupply "capacity"}}%''${color}''${goto 170}''${color}Cap. Lvl: ''${alignr 10}''${color6}''${execi ${short_interval_secs} ${powerSupply "capacity_level"}}''${color}
               ''${goto 10}''${color}Battery Life: ''${color6}''${execi ${short_interval_secs} ${powerSupplyUeventRatio "POWER_SUPPLY_ENERGY_NOW" "POWER_SUPPLY_POWER_NOW" " Hrs" "N/A"}}''${color}''${goto 170}''${color}Usage: ''${alignr 10}''${color6}''${execi ${short_interval_secs} ${powerSupply "power_now"} | awk '{printf "%.2f", $1 / 1000000}'}W''${color}
-              ''${goto 10}''${color}Status: ''${color6}''${execi ${short_interval_secs} ${powerSupply "status"}}''${color}''
+              ''${goto 10}''${color}Status: ''${color6}''${execi ${short_interval_secs} ${powerSupply "status"}}''${color}''${color}''${goto 170}''${color}Cycle Counts: ''${alignr 10}''${color6}''${execi ${long_interval_secs} ${powerSupply "cycle_count"}}''${color}''
         )
         hardwareCfg.batteries;
 
