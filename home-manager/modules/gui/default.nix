@@ -133,6 +133,27 @@ in
         pkgs.bruno
       ];
     })
+    # TODO: lohvht@22dec2024: See if possible to setup different language input keyboard (IME/IMF)
+    # support via nix exclusively.
+    # ATM I followed this guide for fcitx5 + KDE Plasma on Wayland integration:
+    # https://wiki.archlinux.org/title/Input_method
+    # https://wiki.archlinux.org/title/Fcitx5#Integration
+    #
+    # Install these packages
+    # ```
+    # sudo pacman -S fcitx5 fcitx5-configtool
+    # sudo pacman -S fcitx5-chinese-addons fcitx5-pinyin-zhwiki  # Chinese / Pinyin
+    # yay -S fcitx5-mozc-ut # Japanese, select mozc-ut for wider JP dictionary
+    # ```
+    # Export this env var as stated here: https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma
+    #
+    # ```
+    # export XMODIFIERS=@im=fcitx
+    # ```
+    #
+    # Then go ahead to KDE, Settings > Keyboard > Virtual Keyboard and select either one of the fcitx5 options
+    # After restarting, you should be able to select input method from the KDE settings
+    #
     {
       home.packages = [
         pkgs.nixgl.auto.nixGLDefault
