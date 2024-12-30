@@ -140,6 +140,11 @@ let
     "security.pki.sha1_enforcement_level" = 1;
     "security.remote_settings.crlite_filters.enabled" = true;
     "security.ssl.treat_unsafe_negotiation_as_broken" = true;
+    # NOTE: lohvht@30dec2024: attempted bunch of fixes to try to fix google services
+    # slowness in FF > 128, including youtube.
+    # Taken from: https://old.reddit.com/r/firefox/comments/1em9uuh/firefox_128_issues_with_google_services/
+    # "network.http.http3.enable" = false;
+    "network.http.http3.enable_0rtt" = false;
     "security.tls.enable_0rtt_data" = false;
     "signon.rememberSignons" = false;
     "toolkit.coverage.endpoint.base" = "";
