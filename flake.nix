@@ -37,7 +37,7 @@
       # NOTE: If you want to use packages exported from other flakes, add their overlays here.
       # They will be added to your 'pkgs'
       default_overlays = {
-        nur = nur.overlay;
+        nur = nur.overlays.default;
         nixgl = nixgl.overlay;
         default = import ./overlays;
       };
