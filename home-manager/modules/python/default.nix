@@ -93,27 +93,45 @@ in
         extensions = [
           pkgs.vscode-extensions.ms-toolsai.jupyter
           pkgs.vscode-extensions.ms-toolsai.jupyter-renderers
-          pkgs.vscode-extensions.ms-python.isort
-          pkgs.vscode-extensions.ms-python.black-formatter
-          pkgs.vscode-extensions.ms-python.python
+          # pkgs.vscode-extensions.ms-python.isort
+          # pkgs.vscode-extensions.ms-python.black-formatter
+          # pkgs.vscode-extensions.ms-python.python
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             publisher = "ms-python";
+            name = "isort";
+            version = "2023.13.13171013";
+            sha256 = "1dsw2kb8klq84f2gn7v6fhj2w80idx1glcnszasgwmngfa5ps5ah";
+          }
+          {
+            publisher = "ms-python";
+            name = "black-formatter";
+            version = "2024.5.13171011";
+            sha256 = "1c9ss4qs12clv783sxsrs11ayj0h2ymp08czcl72h0p363dlk92q";
+          }
+          {
+            publisher = "ms-python";
+            name = "python";
+            version = "2024.23.2025011501";
+            sha256 = "1wh8lzq6r4si74jkbgz57njh6m88hvrvxa45wxr7i1ajfzynif4h";
+          }
+          {
+            publisher = "ms-python";
             name = "mypy-type-checker";
-            version = "2023.9.11861016";
-            sha256 = "1s6yx62i5cpn250cp7059afflv0ic8pg9appkfvycqlagf9gxc8y";
+            version = "2024.1.13171012";
+            sha256 = "0dslmrhp7flmp6kd69zmpimmayd0n8r5k74c0v81rb1v3wnblvhz";
           }
           {
             publisher = "ms-python";
             name = "pylint";
-            version = "2023.11.13481007";
-            sha256 = "1nr6554sw8iadjd6sn0l45ad0nsrlh0fhch23zrrhdjr7nyvlzxf";
+            version = "2024.1.13511018";
+            sha256 = "0hb4zhzp8bk0d8188nc0qa0jlf8frxslm6ayg0bk95ml6xmkbw9a";
           }
           {
             publisher = "ms-python";
             name = "flake8";
-            version = "2023.13.11511011";
-            sha256 = "17y7pkxx6aiavgmhk6hpmivfizimq9c3gcsp5psz5x6c17szv0ww";
+            version = "2023.13.13171014";
+            sha256 = "1ia5v90z3p6hzxx4apdvr6czdgg0v0f7fbmahp8702czr9q1p6ax";
           }
         ];
       };

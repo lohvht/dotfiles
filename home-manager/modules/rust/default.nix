@@ -47,7 +47,6 @@ in
               "source.organizeImports" = "explicit";
             };
             "editor.formatOnType" = true;
-            "editor.formatOnSave" = true;
           };
         };
         extensions = [

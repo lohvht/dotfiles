@@ -188,6 +188,7 @@ in
           };
           "shellcheck.run" = "onSave";
           "git.inputValidation" = true;
+          "editor.formatOnSaveMode" = "file";
         };
         extensions = [
           pkgs.vscode-extensions.ms-vscode.live-server
