@@ -111,7 +111,7 @@ in
         enable = true;
         package = pkgs.vscodium;
         mutableExtensionsDir = true;
-        keybindings = [
+        profiles.default.keybindings = [
           { key = "ctrl+alt+up"; command = "editor.action.insertCursorAbove"; when = "editorTextFocus"; }
           { key = "ctrl+alt+down"; command = "editor.action.insertCursorBelow"; when = "editorTextFocus"; }
         ] ++ (if pkgs.stdenv.isDarwin then [
@@ -119,7 +119,7 @@ in
         ] else [
           { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when = ""; }
         ]);
-        userSettings = {
+        profiles.default.userSettings = {
           "window.title" = "\${activeEditorMedium}\${separator}\${rootName}";
           "workbench.editor.labelFormat" = "medium";
           "remote.SSH.useFlock" = false;
@@ -188,9 +188,8 @@ in
           };
           "shellcheck.run" = "onSave";
           "git.inputValidation" = true;
-          "editor.formatOnSaveMode" = "file";
         };
-        extensions = [
+        profiles.default.extensions = [
           pkgs.vscode-extensions.ms-vscode.live-server
           pkgs.vscode-extensions.eamodio.gitlens
           pkgs.vscode-extensions.ms-azuretools.vscode-docker

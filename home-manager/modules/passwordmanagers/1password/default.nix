@@ -19,8 +19,8 @@ in
       home.packages = [
         pkgs._1password-gui
       ];
-      programs.firefox.profiles.default.extensions = extensions;
-      programs.firefox.profiles.private.extensions = extensions;
+      programs.firefox.profiles.default.extensions.packages = extensions;
+      programs.firefox.profiles.private.extensions.packages = extensions;
     })
   ]);
 }

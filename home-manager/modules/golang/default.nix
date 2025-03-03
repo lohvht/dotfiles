@@ -30,7 +30,7 @@ in
     }
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {
-        userSettings = {
+        profiles.default.userSettings = {
           "go.formatTool" = "goimports";
           "go.useLanguageServer" = true;
           "go.toolsManagement.autoUpdate" = true;
@@ -64,7 +64,7 @@ in
             "apiVersion" = 2;
           };
         };
-        extensions = [
+        profiles.default.extensions = [
           pkgs.vscode-extensions.golang.go
         ];
       };

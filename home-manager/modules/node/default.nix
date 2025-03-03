@@ -68,7 +68,7 @@ in
     }
     (lib.mkIf (isVSCodeEnable && cfg.includeFrontendTools) {
       programs.vscode = {
-        extensions = [
+        profiles.default.extensions = [
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             publisher = "ecmel";

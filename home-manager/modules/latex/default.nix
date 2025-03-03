@@ -19,7 +19,7 @@ in
     }
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {
-        userSettings = {
+        profiles.default.userSettings = {
           "latex-workshop.latex.autoBuild.run" = "onFileChange";
           "latex-workshop.view.pdf.viewer" = "browser";
           "latex-workshop.latex.outDir" = "%DIR%/out";
@@ -80,7 +80,7 @@ in
             }
           ];
         };
-        extensions = [
+        profiles.default.extensions = [
           pkgs.vscode-extensions.james-yu.latex-workshop
         ];
       };

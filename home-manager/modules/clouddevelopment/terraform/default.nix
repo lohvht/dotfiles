@@ -24,7 +24,7 @@ in
     }
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {
-        extensions = [
+        profiles.default.extensions = [
           pkgs.vscode-extensions.hashicorp.terraform
           pkgs.vscode-extensions.hashicorp.hcl
         ];

@@ -76,7 +76,7 @@ in
     }
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {
-        userSettings = {
+        profiles.default.userSettings = {
           "files.exclude"."**/*.pyc" = true;
           "workbench.editorAssociations"."*.ipynb" = "jupyter-notebook";
           "notebook.cellToolbarLocation" = {
@@ -90,7 +90,7 @@ in
             "editor.insertSpaces" = true;
           };
         };
-        extensions = [
+        profiles.default.extensions = [
           pkgs.vscode-extensions.ms-toolsai.jupyter
           pkgs.vscode-extensions.ms-toolsai.jupyter-renderers
           # pkgs.vscode-extensions.ms-python.isort

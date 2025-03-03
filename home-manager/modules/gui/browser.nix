@@ -303,14 +303,14 @@ in
           name = "Default";
           settings = ffcommon_settings;
           isDefault = true;
-          extensions = extensions;
+          extensions.packages = extensions;
           userChrome = firefox_userchrome;
         };
         profiles.private = {
           id = 1;
           name = "Private";
           settings = ffcommon_settings // ffprivate_settings;
-          extensions = extensions;
+          extensions.packages = extensions;
           userChrome = firefox_userchrome;
         };
       };
