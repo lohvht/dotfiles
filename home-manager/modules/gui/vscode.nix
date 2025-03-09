@@ -165,6 +165,23 @@ in
               "fontWeight" = "bold";
             }
           ];
+          "todohighlight.include" = [
+            "**/*.js"
+            "**/*.jsx"
+            "**/*.ts"
+            "**/*.tsx"
+            "**/*.html"
+            "**/*.css"
+            "**/*.scss"
+            "**/*.php"
+            "**/*.rb"
+            "**/*.txt"
+            "**/*.mdown"
+            "**/*.py"
+            "**/*.rs"
+            "**/*.go"
+            "**/*.md"
+          ];
           "workbench.colorCustomizations" = { };
           "editor.tokenColorCustomizations" = {
             "comments" = "#278a06";
