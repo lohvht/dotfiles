@@ -34,7 +34,7 @@ in
             Actions=new-empty-window
             Categories=Utility;TextEditor;Development;IDE
             Comment=Code Editing. Redefined.
-            Exec=codium %F
+            Exec=${pkgs.vscodium}/bin/codium %F
             GenericName=Text Editor
             Icon=${pkgs.vscodium}/share/pixmaps/code.png
             Keywords=vscode
@@ -46,7 +46,7 @@ in
             Version=1.4
 
             [Desktop Action new-empty-window]
-            Exec=codium --new-window %F
+            Exec=${pkgs.vscodium}/bin/codium --new-window %F
             Icon=${pkgs.vscodium}/share/pixmaps/code.png
             Name=New Empty Window
           '';

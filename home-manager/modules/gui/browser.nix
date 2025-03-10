@@ -268,7 +268,7 @@ in
           text = ''
             [Desktop Entry]
             Categories=Network;WebBrowser
-            Exec=firefox-nixGL -P Default %U
+            Exec=${custom_firefox_pkg}/bin/firefox-nixGL -P Default %U
             GenericName=Web Browser
             Icon=${custom_firefox_pkg}/share/icons/hicolor/128x128/apps/firefox.png
             MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp
@@ -281,7 +281,7 @@ in
             [Desktop Action private_window]
             Name=Open a Private Window
             Icon=${custom_firefox_pkg}/share/icons/hicolor/128x128/apps/firefox.png
-            Exec=firefox-nixGL -P Private %U
+            Exec=${custom_firefox_pkg}/bin/firefox-nixGL -P Private %U
           '';
           executable = true;
         };
