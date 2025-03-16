@@ -69,25 +69,9 @@ in
     (lib.mkIf (isVSCodeEnable && cfg.includeFrontendTools) {
       programs.vscode = {
         profiles.default.extensions = [
+          pkgs.vscode-extensions.ecmel.vscode-html-css
+          pkgs.vscode-extensions.vue.volar
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            publisher = "ecmel";
-            name = "vscode-html-css";
-            version = "2.0.10";
-            sha256 = "0a2czl36nq32jp6bafda3a0x0awm2d3agkvcn9vn0hkp37n7lh3q";
-          }
-          {
-            publisher = "mrmlnc";
-            name = "vscode-scss";
-            version = "0.10.0";
-            sha256 = "08kdvg4p0aysf7wg1qfbri59cipllgf69ph1x7aksrwlwjmsps12";
-          }
-          {
-            publisher = "vue";
-            name = "volar";
-            version = "2.0.26";
-            sha256 = "04j8x740lp15r28j9jm7sl30g2qn53nm9lyblvq59sxpa7i57qhi";
-          }
         ];
       };
     })
