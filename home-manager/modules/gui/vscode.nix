@@ -223,6 +223,7 @@ in
           pkgs.vscode-extensions.zxh404.vscode-proto3
           pkgs.vscode-extensions.vadimcn.vscode-lldb
           pkgs.vscode-extensions.timonwong.shellcheck
+          pkgs.vscode-extensions.usernamehw.errorlens
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # TODO: Replace the whole of pkgs.vscode-utils.extensionsFromVscodeMarketplace
           # block + extensions above with this:
