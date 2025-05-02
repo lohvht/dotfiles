@@ -60,12 +60,15 @@ in
     (lib.mkIf isVSCodeEnable {
       programs.vscode = {
         profiles.default.userSettings = {
-          "ruby.useBundler" = true; #run non-lint commands with bundle exec
-          "solargraph.useBundler" = false;
-          "ruby.useLanguageServer" = true; # use the internal language server (see below)
-          "ruby.intellisense" = "rubyLocate";
+          "[ruby]" = {
+            "editor.defaultFormatter" = "Shopify.ruby-lsp";
+            "editor.formatOnSave" = true;
+            "editor.insertSpaces" = true;
+            "editor.semanticHighlighting.enabled" = true;
+          };
         };
         profiles.default.extensions = [
+          pkgs.vscode-extensions.shopify.ruby-lsp
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "endwise";
@@ -79,24 +82,6 @@ in
             version = "0.2.6";
             sha256 = "16nmbg3p1z1mr3027m46j8m09g1l3w2d529g27aydw5i1v6d84f4";
           }
-          {
-            publisher = "castwide";
-            name = "solargraph";
-            version = "0.24.0";
-            sha256 = "0pcd4gwzg4rla5mz6kj4dqq30pyvsv6290an15yr89wxwcvk6qzf";
-          }
-          {
-            name = "vscode-ruby";
-            publisher = "wingrunr21";
-            version = "0.28.0";
-            sha256 = "1gab5cka87zw7i324rz9gmv423rf5sylsq1q1dhfkizmrpwzaxqz";
-          }
-          # {
-          #   name = "ruby";
-          #   publisher = "rebornix";
-          #   version = "0.28.1";
-          #   sha256 = "179g7nc6mf5rkha75v7rmb3vl8x4zc6qk1m0wn4pgylkxnzis18w";
-          # }
         ];
       };
     })
