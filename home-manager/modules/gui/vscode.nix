@@ -131,7 +131,7 @@ in
           "terminal.integrated.fontFamily" = "MesloLGS NF";
           "terminal.integrated.fontSize" = 12;
           "workbench.colorTheme" = "monokai-charcoal (white)";
-          "terminal.integrated.enableMultiLinePasteWarning" = false;
+          "terminal.integrated.enableMultiLinePasteWarning" = "never";
           # "workbench.iconTheme" = "Monokai Pro (Filter Spectrum) Icons";
           # "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
           "search.followSymlinks" = false;
