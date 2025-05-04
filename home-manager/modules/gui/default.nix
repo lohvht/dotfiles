@@ -96,7 +96,7 @@ in
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable) {
       programs.mangohud = {
         enable = true;
-        enableSessionWide = true;
+        enableSessionWide = false;
       };
     })
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable && cfg.gaming.animeGameLauncherRunnerName != null) {
