@@ -224,6 +224,7 @@ in
           pkgs.vscode-extensions.vadimcn.vscode-lldb
           pkgs.vscode-extensions.timonwong.shellcheck
           pkgs.vscode-extensions.usernamehw.errorlens
+          pkgs.vscode-extensions.jgclark.vscode-todo-highlight
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # TODO: Replace the whole of pkgs.vscode-utils.extensionsFromVscodeMarketplace
           # block + extensions above with this:
@@ -253,12 +254,6 @@ in
             name = "vscode-coverage-gutters";
             version = "2.11.1";
             sha256 = "122558k6jkxmhahh8cs3qjznadydwm5286m02bg5q0k4j0bk9vrm";
-          }
-          {
-            publisher = "jgclark";
-            name = "vscode-todo-highlight";
-            version = "2.0.4";
-            sha256 = "18zm1w4ziq3i7fn2rcd095va7nqnbdmsvr82lj27s33zrd2wwzzr";
           }
           {
             name = "monokai-charcoal-high-contrast";
