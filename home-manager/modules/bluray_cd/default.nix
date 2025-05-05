@@ -4,5 +4,6 @@
     ./abcde
     ./handbrake
     ./makemkv
+    ./mkvtoolnix
   ];
 }

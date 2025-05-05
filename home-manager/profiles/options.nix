@@ -190,6 +190,7 @@
         For more info regarding this, read the FAQ about BETA and permanent keys
         https://forum.makemkv.com/forum/viewtopic.php?f=1&t=20579
       '';
+      mkvtoolnix.enable = lib.mkEnableOption "enable mkv editing tools"; 
       handbrake.enable = lib.mkEnableOption "enable transcoder tools";
       abcde.enable = lib.mkEnableOption "enable audio CD ripping tool abcde";
     };
