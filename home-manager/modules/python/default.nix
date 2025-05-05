@@ -16,12 +16,25 @@ let
     # workon {venv_name}
     # deactivate
 
-    # init virtualenvwrapper
-    . virtualenvwrapper.sh
-    if command -v pyenv 1>/dev/null 2>&1; then
-      eval "$(pyenv init -)"
-    fi
+    # NOTE: Do not use pyenv init as we don't want shims support, only
+    #       want python management.
+    # if command -v pyenv 1>/dev/null 2>&1; then
+    #   eval "$(pyenv init -)"
+    # fi
     ########## Module Python Init Extra End ##########
+  '';
+
+  venvwrapper = pkgs.python3Packages.virtualenvwrapper;
+  virtualenv_wrapper_path_modification_removed = pkgs.runCommand "${venvwrapper.name}-wrapper" { } ''
+    mkdir $out
+    # ln -s ${venvwrapper}/* $out
+    # rm $out/bin
+    mkdir $out/bin
+    for bin in ${venvwrapper}/bin/virtualenvwrapper.sh ${venvwrapper}/bin/virtualenvwrapper_lazy.sh; do
+      wrapped_bin="$out/bin/$(basename $bin)"
+      grep -v '^export PATH=' "$bin" > $wrapped_bin
+      chmod +x $wrapped_bin
+    done
   '';
 in
 {
@@ -39,23 +52,13 @@ in
         # makes pip detect an active virtualenv and install to it
         PIP_RESPECT_VIRTUALENV = "true";
         VIRTUALENVWRAPPER_PYTHON = "${pkgs.python3}/bin/python";
+        VIRTUALENVWRAPPER_VIRTUALENV = "${pkgs.virtualenv}/bin/virtualenv";
         PYTHONDONTWRITEBYTECODE = 1;
       };
       home.packages = [
-        pkgs.python3
-        pkgs.python3Packages.pip
-        pkgs.python3Packages.virtualenv
-        pkgs.python3Packages.virtualenvwrapper
+        pkgs.pyenv
+        virtualenv_wrapper_path_modification_removed
       ];
-      home.file."${PYENV_ROOT}" = {
-        recursive = true;
-        source = pkgs.fetchFromGitHub {
-          owner = "pyenv";
-          repo = "pyenv";
-          rev = "v2.3.3";
-          sha256 = "0a50nk6nmn19yxf5qxmc332wfbsvyn1yxhvn4imqy181fkwq2wlg";
-        };
-      };
       home.shellAliases = {
         #######
         # pyenv virtualenvs
@@ -66,11 +69,12 @@ in
         py-version-uninstall = "pyenv uninstall ";
       };
       programs.bash.initExtra = shell_extracommon_str;
-      programs.zsh.initContent = shell_extracommon_str;
+      programs.zsh.initContent = lib.mkBefore shell_extracommon_str;
       programs.zsh.oh-my-zsh.plugins = [
         # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenv
         "virtualenv"
         # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenvwrapper
+        # NOTE: This will also do the virtualenvwrapper init required.
         "virtualenvwrapper"
       ];
     }
