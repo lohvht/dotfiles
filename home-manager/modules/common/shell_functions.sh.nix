@@ -85,6 +85,10 @@ builtins.concatStringsSep "" (
         git fetch origin -f "$branch":"$branch"
       }
 
+      urlencode() {
+        printf "%s" "$1" | ${pkgs.python3}/bin/python -c 'from urllib.parse import urlunsplit, urlsplit, quote, unquote; from sys import stdin; print(urlunsplit(tuple(quote(unquote(p)) for p in urlsplit(stdin.read()))))'
+      }
+
       gnb() {
         branch_to_checkout=$1;
         shift;
