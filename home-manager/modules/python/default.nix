@@ -66,7 +66,7 @@ in
         py-version-uninstall = "pyenv uninstall ";
       };
       programs.bash.initExtra = shell_extracommon_str;
-      programs.zsh.initExtra = shell_extracommon_str;
+      programs.zsh.initContent = shell_extracommon_str;
       programs.zsh.oh-my-zsh.plugins = [
         # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/virtualenv
         "virtualenv"

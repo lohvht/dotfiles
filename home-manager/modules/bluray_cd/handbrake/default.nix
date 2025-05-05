@@ -20,7 +20,7 @@ in
         custom_handbrake_pkg
       ];
       programs.bash.initExtra = shell_extracommon_str;
-      programs.zsh.initExtra = shell_extracommon_str;
+      programs.zsh.initContent = shell_extracommon_str;
     }
   ]);
 }

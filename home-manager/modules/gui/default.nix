@@ -101,7 +101,7 @@ in
     })
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable && cfg.gaming.animeGameLauncherRunnerName != null) {
       programs.bash.initExtra = shell_extracommon_str;
-      programs.zsh.initExtra = shell_extracommon_str;
+      programs.zsh.initContent = shell_extracommon_str;
     })
     (lib.mkIf cfg.communications.ms_teams.enable {
       home.packages = [

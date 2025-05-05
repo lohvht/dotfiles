@@ -87,7 +87,7 @@ in
         [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
         ########## VSCODE GUI INTEGRATION END ##########
       '';
-      programs.zsh.initExtra = ''
+      programs.zsh.initContent = ''
         ########## VSCODE GUI INTEGRATION START ##########
         [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
         ########## VSCODE GUI INTEGRATION END ##########

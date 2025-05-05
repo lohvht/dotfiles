@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable (lib.mkMerge [
     {
       programs.bash.initExtra = shell_extracommon_str;
-      programs.zsh.initExtra = shell_extracommon_str;
+      programs.zsh.initContent = shell_extracommon_str;
     }
     (lib.mkIf isGUIEnabled {
       home.packages = [

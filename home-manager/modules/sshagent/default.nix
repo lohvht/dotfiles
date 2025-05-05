@@ -23,7 +23,7 @@ in
   config = lib.mkMerge [
     {
       programs.bash.initExtra = shell_extracommon_str;
-      programs.zsh.initExtra = shell_extracommon_str;
+      programs.zsh.initContent = shell_extracommon_str;
       home.file.".local/bin/ssh-find-agent.sh" = {
         text = builtins.readFile ./ssh-find-agent.sh;
         executable = true;

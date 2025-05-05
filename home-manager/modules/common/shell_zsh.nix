@@ -123,7 +123,7 @@ in
           if [ -e ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh ]; then . ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
         '';
 
-        initExtraFirst = ''
+        initContent = lib.mkBefore ''
           ########## Module Common Init ExtraTop Start ##########
           # Extra Init Shell Commands
           ${shell_extracommoninit_str}
@@ -139,8 +139,11 @@ in
           fi
           ########## Module Common Init ExtraTop End ##########
         '';
-
-        initExtra = ''
+      };
+    }
+    {
+      programs.zsh = {
+        initContent = ''
           ########## Module Common Init Extra Start ##########
           # Extra shell opts for zsh
           ${zshSetOptsStr}

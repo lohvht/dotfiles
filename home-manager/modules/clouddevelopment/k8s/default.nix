@@ -50,7 +50,7 @@ in
         k = "kubectl";
       };
       programs.bash.initExtra = shell_extracommon_str;
-      programs.zsh.initExtra = shell_extracommon_str;
+      programs.zsh.initContent = shell_extracommon_str;
     }
     (lib.mkIf cfg.argocd.enable {
       home.packages = [
@@ -58,7 +58,7 @@ in
         pkgs.argo-rollouts
       ];
       programs.bash.initExtra = argocd_competions_str;
-      programs.zsh.initExtra = argocd_competions_str;
+      programs.zsh.initContent = argocd_competions_str;
     })
 
   ]);
