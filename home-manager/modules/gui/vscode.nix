@@ -224,7 +224,6 @@ in
           pkgs.vscode-extensions.vadimcn.vscode-lldb
           pkgs.vscode-extensions.timonwong.shellcheck
           pkgs.vscode-extensions.usernamehw.errorlens
-          pkgs.vscode-extensions.jgclark.vscode-todo-highlight
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # TODO: Replace the whole of pkgs.vscode-utils.extensionsFromVscodeMarketplace
           # block + extensions above with this:
@@ -248,6 +247,12 @@ in
             name = "open-remote-ssh";
             version = "0.0.46";
             sha256 = "0hrxdivwspg8xyf3g08rnhwa2m91v5pr7clp9yd4aicw3psrx007";
+          })
+          (mkOpenVSXExt {
+            publisher = "wayou";
+            name = "vscode-todo-highlight";
+            version = "1.0.5";
+            sha256 = "1qihzvsghd7hrnwdk7cwk4dx3hbzd1rkdg032z4rq90g3j0yy06w";
           })
           {
             publisher = "ryanluker";
