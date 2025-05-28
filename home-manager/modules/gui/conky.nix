@@ -235,7 +235,6 @@ in
       '';
       xdg.configFile."conky/conky.conf".text = ''
         conky.config = {
-          out_to_wayland = true,
           alignment = 'top_right',
           use_xft = true,
           xftalpha = 0.8,
@@ -252,7 +251,7 @@ in
           own_window_argb_visual = true,
           own_window_argb_value = 192,
           own_window_transparent = no,
-          own_window_type = 'dock',
+          own_window_type = 'normal',
           own_window_hints = 'undecorated,below,skip_taskbar,sticky,skip_pager',
           own_window_colour = '000000',
           draw_shades = no,
@@ -302,7 +301,7 @@ in
         ''${goto 10}''${color}Active Governor: ''${alignr 10}''${color6}''${execi ${short_interval_secs} cut -b 1-20 /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor}''${color}''${font}
         # top processes
         ''${goto 10}''${color}Current Average CPU Load: ''${alignr 10}''${color6}''${cpu cpu0}%
-        ''${goto 15}''${color5}''${cpugraph 0 20,280 ${colour_orange} ${colour_pinkred} -t}
+        ''${goto 15}''${color5}''${cpugraph 20,280 ${colour_orange} ${colour_pinkred} -t}
         ''${goto 10}''${color1}''${top name 1}''${alignc}''${color2}''${top pid 1}''${alignr 10}''${color}''${top cpu 1}%
         ''${goto 10}''${color1}''${top name 2}''${alignc}''${color2}''${top pid 2}''${alignr 10}''${color}''${top cpu 2}%
         ''${goto 10}''${color1}''${top name 3}''${alignc}''${color2}''${top pid 3}''${alignr 10}''${color}''${top cpu 3}%
