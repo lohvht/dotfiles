@@ -246,6 +246,7 @@ in
           no_buffers = true,
           imlib_cache_size = 0,
           cpu_avg_samples = 2,
+          xinerama_head = 1,
           own_window = true,
           own_window_class = 'Conky',
           own_window_argb_visual = true,
