@@ -229,7 +229,7 @@ in
         [Desktop Entry]
         Type=Application
         Name=conky
-        Exec=${pkgs.conky}/bin/conky --daemonize --pause=30
+        Exec=${pkgs.conky}/bin/conky --daemonize --pause=5
         StartupNotify=false
         Terminal=false
       '';
@@ -237,6 +237,7 @@ in
         conky.config = {
           alignment = 'top_right',
           use_xft = true,
+          background = true,
           xftalpha = 0.8,
           font = '${font_para}',
           text_buffer_size = 2048,
