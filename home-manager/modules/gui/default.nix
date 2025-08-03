@@ -40,6 +40,7 @@ let
     ########## Module Gaming Init Extra End ##########
   '';
   nextcloud_client_pkg = guilib.nixGLWrap pkgs.nextcloud-client;
+  obsidian_pkg = guilib.nixGLWrap pkgs.obsidian;
 in
 {
   imports = [
@@ -157,9 +158,19 @@ in
     {
       home.packages = [
         pkgs.nixgl.auto.nixGLDefault
-        pkgs.obsidian
+        obsidian_pkg
         pkgs.wxhexeditor
       ];
+      home.file = { } // guilib.desktopWrap {
+        desktopName = "Obsidian";
+        name = "obsidian";
+        mimeTypes = [ "x-scheme-handler/obsidian" ];
+        comment = "Knowledge base";
+        icon = "obsidian";
+        categories = [ "Office" ];
+        exec = "${obsidian_pkg}/bin/obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime %u";
+        type = "Application";
+      };
       xdg.systemDirs.data = [
         "/home/vloh/.local/share/flatpak/exports/share"
         "/var/lib/flatpak/exports/share"

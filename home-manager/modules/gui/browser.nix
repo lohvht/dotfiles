@@ -264,26 +264,22 @@ in
       home.file = {
         # NOTE: Do remember to do the sidebery import
         ".local/firefox-custom/sidebery-export.json".text = builtins.readFile ./firefox-sidebery-export.json;
-        ".local/share/applications/firefox.desktop" = {
-          text = ''
-            [Desktop Entry]
-            Categories=Network;WebBrowser
-            Exec=${custom_firefox_pkg}/bin/firefox-nixGL -P Default %U
-            GenericName=Web Browser
-            Icon=${custom_firefox_pkg}/share/icons/hicolor/128x128/apps/firefox.png
-            MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp
-            Name=Firefox
-            Type=Application
-            Version=1.4
-            Terminal=False
-            Actions=private_window;
-
-            [Desktop Action private_window]
-            Name=Open a Private Window
-            Icon=${custom_firefox_pkg}/share/icons/hicolor/128x128/apps/firefox.png
-            Exec=${custom_firefox_pkg}/bin/firefox-nixGL -P Private %U
-          '';
-          executable = true;
+      } // guilib.desktopWrap {
+        name = "firefox";
+        desktopName = "Firefox";
+        genericName = "Web Browser";
+        categories = [ "Network" "WebBrowser" ];
+        exec = "${custom_firefox_pkg}/bin/firefox-nixGL -P Default %u";
+        icon = "firefox";
+        mimeTypes = [ "text/html" "text/xml" "application/xhtml+xml" "application/vnd.mozilla.xul+xml" "x-scheme-handler/http" "x-scheme-handler/https" "x-scheme-handler/ftp" ];
+        type = "Application";
+        terminal = false;
+        actions = {
+          private-window = {
+            name = "Open a Private Window";
+            icon = "firefox";
+            exec = "${custom_firefox_pkg}/bin/firefox-nixGL -P Private %u";
+          };
         };
       };
       home.sessionVariables = {

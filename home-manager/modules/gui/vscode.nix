@@ -1,5 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }@inputs:
 let
+  guilib = import ./lib.nix inputs;
   # utility for openvsx extensions
   mkOpenVSXExt = { publisher, name, version, sha256 }: {
     inherit name publisher version;
@@ -14,6 +15,23 @@ let
   isVSCodeEnable = config.customHomeProfile.GUI.enable && config.customHomeProfile.GUI.vscode.enable;
   cfg = config.customHomeProfile.GUI.vscode;
   crUUID = if cfg.crashReporterUUID == null then "473f1188-f798-49bf-91b2-a80a8ab1a498" else cfg.crashReporterUUID;
+  vscode_pkg = pkgs.vscodium;
+  code_wrapper_alias = pkgs.writeScriptBin "code_wrapper" ''
+    exec ${vscode_pkg}/bin/codium "$@" --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
+  '';
+  shell_extracommon_str = ''
+    ########## Module VsCode Init Extra Start ##########
+    if [ "$TERM_PROGRAM" = "vscode" ]; then
+      if [ -n "$ZSH_VERSION" ]; then
+        . "$(code --locate-shell-integration-path zsh)"
+      elif [ -n "$BASH_VERSION" ]; then
+        . "$(code --locate-shell-integration-path bash)"
+      else
+        . "$(code --locate-shell-integration-path bash)"
+      fi
+    fi
+    ########## Module VsCode Init Extra End ##########
+  '';
 in
 {
   config = lib.mkIf isVSCodeEnable (lib.mkMerge [
@@ -28,30 +46,6 @@ in
     }
     (lib.mkIf pkgs.stdenv.isLinux {
       home.file = {
-        ".local/share/applications/Codium.desktop" = {
-          text = ''
-            [Desktop Entry]
-            Actions=new-empty-window
-            Categories=Utility;TextEditor;Development;IDE
-            Comment=Code Editing. Redefined.
-            Exec=${pkgs.vscodium}/bin/codium %F
-            GenericName=Text Editor
-            Icon=${pkgs.vscodium}/share/pixmaps/code.png
-            Keywords=vscode
-            MimeType=text/plain;inode/directory
-            Name=VSCodium
-            StartupNotify=true
-            StartupWMClass=vscodium
-            Type=Application
-            Version=1.4
-
-            [Desktop Action new-empty-window]
-            Exec=${pkgs.vscodium}/bin/codium --new-window %F
-            Icon=${pkgs.vscodium}/share/pixmaps/code.png
-            Name=New Empty Window
-          '';
-          executable = true;
-        };
         ".vscode-oss/argv.json" = {
           text = ''
             // This configuration file allows you to pass permanent command line arguments to VS Code.
@@ -79,19 +73,34 @@ in
             }
           '';
         };
+      } // guilib.desktopWrap {
+        actions = {
+          new-empty-window = {
+            exec = "${vscode_pkg}/bin/codium %F --new-window --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
+            icon = "vscodium";
+            name = "New Empty Window";
+          };
+        };
+        categories = [ "Utility" "TextEditor" "Development" "IDE" ];
+        comment = "Code Editing. Redefined.";
+        exec = "${vscode_pkg}/bin/codium %F --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
+        genericName = "Text Editor";
+        icon = "vscodium";
+        keywords = [ "vscode" ];
+        startupWMClass = "vscodium";
+        mimeTypes = [
+          "text/plain"
+          "inode/directory"
+        ];
+        name = "codium";
+        desktopName = "VSCode";
+        startupNotify = true;
+        type = "Application";
       };
     })
     {
-      programs.bash.initExtra = ''
-        ########## VSCODE GUI INTEGRATION START ##########
-        [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
-        ########## VSCODE GUI INTEGRATION END ##########
-      '';
-      programs.zsh.initContent = ''
-        ########## VSCODE GUI INTEGRATION START ##########
-        [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-        ########## VSCODE GUI INTEGRATION END ##########
-      '';
+      programs.bash.initExtra = shell_extracommon_str;
+      programs.zsh.initContent = shell_extracommon_str;
       home.file = {
         ".local/bin/update_installed_exts.sh".source = pkgs.fetchFromGitHub
           {
@@ -100,7 +109,8 @@ in
             rev = "8f868e154ca265e38481ab15d28429f7ff72e0e4";
             sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
           } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
-        ".local/bin/code".source = config.lib.file.mkOutOfStoreSymlink "${pkgs.vscodium}/bin/codium";
+        ".local/bin/code".source = config.lib.file.mkOutOfStoreSymlink "${code_wrapper_alias}/bin/code_wrapper";
+        ".local/bin/codium".source = config.lib.file.mkOutOfStoreSymlink "${code_wrapper_alias}/bin/code_wrapper";
       };
       # TODO: Attempt to try this number 3 option out in WSL as WSLg exists:
       # https://stackoverflow.com/questions/72011852/how-to-setup-windows-subsystem-linux-wsl-2-with-vscodium-on-windows-10
@@ -109,7 +119,7 @@ in
       };
       programs.vscode = {
         enable = true;
-        package = pkgs.vscodium;
+        package = vscode_pkg;
         mutableExtensionsDir = true;
         profiles.default.keybindings = [
           { key = "ctrl+alt+up"; command = "editor.action.insertCursorAbove"; when = "editorTextFocus"; }
