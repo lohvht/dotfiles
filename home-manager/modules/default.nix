@@ -16,6 +16,7 @@
     ./clouddevelopment
     ./passwordmanagers
     ./bluray_cd
+    ./music_cd
     ./databases
   ];
 }

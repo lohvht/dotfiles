@@ -192,8 +192,8 @@
       '';
       mkvtoolnix.enable = lib.mkEnableOption "enable mkv editing tools";
       handbrake.enable = lib.mkEnableOption "enable transcoder tools";
-      abcde.enable = lib.mkEnableOption "enable audio CD ripping tool abcde";
     };
+    musicCd.enable = lib.mkEnableOption "enable audio CD tool";
     cloudDevelopment = {
       k8s = {
         enable = lib.mkEnableOption "enable tools used for k8s development";

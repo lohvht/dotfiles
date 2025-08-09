@@ -33,8 +33,8 @@
     blurayCd = {
       mkvtoolnix.enable = true;
       handbrake.enable = true;
-      abcde.enable = true;
     };
+    musicCd.enable = true;
     # NOTE: Replace the usernames here
     git.userEmail = "vic94loh@hotmail.com";
     git.username = "Victor Loh";

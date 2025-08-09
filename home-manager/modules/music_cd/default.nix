@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.customHomeProfile.blurayCd.abcde;
+  cfg = config.customHomeProfile.musicCd;
   shell_extracommon_str = ''
-    ########## Module blurayCd.abcde Init Extra Start ##########
-    ########## Module blurayCd.abcde Init Extra End ##########
+    ########## Module musicCd Init Extra Start ##########
+    ########## Module musicCd Init Extra End ##########
   '';
 in
 {
@@ -11,6 +11,7 @@ in
     {
       home.packages = [
         pkgs.abcde
+        pkgs.picard
       ];
       home.shellAliases = {
         # Easy rip command to flac.
