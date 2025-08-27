@@ -248,7 +248,7 @@ let
   }).override {
     nativeMessagingHosts = [
       pkgs.fx-cast-bridge # Enable chromecast for firefox
-      pkgs.plasma5Packages.plasma-browser-integration # enable KDE plasma integration
+      pkgs.kdePackages.plasma-browser-integration # enable KDE plasma integration
     ];
   };
   # NOTE: We have to do this and use a separate bin firefox-nixGL instead of just using firefox via `guilib.nixGLWrap`
