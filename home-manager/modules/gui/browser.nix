@@ -212,6 +212,18 @@ let
       OfferToSaveLogins = false;
       PasswordManagerEnabled = false;
       SearchSuggestEnabled = false;
+      SearchEngines = {
+        Add = [
+          {
+            Name = "Google Search Web Only";
+            URLTemplate = "https://www.google.com/search?q={searchTerms}&udm=14";
+            Alias = "@googleweb";
+            Description = "Google search using web only (i.e. udm=14)";
+            IconURL = "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico";
+          }
+        ];
+        Default = "Google Search Web Only";
+      };
       FirefoxHome = {
         Search = false;
         Highlights = false;
