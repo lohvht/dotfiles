@@ -16,7 +16,8 @@ let
   cfg = config.customHomeProfile.GUI.vscode;
   crUUID = if cfg.crashReporterUUID == null then "473f1188-f798-49bf-91b2-a80a8ab1a498" else cfg.crashReporterUUID;
   vscode_pkg = pkgs.vscodium;
-  code_wrapper_alias = pkgs.writeScriptBin "code_wrapper" ''
+  code_wrapper = ''
+    #!${pkgs.bash}/bin/bash
     exec ${vscode_pkg}/bin/codium "$@" --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
   '';
   shell_extracommon_str = ''
@@ -109,8 +110,14 @@ in
             rev = "8f868e154ca265e38481ab15d28429f7ff72e0e4";
             sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
           } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
-        ".local/bin/code".source = config.lib.file.mkOutOfStoreSymlink "${code_wrapper_alias}/bin/code_wrapper";
-        ".local/bin/codium".source = config.lib.file.mkOutOfStoreSymlink "${code_wrapper_alias}/bin/code_wrapper";
+        ".local/bin/code" = {
+          text =code_wrapper;
+          executable=true;
+        };
+        ".local/bin/codium" = {
+          text = code_wrapper;
+          executable=true;
+        };
       };
       # TODO: Attempt to try this number 3 option out in WSL as WSLg exists:
       # https://stackoverflow.com/questions/72011852/how-to-setup-windows-subsystem-linux-wsl-2-with-vscodium-on-windows-10
