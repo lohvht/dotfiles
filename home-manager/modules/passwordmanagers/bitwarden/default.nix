@@ -18,7 +18,7 @@ in
     }
     (lib.mkIf isGUIEnabled {
       home.packages = [
-        pkgs.bitwarden
+        pkgs.bitwarden-desktop
       ];
       programs.firefox.profiles.default.extensions.packages = extensions;
       programs.firefox.profiles.private.extensions.packages = extensions;

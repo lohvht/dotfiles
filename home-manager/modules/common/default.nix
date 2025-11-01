@@ -14,10 +14,10 @@ in
   ];
   config = (lib.mkMerge [
     (lib.mkIf (gitCfg.username != null) {
-      programs.git.userName = gitCfg.username;
+      programs.git.settings.user.name = gitCfg.username;
     })
     (lib.mkIf (gitCfg.userEmail != null) {
-      programs.git.userEmail = gitCfg.userEmail;
+      programs.git.settings.user.email = gitCfg.userEmail;
     })
     (lib.mkIf pkgs.stdenv.isLinux {
       # Make it easier for generic non-nixos linuxes
@@ -203,36 +203,36 @@ in
         # TODO: Add fancy git related stuff such as contributors tag, pre-commit hooks etc 
         enable = true;
         lfs.enable = true;
-        aliases = {
-          com = "commit ";
-          coma = "commit --amend ";
-          show = "show";
-          add = "add ";
-          mrg = "merge ";
-          pull = "pull";
-          push = "push";
-          co = "checkout ";
-          lg = "log";
-          diff = "diff ";
-          st = "status";
-          dmas = "diff origin/master...";
-          dmai = "diff origin/main...";
-          rsl = "reset HEAD~1 --soft";
-          rsd = "reset HEAD~1 --hard";
-          rmrg = "reset --merge ORIG_HEAD";
-          stal = "stash list";
-          staa = "stash apply";
-          stad = "stash drop";
-          stam = "stash save ";
-          stams = "stash save --staged ";
-          sta = "stash ";
-          stas = "stash --staged";
-          rb = "rebase ";
-          rbi = "rebase -i ";
-          pullrb = "pull --rebase";
-          ca = "coauthor";
-        };
-        extraConfig = {
+        settings = {
+          aliases = {
+            com = "commit ";
+            coma = "commit --amend ";
+            show = "show";
+            add = "add ";
+            mrg = "merge ";
+            pull = "pull";
+            push = "push";
+            co = "checkout ";
+            lg = "log";
+            diff = "diff ";
+            st = "status";
+            dmas = "diff origin/master...";
+            dmai = "diff origin/main...";
+            rsl = "reset HEAD~1 --soft";
+            rsd = "reset HEAD~1 --hard";
+            rmrg = "reset --merge ORIG_HEAD";
+            stal = "stash list";
+            staa = "stash apply";
+            stad = "stash drop";
+            stam = "stash save ";
+            stams = "stash save --staged ";
+            sta = "stash ";
+            stas = "stash --staged";
+            rb = "rebase ";
+            rbi = "rebase -i ";
+            pullrb = "pull --rebase";
+            ca = "coauthor";
+          };
           init.defaultBranch = "main";
           diff = {
             colormoved = "default";

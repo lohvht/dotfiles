@@ -111,12 +111,12 @@ in
             sha256 = "0qma806bpd99glhjl3zwdkaydi44nrhjg51n6n4siqkfq0kk96v7";
           } + "/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
         ".local/bin/code" = {
-          text =code_wrapper;
-          executable=true;
+          text = code_wrapper;
+          executable = true;
         };
         ".local/bin/codium" = {
           text = code_wrapper;
-          executable=true;
+          executable = true;
         };
       };
       # TODO: Attempt to try this number 3 option out in WSL as WSLg exists:

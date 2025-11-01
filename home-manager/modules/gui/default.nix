@@ -160,6 +160,7 @@ in
         pkgs.nixgl.auto.nixGLDefault
         obsidian_pkg
         pkgs.wxhexeditor
+        pkgs.imagemagick # Image tools
       ];
       home.file = { } // guilib.desktopWrap {
         desktopName = "Obsidian";
