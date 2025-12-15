@@ -1,0 +1,19 @@
+# Put into the file path below:
+# /etc/systemd/system/ensure-symlinked-units-resolve.service
+#
+# This restarts the nix-daemon such that it can properly resolve broken symlinks
+[Unit]
+Description=Ensure Nix related units which are symlinked resolve
+After=nix.mount
+Requires=nix-directory.service
+Requires=nix.mount
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/systemctl daemon-reload
+ExecStart=/usr/bin/systemctl restart --no-block nix-daemon.socket
+
+[Install]
+WantedBy=sysinit.target
