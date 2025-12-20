@@ -28,7 +28,7 @@ let
         wrapped_bin=$out/bin/$(basename $bin)${binSuffix}
         cat <<EOF >$wrapped_bin
       #!${pkgs.bash}/bin/bash
-      exec ${nixGLRunCommand} $bin \$@
+      exec ${nixGLRunCommand} $bin "\$@"
       EOF
           chmod +x $wrapped_bin
         done
