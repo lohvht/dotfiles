@@ -153,6 +153,7 @@ in
           # "workbench.iconTheme" = "Monokai Pro (Filter Spectrum) Icons";
           # "workbench.colorTheme" = "Monokai Pro (Filter Spectrum)";
           "search.followSymlinks" = false;
+          "git.enableCommitSigning" = true;
           "todohighlight.keywords" = [
             {
               "text" = "TODO:";

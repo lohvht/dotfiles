@@ -96,6 +96,7 @@ in
         pkgs.inetutils # Collection of common network programs, ping, ifconfig, hostname, traceroute etc
         pkgs.psmisc # Collection of utilities using proc filesystem (`pstree`, `killall`, etc.)
         pkgs.gnugrep
+        pkgs.gnupg # GPG
         pkgs.wget # Non-interactive network downloader.
         pkgs.curl
         pkgs.nix-prefetch-git
@@ -193,16 +194,28 @@ in
         nxcleandeep = "nix-collect-garbage -d";
         hmgens = "home-manager generations";
         hmls = ''awk '/^        ###### HOMECONFIG PROFILES START/{p=1;next};/^        ###### HOMECONFIG PROFILES END/{p=0};p' ${NXPKGS_CFG_PATH}/flake.nix | awk -F'=' '{print $1}' | awk '{$1=$1;print}' '';
+        gpg-keygen = "${pkgs.gnupg}/bin/gpg --full-generate-key";
+        gpg-ls-key-secret = "${pkgs.gnupg}/bin/gpg --list-secret-keys --keyid-format=long";
+        gpg-ls-key-public = "${pkgs.gnupg}/bin/gpg --list-secret-keys --keyid-format=long";
       };
       programs.man = {
         enable = true;
         # generateCaches = true;
       };
       programs.direnv = { enable = true; enableBashIntegration = true; enableZshIntegration = true; nix-direnv.enable = true; };
+      services.gpg-agent = {
+        enable = true;
+        defaultCacheTtl = 3600; # 1hr
+        enableSshSupport = true;
+        pinentry.package = pkgs.pinentry-all; # GPG interface for passphrase input
+      };
       programs.git = {
         # TODO: Add fancy git related stuff such as contributors tag, pre-commit hooks etc 
         enable = true;
         lfs.enable = true;
+        signing = {
+          signByDefault = true;
+        };
         settings = {
           aliases = {
             com = "commit ";
