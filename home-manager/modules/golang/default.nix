@@ -65,7 +65,7 @@ in
           };
         };
         profiles.default.extensions = [
-          pkgs.vscode-extensions.golang.go
+          pkgs.nix-vscode-extensions.vscode-marketplace.golang.go
         ];
       };
     })

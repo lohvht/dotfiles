@@ -55,7 +55,7 @@ in
           # component for the actual `rust-analyzer` via
           # `rustup component add rust-src`
           # as highlighted here: https://rust-analyzer.github.io/manual.html#installation
-          pkgs.vscode-extensions.rust-lang.rust-analyzer
+          pkgs.nix-vscode-extensions.vscode-marketplace.rust-lang.rust-analyzer
         ];
       };
     })

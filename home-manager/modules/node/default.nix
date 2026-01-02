@@ -69,9 +69,8 @@ in
     (lib.mkIf (isVSCodeEnable && cfg.includeFrontendTools) {
       programs.vscode = {
         profiles.default.extensions = [
-          pkgs.vscode-extensions.ecmel.vscode-html-css
-          pkgs.vscode-extensions.vue.volar
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          pkgs.nix-vscode-extensions.vscode-marketplace.ecmel.vscode-html-css
+          pkgs.nix-vscode-extensions.vscode-marketplace.vue.volar
         ];
       };
     })

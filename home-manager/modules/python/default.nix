@@ -95,15 +95,14 @@ in
           };
         };
         profiles.default.extensions = [
-          pkgs.vscode-extensions.ms-toolsai.jupyter
-          pkgs.vscode-extensions.ms-toolsai.jupyter-renderers
-          pkgs.vscode-extensions.ms-python.isort
-          pkgs.vscode-extensions.ms-python.black-formatter
-          pkgs.vscode-extensions.ms-python.python
-          pkgs.vscode-extensions.ms-python.mypy-type-checker
-          pkgs.vscode-extensions.ms-python.pylint
-          pkgs.vscode-extensions.ms-python.flake8
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-toolsai.jupyter
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-toolsai.jupyter-renderers
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-python.isort
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-python.black-formatter
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-python.python
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-python.mypy-type-checker
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-python.pylint
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-python.flake8
         ];
       };
     })

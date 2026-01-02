@@ -21,6 +21,9 @@
     nixgl.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nixgl.inputs.flake-utils.follows = "flake-utils";
     nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
   outputs =
     { self
@@ -31,6 +34,7 @@
       home-manager
     , nur
     , nixgl
+    , nix-vscode-extensions
     , ...
     }:
     let
@@ -39,6 +43,7 @@
       default_overlays = {
         nur = nur.overlays.default;
         nixgl = nixgl.overlay;
+        nix-vscode-extensions = nix-vscode-extensions.overlays.default;
         default = import ./overlays;
       };
       mkHomeMgrCfg = homeProfileName: { system ? flake-utils.lib.system.x86_64-linux

@@ -226,71 +226,29 @@ in
           "git.inputValidation" = true;
         };
         profiles.default.extensions = [
-          pkgs.vscode-extensions.ms-vscode.live-server
-          pkgs.vscode-extensions.eamodio.gitlens
-          pkgs.vscode-extensions.ms-azuretools.vscode-docker
-          pkgs.vscode-extensions.ms-vscode.cpptools
-          pkgs.vscode-extensions.tomoki1207.pdf
-          pkgs.vscode-extensions.mikestead.dotenv
-          pkgs.vscode-extensions.mechatroner.rainbow-csv
-          pkgs.vscode-extensions.jnoortheen.nix-ide
-          pkgs.vscode-extensions.ibm.output-colorizer
-          pkgs.vscode-extensions.tamasfe.even-better-toml
-          pkgs.vscode-extensions.sanaajani.taskrunnercode
-          pkgs.vscode-extensions.mkhl.direnv
-          pkgs.vscode-extensions.ms-vscode.hexeditor
-          pkgs.vscode-extensions.zxh404.vscode-proto3
-          pkgs.vscode-extensions.vadimcn.vscode-lldb
-          pkgs.vscode-extensions.timonwong.shellcheck
-          pkgs.vscode-extensions.usernamehw.errorlens
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          # TODO: Replace the whole of pkgs.vscode-utils.extensionsFromVscodeMarketplace
-          # block + extensions above with this:
-          # https://github.com/nix-community/nix-vscode-extensions
-          # {
-          #   publisher = "eamodio";
-          #   name = "gitlens";
-          #   version = "2023.3.1705";
-          #   sha256 = "06qb0c3c6nh8c4qvjcm0kr5nn3xj2qq1kbwmjlyvy67w9hzmir7p";
-          # }
-          # NOTE: We can use the shell function `get_vsixpkg $publisher $extension_name` to easily get the required updated
-          # version as well as the required SHA info.
-          {
-            name = "code-gnu-global";
-            publisher = "austin";
-            version = "0.2.2";
-            sha256 = "1fz89m6ja25aif6wszg9h2fh5vajk6bj3lp1mh0l2b04nw2mzhd5";
-          }
-          (mkOpenVSXExt {
-            publisher = "jeanp413";
-            name = "open-remote-ssh";
-            version = "0.0.46";
-            sha256 = "0hrxdivwspg8xyf3g08rnhwa2m91v5pr7clp9yd4aicw3psrx007";
-          })
-          (mkOpenVSXExt {
-            publisher = "wayou";
-            name = "vscode-todo-highlight";
-            version = "1.0.5";
-            sha256 = "1qihzvsghd7hrnwdk7cwk4dx3hbzd1rkdg032z4rq90g3j0yy06w";
-          })
-          {
-            publisher = "ryanluker";
-            name = "vscode-coverage-gutters";
-            version = "2.11.1";
-            sha256 = "122558k6jkxmhahh8cs3qjznadydwm5286m02bg5q0k4j0bk9vrm";
-          }
-          {
-            name = "monokai-charcoal-high-contrast";
-            publisher = "74th";
-            version = "3.4.0";
-            sha256 = "05y8dwqqmixy9k59xmdpwgjbvvc6w7lh8apgnijy0li0xrs11i9f";
-          }
-          {
-            publisher = "ahmadalli";
-            name = "vscode-nginx-conf";
-            version = "0.3.5";
-            sha256 = "10f5b14hlkz9gm11vxcqj6mw6nwz2lynh4z5nz2skkgn04qns0pa";
-          }
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-vscode.live-server
+          pkgs.nix-vscode-extensions.vscode-marketplace.eamodio.gitlens
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-azuretools.vscode-docker
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-vscode.cpptools
+          pkgs.nix-vscode-extensions.vscode-marketplace.tomoki1207.pdf
+          pkgs.nix-vscode-extensions.vscode-marketplace.mikestead.dotenv
+          pkgs.nix-vscode-extensions.vscode-marketplace.mechatroner.rainbow-csv
+          pkgs.nix-vscode-extensions.vscode-marketplace.jnoortheen.nix-ide
+          pkgs.nix-vscode-extensions.vscode-marketplace.ibm.output-colorizer
+          pkgs.nix-vscode-extensions.vscode-marketplace.tamasfe.even-better-toml
+          pkgs.nix-vscode-extensions.vscode-marketplace.sanaajani.taskrunnercode
+          pkgs.nix-vscode-extensions.vscode-marketplace.mkhl.direnv
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-vscode.hexeditor
+          pkgs.nix-vscode-extensions.vscode-marketplace.zxh404.vscode-proto3
+          # pkgs.nix-vscode-extensions.vscode-marketplace.vadimcn.vscode-lldb
+          pkgs.nix-vscode-extensions.vscode-marketplace.timonwong.shellcheck
+          pkgs.nix-vscode-extensions.vscode-marketplace.usernamehw.errorlens
+          pkgs.nix-vscode-extensions.vscode-marketplace.austin.code-gnu-global
+          pkgs.nix-vscode-extensions.open-vsx.jeanp413.open-remote-ssh
+          pkgs.nix-vscode-extensions.open-vsx.wayou.vscode-todo-highlight
+          pkgs.nix-vscode-extensions.vscode-marketplace.ryanluker.vscode-coverage-gutters
+          pkgs.nix-vscode-extensions.vscode-marketplace."74th".monokai-charcoal-high-contrast
+          pkgs.nix-vscode-extensions.vscode-marketplace.ahmadalli.vscode-nginx-conf
         ];
       };
     }

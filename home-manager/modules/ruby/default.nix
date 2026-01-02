@@ -68,20 +68,9 @@ in
           };
         };
         profiles.default.extensions = [
-          pkgs.vscode-extensions.shopify.ruby-lsp
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "endwise";
-            publisher = "kaiwood";
-            version = "1.5.1";
-            sha256 = "1dg096dnv3isyimp3r73ih25ya0yj0m1y9ryzrz40m0mbsk21mp4";
-          }
-          {
-            name = "rails-db-schema";
-            publisher = "aki77";
-            version = "0.2.6";
-            sha256 = "16nmbg3p1z1mr3027m46j8m09g1l3w2d529g27aydw5i1v6d84f4";
-          }
+          pkgs.nix-vscode-extensions.vscode-marketplace.shopify.ruby-lsp
+          pkgs.nix-vscode-extensions.vscode-marketplace.kaiwood.endwise
+          pkgs.nix-vscode-extensions.vscode-marketplace.aki77.rails-db-schema
         ];
       };
     })

@@ -81,7 +81,7 @@ in
           ];
         };
         profiles.default.extensions = [
-          pkgs.vscode-extensions.james-yu.latex-workshop
+          pkgs.nix-vscode-extensions.vscode-marketplace.james-yu.latex-workshop
         ];
       };
     })
