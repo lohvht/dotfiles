@@ -169,7 +169,7 @@ in
         comment = "Knowledge base";
         icon = "obsidian";
         categories = [ "Office" ];
-        exec = "${obsidian_pkg}/bin/obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime %u";
+        exec = "${obsidian_pkg}/bin/obsidian --ozone-platform=wayland --enable-wayland-ime %u";
         type = "Application";
       };
       xdg.systemDirs.data = [

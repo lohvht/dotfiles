@@ -18,7 +18,7 @@ let
   vscode_pkg = pkgs.vscodium;
   code_wrapper = ''
     #!${pkgs.bash}/bin/bash
-    exec ${vscode_pkg}/bin/codium "$@" --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
+    exec ${vscode_pkg}/bin/codium "$@" --ozone-platform=wayland --enable-wayland-ime
   '';
   shell_extracommon_str = ''
     ########## Module VsCode Init Extra Start ##########
@@ -77,14 +77,14 @@ in
       } // guilib.desktopWrap {
         actions = {
           new-empty-window = {
-            exec = "${vscode_pkg}/bin/codium %F --new-window --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
+            exec = "${vscode_pkg}/bin/codium %F --new-window --ozone-platform=wayland --enable-wayland-ime";
             icon = "vscodium";
             name = "New Empty Window";
           };
         };
         categories = [ "Utility" "TextEditor" "Development" "IDE" ];
         comment = "Code Editing. Redefined.";
-        exec = "${vscode_pkg}/bin/codium %F --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
+        exec = "${vscode_pkg}/bin/codium %F --ozone-platform=wayland --enable-wayland-ime";
         genericName = "Text Editor";
         icon = "vscodium";
         keywords = [ "vscode" ];
