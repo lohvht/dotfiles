@@ -84,6 +84,7 @@
         darwin_64 = { system = flake-utils.lib.system.x86_64-darwin; };
         linux_gaming_64 = { };
         linux_thinkpad_64 = { };
+        linux_steamdeck = { };
         ###### HOMECONFIG PROFILES END
       };
 
