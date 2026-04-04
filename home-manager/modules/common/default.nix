@@ -216,6 +216,7 @@ in
         signing = {
           signByDefault = true;
         };
+        signing.format = "openpgp";
         settings = {
           aliases = {
             com = "commit ";
