@@ -11,6 +11,21 @@ let
     # due to codec
     "media.mediasource.vp9.enabled" = false;
     "browser.tabs.inTitlebar" = 0;
+    # Attempt to disable all things AI
+    # Taken from this list here: https://flamedfury.com/posts/disable-ai-in-firefox/
+    "browser.ml.enable" = false;                    # Master switch for Firefox’s built-in machine-learning platform. Turning this off disables all AI features.
+    "browser.ml.chat.enabled" = false;              # disable the AI chatbot integration.
+    "browser.ml.chat.sidebar" = false;              # Shows the AI chat panel in the sidebar.
+    "browser.ml.chat.shortcuts" = false;            # Lets you trigger chat from selected text or shortcuts.
+    "browser.ml.chat.page" = false;                 # Powers the on-page chat menu when you highlight text.
+    "browser.ml.chat.page.footerBadge" = false;     # Displays the floating badge at the bottom of the page.
+    "browser.ml.chat.page.menuBadge" = false;       # Shows the “Ask AI” badge in the page menu.
+    "browser.ml.chat.menu" = false;                 # Adds “Chat about this” to right-click menus.
+    "browser.ml.linkPreview.enabled" = false;       # Generates AI-based link previews and suggestions.
+    "extensions.ml.enabled" = false;                # Allows browser extensions to use Firefox’s ML API.
+    "browser.ml.pageAssist.enabled" = false;        # Runs the AI “page assist” summariser/assistant.
+    "browser.tabs.groups.smart.enabled" = false;    # Uses AI to automatically group and label your tabs.
+    "browser.tabs.groups.smart.userEnable" = false; # Lets users manually toggle the smart tab groups feature.
     "gfx.webrender.all" = true;
     "media.ffmpeg.vaapi.enabled" = true;
     "media.hardware-video-decoding.force-enabled" = true;
