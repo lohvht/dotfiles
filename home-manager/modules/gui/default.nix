@@ -39,8 +39,8 @@ let
     }
     ########## Module Gaming Init Extra End ##########
   '';
-  nextcloud_client_pkg = guilib.nixGLWrap pkgs.nextcloud-client;
-  obsidian_pkg = guilib.nixGLWrap pkgs.obsidian;
+  nextcloud_client_pkg = pkgs.nextcloud-client;
+  obsidian_pkg = pkgs.obsidian;
 in
 {
   imports = [
@@ -49,6 +49,11 @@ in
     ./conky.nix
   ];
   config = lib.mkIf cfg.enable (lib.mkMerge [
+    (lib.mkIf (pkgs.stdenv.isLinux && cfg.webcamTools.enable) {
+      home.packages = [
+        pkgs.cheese # Take photos / videos with webcam. Can be used to test webcam
+      ];
+    })
     (lib.mkIf (pkgs.stdenv.isLinux && cfg.libreoffice.enable) {
       home.packages = [
         pkgs.libreoffice-qt
@@ -173,7 +178,7 @@ in
         type = "Application";
       };
       xdg.systemDirs.data = [
-        "/home/vloh/.local/share/flatpak/exports/share"
+        "/home/vloh/.local/share/flatpak/exports/share" # TODO: WRONG USERNAME
         "/var/lib/flatpak/exports/share"
       ];
     }

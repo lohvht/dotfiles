@@ -33,16 +33,12 @@
       communications.slack.enable = true;
       nextcloudClient.enable = true;
       libreoffice.enable = true;
+      webcamTools.enable = true;
     };
-    # cloudDevelopment.k8s.enable = true;
-    # cloudDevelopment.terraform.enable = true;
     databases.mariadb.enable = true;
     corsairKeyboardMouseSupport.enable = false;
-    # golang.enable = true;
     rust.enable = true;
-    python.enable = true;
-    # ruby.enable = true;
-    # node.enable = true;
+    node.enable = true;
     latex.enable = true;
     passwordManagers.bitwarden.enable = true;
     blurayCd = {

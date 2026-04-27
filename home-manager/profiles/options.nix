@@ -126,6 +126,7 @@
       development = {
         apiClient.enable = lib.mkEnableOption "install an API client, the current client used is `bruno`";
       };
+      webcamTools.enable = lib.mkEnableOption "enable tools checking webcam";
     };
     corsairKeyboardMouseSupport.enable = lib.mkEnableOption ''
       if true, adds corsair keyboard and mouse support
