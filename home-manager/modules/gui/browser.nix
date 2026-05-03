@@ -319,6 +319,7 @@ in
         custom_firefox_pkg
       ];
       programs.firefox = {
+        configPath = "${config.home.homeDirectory}/.mozilla/firefox";
         enable = true;
         # https://nixos.org/manual/nixpkgs/stable/#build-wrapped-firefox-with-extensions-and-policies
         package = wrapped_firefox_pkg;
