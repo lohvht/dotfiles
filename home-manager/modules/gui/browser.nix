@@ -266,10 +266,6 @@ let
       pkgs.kdePackages.plasma-browser-integration # enable KDE plasma integration
     ];
   };
-  # NOTE: We have to do this and use a separate bin firefox-nixGL instead of just using firefox via `guilib.nixGLWrap`
-  #       The home-manager program.firefox.package doesnt accept anything else as it needs the `override` attribute key
-  #       which the wrapper doesnt have.
-  custom_firefox_pkg = guilib.nixGLWrapOpts wrapped_firefox_pkg { binSuffix = "-nixGL"; };
 
   extensions = [
     firefox-addons.ublock-origin # adblocker
@@ -296,7 +292,7 @@ in
         desktopName = "Firefox";
         genericName = "Web Browser";
         categories = [ "Network" "WebBrowser" ];
-        exec = "${custom_firefox_pkg}/bin/firefox-nixGL -P Default %u";
+        exec = "${wrapped_firefox_pkg}/bin/firefox -P Default %u";
         icon = "firefox";
         mimeTypes = [ "text/html" "text/xml" "application/xhtml+xml" "application/vnd.mozilla.xul+xml" "x-scheme-handler/http" "x-scheme-handler/https" "x-scheme-handler/ftp" ];
         type = "Application";
@@ -305,7 +301,7 @@ in
           private-window = {
             name = "Open a Private Window";
             icon = "firefox";
-            exec = "${custom_firefox_pkg}/bin/firefox-nixGL -P Private %u";
+            exec = "${wrapped_firefox_pkg}/bin/firefox -P Private %u";
           };
         };
       };
@@ -316,7 +312,7 @@ in
     })
     {
       home.packages = [
-        custom_firefox_pkg
+        wrapped_firefox_pkg
       ];
       programs.firefox = {
         configPath = "${config.home.homeDirectory}/.mozilla/firefox";

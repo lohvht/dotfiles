@@ -88,7 +88,7 @@ in
     })
     # (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable) {
     #   home.packages = [
-    #     (guilib.nixGLWrap (pkgs.lutris.override {
+    #     ((pkgs.lutris.override {
     #       extraLibraries = pkgs: [
     #         # List library dependencies here
     #         pkgs.dxvk
@@ -162,7 +162,6 @@ in
     #
     {
       home.packages = [
-        pkgs.nixgl.auto.nixGLDefault
         obsidian_pkg
         pkgs.wxhexeditor
         pkgs.imagemagick # Image tools

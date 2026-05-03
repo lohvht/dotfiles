@@ -17,9 +17,6 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs-stable";
 
-    nixgl.url = "github:guibou/nixGL";
-    nixgl.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    nixgl.inputs.flake-utils.follows = "flake-utils";
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -33,7 +30,6 @@
     , # nixpkgs-darwin-stable,
       home-manager
     , nur
-    , nixgl
     , nix-vscode-extensions
     , ...
     }:
@@ -42,7 +38,6 @@
       # They will be added to your 'pkgs'
       default_overlays = {
         nur = nur.overlays.default;
-        nixgl = nixgl.overlay;
         nix-vscode-extensions = nix-vscode-extensions.overlays.default;
         default = import ./overlays;
       };

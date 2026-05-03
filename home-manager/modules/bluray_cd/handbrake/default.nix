@@ -1,17 +1,15 @@
 { config, lib, pkgs, ... }@inputs:
 let
   cfg = config.customHomeProfile.blurayCd.handbrake;
-  gpus = config.systemHardwareInfo.gpus;
-
   shell_extracommon_str = ''
     ########## Module blurayCd.handbrake Init Extra Start ##########
     ########## Module blurayCd.handbrake Init Extra End ##########
   '';
-  guilib = import ../../gui/lib.nix inputs;
-  hasNvidia = lib.any (g: g.driver == "nvidia") gpus;
-  hasAMD = lib.any (g: g.driver == "amdgpu") gpus;
-  nixGLToUse = if hasNvidia then "nvidia" else if hasAMD then "auto" else "mesa";
-  custom_handbrake_pkg = guilib.nixGLWrapOpts pkgs.handbrake { nixGLPackage = nixGLToUse; };
+  custom_handbrake_pkg = pkgs.handbrake.overrideAttrs(old: {
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
+      pkgs.autoAddDriverRunpath
+    ];
+  });
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
