@@ -124,7 +124,7 @@ in
       home.sessionVariables = {
         DONT_PROMPT_WSL_INSTALL = "1";
       };
-      programs.vscode = {
+      programs.vscodium = {
         enable = true;
         package = vscode_pkg;
         mutableExtensionsDir = true;

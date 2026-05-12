@@ -67,7 +67,7 @@ in
       programs.zsh.initContent = shell_extracommon_str;
     }
     (lib.mkIf (isVSCodeEnable && cfg.includeFrontendTools) {
-      programs.vscode = {
+      programs.vscodium = {
         profiles.default.extensions = [
           pkgs.nix-vscode-extensions.vscode-marketplace.ecmel.vscode-html-css
           pkgs.nix-vscode-extensions.vscode-marketplace.vue.volar

@@ -18,7 +18,7 @@ in
       };
     }
     (lib.mkIf isVSCodeEnable {
-      programs.vscode = {
+      programs.vscodium = {
         profiles.default.userSettings = {
           "latex-workshop.latex.autoBuild.run" = "onFileChange";
           "latex-workshop.view.pdf.viewer" = "browser";

@@ -58,7 +58,7 @@ in
       programs.zsh.initContent = shell_extracommon_str;
     }
     (lib.mkIf isVSCodeEnable {
-      programs.vscode = {
+      programs.vscodium = {
         profiles.default.userSettings = {
           "[ruby]" = {
             "editor.defaultFormatter" = "Shopify.ruby-lsp";

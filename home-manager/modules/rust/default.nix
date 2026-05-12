@@ -37,7 +37,7 @@ in
       ];
     }
     (lib.mkIf isVSCodeEnable {
-      programs.vscode = {
+      programs.vscodium = {
         profiles.default.userSettings = {
           "rust-analyzer.imports.granularity.enforce" = true;
           "rust-analyzer.cargo.autoreload" = true;

@@ -49,7 +49,7 @@ in
       ];
     }
     (lib.mkIf isVSCodeEnable {
-      programs.vscode = {
+      programs.vscodium = {
         profiles.default.userSettings = {
           "files.exclude"."**/*.pyc" = true;
           "[python]" = {

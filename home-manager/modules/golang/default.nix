@@ -29,7 +29,7 @@ in
       };
     }
     (lib.mkIf isVSCodeEnable {
-      programs.vscode = {
+      programs.vscodium = {
         profiles.default.userSettings = {
           "go.formatTool" = "goimports";
           "go.useLanguageServer" = true;

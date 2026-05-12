@@ -23,7 +23,7 @@ in
       programs.zsh.initContent = shell_extracommon_str;
     }
     (lib.mkIf isVSCodeEnable {
-      programs.vscode = {
+      programs.vscodium = {
         profiles.default.extensions = [
           pkgs.nix-vscode-extensions.vscode-marketplace.hashicorp.terraform
           pkgs.nix-vscode-extensions.vscode-marketplace.hashicorp.hcl
