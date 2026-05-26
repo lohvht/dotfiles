@@ -218,6 +218,9 @@ in
             "jacoco.xml"
             "coverage.cobertura.xml"
           ];
+          "git.blame.editorDecoration.enabled"= true;
+          "git.blame.statusBarItem.enabled" = true;
+          "git.blame.ignoreWhitespace" = true;
           "editor.codeActionsOnSave" = {
             # Shellcheck
             "source.fixAll.shellcheck" = "explicit";
@@ -227,7 +230,6 @@ in
         };
         profiles.default.extensions = [
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-vscode.live-server
-          pkgs.nix-vscode-extensions.vscode-marketplace.eamodio.gitlens
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-azuretools.vscode-docker
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-vscode.cpptools
           pkgs.nix-vscode-extensions.vscode-marketplace.tomoki1207.pdf
