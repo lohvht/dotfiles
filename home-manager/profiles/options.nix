@@ -113,6 +113,7 @@
           default = null;
           description = "The crash reporter UUID to set. if not set, default to a default hardcoded one. You should override this option by generating a UUID via `uuidgen`";
         };
+        gitlabIntegration.enable = lib.mkEnableOption "check if gitlab integration should be installed";
       };
       communications = {
         ms_teams.enable = lib.mkEnableOption "install Microsoft Teams";

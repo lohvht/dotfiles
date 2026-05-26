@@ -99,6 +99,11 @@ in
         type = "Application";
       };
     })
+    (lib.mkIf cfg.gitlabIntegration.enable {
+      programs.vscodium.profiles.default.extensions = [
+        pkgs.nix-vscode-extensions.vscode-marketplace.gitlab.gitlab-workflow
+      ];
+    })
     {
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initContent = shell_extracommon_str;
