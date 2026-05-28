@@ -48,31 +48,12 @@ in
     (lib.mkIf pkgs.stdenv.isLinux {
       home.file = {
         ".vscode-oss/argv.json" = {
-          text = ''
-            // This configuration file allows you to pass permanent command line arguments to VS Code.
-            // Only a subset of arguments is currently supported to reduce the likelihood of breaking
-            // the installation.
-            //
-            // PLEASE DO NOT CHANGE WITHOUT UNDERSTANDING THE IMPACT
-            //
-            // NOTE: Changing this file requires a restart of VS Code.
-            {
-              // Use software rendering instead of hardware accelerated rendering.
-              // This can help in cases where you see rendering issues in VS Code.
-              // "disable-hardware-acceleration": true,
-
-              // Allows to disable crash reporting.
-              // Should restart the app if the value is changed.
-              "enable-crash-reporter": false,
-
-              // Unique id used for correlating crash reports sent from this instance.
-              // Do not edit this value.
-              "crash-reporter-id": "${crUUID}",
-              "enable-proposed-api": [
-                  "jeanp413.open-remote-ssh",
-              ]
-            }
-          '';
+            text = builtins.toJSON (lib.recursiveUpdate 
+          cfg.argvParams
+          # Unique id used for correlating crash reports sent from this instance.
+          # Do not edit this value.
+          { "crash-reporter-id"= crUUID; }
+        );
         };
       } // guilib.desktopWrap {
         actions = {

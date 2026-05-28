@@ -1,4 +1,20 @@
 { config, lib, options, pkgs, ... }:
+let
+  vscodeArgvParamsDefaults = {
+    # # Use software rendering instead of hardware accelerated rendering.
+    # # This can help in cases where you see rendering issues in VS Code.
+    # "disable-hardware-acceleration"= true;
+
+    # Allows to disable crash reporting.
+    # Should restart the app if the value is changed.
+    "enable-crash-reporter"= false;
+    # Unique id used for correlating crash reports sent from this instance.
+    # Do not edit this value.
+    "enable-proposed-api" = [
+        "jeanp413.open-remote-ssh"
+    ];
+  };
+in
 {
   options.linuxInfo = {
     distro = lib.mkOption {
@@ -114,6 +130,19 @@
           description = "The crash reporter UUID to set. if not set, default to a default hardcoded one. You should override this option by generating a UUID via `uuidgen`";
         };
         gitlabIntegration.enable = lib.mkEnableOption "check if gitlab integration should be installed";
+        argvParams = lib.mkOption {
+          type = lib.types.attrsOf lib.types.anything;
+          description = ''
+          This configuration file allows you to pass permanent command line arguments to VS Code.
+          Only a subset of arguments is currently supported to reduce the likelihood of breaking
+          the installation.
+          
+          PLEASE DO NOT CHANGE WITHOUT UNDERSTANDING THE IMPACT
+          
+          NOTE: Changing this file requires a restart of VS Code.
+          '';
+          default = vscodeArgvParamsDefaults;
+        };
       };
       communications = {
         ms_teams.enable = lib.mkEnableOption "install Microsoft Teams";
@@ -209,4 +238,8 @@
       bitwarden.enable = lib.mkEnableOption "enable bitwarden";
     };
   };
+  # exposed defaults to args outside.
+  # The following keywords can be referenced in the top level scope like so
+  # { config, lib, pkgs, <myKeyword>, ... }:
+  config._module.args.vscodeArgvParamsDefaults = vscodeArgvParamsDefaults;
 }
