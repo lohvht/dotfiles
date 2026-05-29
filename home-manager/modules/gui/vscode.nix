@@ -81,9 +81,14 @@ in
       };
     })
     (lib.mkIf cfg.gitlabIntegration.enable {
-      programs.vscodium.profiles.default.extensions = [
-        pkgs.nix-vscode-extensions.vscode-marketplace.gitlab.gitlab-workflow
-      ];
+      programs.vscodium.profiles.default = {
+        extensions = [
+          pkgs.nix-vscode-extensions.vscode-marketplace.gitlab.gitlab-workflow
+        ];
+        userSettings = {
+          "gitlab.duoCodeSuggestions.enabled" = cfg.gitlabIntegration.agenticSuggestions.enable;
+        };
+      }; 
     })
     {
       programs.bash.initExtra = shell_extracommon_str;

@@ -129,7 +129,10 @@ in
           default = null;
           description = "The crash reporter UUID to set. if not set, default to a default hardcoded one. You should override this option by generating a UUID via `uuidgen`";
         };
-        gitlabIntegration.enable = lib.mkEnableOption "check if gitlab integration should be installed";
+        gitlabIntegration =  {
+          enable = lib.mkEnableOption "check if gitlab integration should be installed";
+          agenticSuggestions.enable = lib.mkEnableOption "check to enable agentic suggestions via gitlab duo";
+        };
         argvParams = lib.mkOption {
           type = lib.types.attrsOf lib.types.anything;
           description = ''
