@@ -61,6 +61,7 @@ in
         };
         profiles.default.extensions = [
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-toolsai.jupyter
+          pkgs.nix-vscode-extensions.vscode-marketplace.ms-toolsai.jupyter-hub
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-toolsai.jupyter-renderers
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-python.isort
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-python.black-formatter
