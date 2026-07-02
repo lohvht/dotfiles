@@ -218,6 +218,7 @@ in
           };
           "shellcheck.run" = "onSave";
           "git.inputValidation" = true;
+          "git.detectWorktrees" = true;
         };
         profiles.default.extensions = [
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-vscode.live-server
