@@ -71,6 +71,8 @@ in
         profiles.default.extensions = [
           pkgs.nix-vscode-extensions.vscode-marketplace.ecmel.vscode-html-css
           pkgs.nix-vscode-extensions.vscode-marketplace.vue.volar
+          pkgs.nix-vscode-extensions.vscode-marketplace.dbaeumer.vscode-eslint
+          pkgs.nix-vscode-extensions.vscode-marketplace.esbenp.prettier-vscode
         ];
       };
     })
