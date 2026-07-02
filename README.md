@@ -283,3 +283,13 @@ nix flake update ~/.config/nixpkgs
 # After first apply
 nxup
 ```
+
+NOTE: If the above flake updates DO NOT WORK due to rate limiting from github over github based flakes with the following error
+
+>        {"message":"API rate limit exceeded for 104.30.161.23. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)","documentation_url":"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"}; using cached version
+
+You'll need to create a Fine-grained Personal Access Token on github, then assign this credential to the file at `~/.config/nix/nix.conf` via adding the following line:
+
+```
+access-tokens = github.com=<github_pat_YOUR_GENERATED_PAT>
+```
