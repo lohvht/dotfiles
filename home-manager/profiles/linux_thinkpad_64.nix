@@ -38,12 +38,13 @@
     databases.mariadb.enable = true;
     corsairKeyboardMouseSupport.enable = false;
     rust.enable = true;
-    node.enable = true;
     latex.enable = true;
+    python.enable = true;
     passwordManagers.bitwarden.enable = true;
     blurayCd = {
       makemkv.enable = true;
       handbrake.enable = true;
+      mkvtoolnix.enable = true;
     };
     musicCd.enable = true;
     # NOTE: Replace the usernames here
