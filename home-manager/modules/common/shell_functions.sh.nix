@@ -50,7 +50,7 @@ builtins.concatStringsSep "" (
         # use $EDITOR, otherwise if not found fallback to vim
         local editor="''${EDITOR:-vi}"
         local nowait=1
-        while getopts w: name
+        while getopts w name
         do
           case $name in
             w)
