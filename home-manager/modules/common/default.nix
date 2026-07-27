@@ -149,6 +149,7 @@ in
         ########
         # Git related
         ########
+        gsignkey = "git config user.signingkey "; # Set signing key for current repo
         gcom = "git commit ";
         gcoma = "git commit --amend ";
         gshow = "git show";
