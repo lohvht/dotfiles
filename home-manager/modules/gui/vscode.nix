@@ -134,7 +134,7 @@ in
           "remote.SSH.localServerDownload" = "always";
           "terminal.integrated.shellIntegration.enabled" = false;
           "update.mode" = "none";
-          "extensions.autoUpdate" = false;
+          "extensions.autoUpdate" = "off";
           "editor.rulers" = [ 72 80 100 120 140 160 ];
           "explorer.confirmDelete" = false;
           "terminal.integrated.fontFamily" = "MesloLGS NF";
