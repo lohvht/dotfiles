@@ -284,7 +284,7 @@ let
 in
 {
   config = lib.mkIf cfg.enable (lib.mkMerge [
-    (lib.mkIf pkgs.stdenv.isLinux {
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       home.file = {
         # NOTE: Do remember to do the sidebery import
         ".local/firefox-custom/sidebery-export.json".text = builtins.readFile ./firefox-sidebery-export.json;

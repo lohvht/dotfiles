@@ -30,7 +30,7 @@ let
   # Conky templated strings
 
   # TODO: only support arch for now
-  conky_package_update_section = if (!pkgs.stdenv.isLinux || linuxCfg.distro == null || linuxCfg.distro != "arch") then "#" else
+  conky_package_update_section = if (!pkgs.stdenv.hostPlatform.isLinux || linuxCfg.distro == null || linuxCfg.distro != "arch") then "#" else
   ''
     #Package Section
     ''${color4}''${hr}''${color}
@@ -216,10 +216,16 @@ let
     resultStr;
 in
 {
-  config = lib.mkIf (cfg.enable && pkgs.stdenv.isLinux) (lib.mkMerge [
+  config = lib.mkIf (cfg.enable && pkgs.stdenv.hostPlatform.isLinux) (lib.mkMerge [
     {
       home.shellAliases = {
         conky_reload = "pkill -USR1 conky";
+        # TODO: lohvht@23sept2025:
+        #   Make this more "modular"
+        #   i.e. Check if the given services exists first before apply
+        #   This alias helps us restart the relevant services in order
+        #   to restore audio after suspends
+        audio_restart = "systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.service plasma-kded6.service";
       };
       # NOTE: lohvht@27aug2022: autostart may create multiple entries of the same conky instance on auto startup if
       #       we choose to restore session on your DE.

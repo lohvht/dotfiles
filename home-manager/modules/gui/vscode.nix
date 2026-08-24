@@ -45,7 +45,7 @@ in
         ''
       ];
     }
-    (lib.mkIf pkgs.stdenv.isLinux {
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       home.file = {
         ".vscode-oss/argv.json" = {
             text = builtins.toJSON (lib.recursiveUpdate 
@@ -122,7 +122,7 @@ in
         profiles.default.keybindings = [
           { key = "ctrl+alt+up"; command = "editor.action.insertCursorAbove"; when = "editorTextFocus"; }
           { key = "ctrl+alt+down"; command = "editor.action.insertCursorBelow"; when = "editorTextFocus"; }
-        ] ++ (if pkgs.stdenv.isDarwin then [
+        ] ++ (if pkgs.stdenv.hostPlatform.isDarwin then [
           { key = "shift+cmd+/"; command = "editor.action.goToImplementation"; when = ""; }
         ] else [
           { key = "shift+ctrl+/"; command = "editor.action.goToImplementation"; when = ""; }

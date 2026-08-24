@@ -49,19 +49,19 @@ in
     ./conky.nix
   ];
   config = lib.mkIf cfg.enable (lib.mkMerge [
-    (lib.mkIf (pkgs.stdenv.isLinux && cfg.webcamTools.enable) {
+    (lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && cfg.webcamTools.enable) {
       home.packages = [
         pkgs.cheese # Take photos / videos with webcam. Can be used to test webcam
       ];
     })
-    (lib.mkIf (pkgs.stdenv.isLinux && cfg.libreoffice.enable) {
+    (lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && cfg.libreoffice.enable) {
       home.packages = [
         pkgs.libreoffice-qt
         pkgs.hunspell
         pkgs.hunspellDicts.en_GB-ise
       ];
     })
-    (lib.mkIf (pkgs.stdenv.isLinux && cfg.nextcloudClient.enable) {
+    (lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && cfg.nextcloudClient.enable) {
       home.packages = [
         nextcloud_client_pkg
       ];
@@ -86,7 +86,7 @@ in
       #   showExperimentalOptions=true
       # '';
     })
-    # (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable) {
+    # (lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && cfg.gaming.enable) {
     #   home.packages = [
     #     ((pkgs.lutris.override {
     #       extraLibraries = pkgs: [
@@ -99,13 +99,13 @@ in
     #     }))
     #   ];
     # })
-    (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable) {
+    (lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && cfg.gaming.enable) {
       programs.mangohud = {
         enable = true;
         enableSessionWide = false;
       };
     })
-    (lib.mkIf (pkgs.stdenv.isLinux && cfg.gaming.enable && cfg.gaming.animeGameLauncherRunnerName != null) {
+    (lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && cfg.gaming.enable && cfg.gaming.animeGameLauncherRunnerName != null) {
       programs.bash.initExtra = shell_extracommon_str;
       programs.zsh.initContent = shell_extracommon_str;
     })

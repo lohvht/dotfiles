@@ -19,11 +19,11 @@ in
     (lib.mkIf (gitCfg.userEmail != null) {
       programs.git.settings.user.email = gitCfg.userEmail;
     })
-    (lib.mkIf pkgs.stdenv.isLinux {
+    (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       # Make it easier for generic non-nixos linuxes
       targets.genericLinux.enable = true;
     })
-    (lib.mkIf (pkgs.stdenv.isLinux && isCorsairKBMSupportEnable) {
+    (lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && isCorsairKBMSupportEnable) {
       home.packages = [
         pkgs.ckb-next
       ];
