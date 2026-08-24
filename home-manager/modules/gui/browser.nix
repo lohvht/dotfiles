@@ -279,6 +279,7 @@ let
     firefox-addons.old-reddit-redirect
     firefox-addons.canvasblocker
     firefox-addons.user-agent-string-switcher
+    firefox-addons.lockedin-yt # Disable youtube shorts and other YT related distractions
   ];
 in
 {
