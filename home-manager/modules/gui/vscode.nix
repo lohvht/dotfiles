@@ -219,6 +219,9 @@ in
           "shellcheck.run" = "onSave";
           "git.inputValidation" = true;
           "git.detectWorktrees" = true;
+          "[json]"= {
+              "editor.defaultFormatter"="vscode.json-language-features";
+            };
         };
         profiles.default.extensions = [
           pkgs.nix-vscode-extensions.vscode-marketplace.ms-vscode.live-server
@@ -243,6 +246,8 @@ in
           pkgs.nix-vscode-extensions.vscode-marketplace.ryanluker.vscode-coverage-gutters
           pkgs.nix-vscode-extensions.vscode-marketplace."74th".monokai-charcoal-high-contrast
           pkgs.nix-vscode-extensions.vscode-marketplace.ahmadalli.vscode-nginx-conf
+          pkgs.nix-vscode-extensions.vscode-marketplace.renesaarsoo.sql-formatter-vsc
+          pkgs.nix-vscode-extensions.vscode-marketplace.clemenspeters.format-json
         ];
       };
     }
