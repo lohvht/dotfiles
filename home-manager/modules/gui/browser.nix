@@ -312,9 +312,6 @@ in
       };
     })
     {
-      home.packages = [
-        wrapped_firefox_pkg
-      ];
       programs.firefox = {
         configPath = "${config.home.homeDirectory}/.mozilla/firefox";
         enable = true;
