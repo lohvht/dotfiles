@@ -18,5 +18,6 @@
     ./bluray_cd
     ./music_cd
     ./databases
+    ./llm_tools
   ];
 }

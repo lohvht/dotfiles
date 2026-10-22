@@ -46,6 +46,10 @@
       handbrake.enable = true;
       mkvtoolnix.enable = true;
     };
+    llmTools.claude = {
+      enable = true;
+      agentToolkit.enable = true;
+    };
     musicCd.enable = true;
     # NOTE: Replace the usernames here
     git.userEmail = "vic94loh@hotmail.com";

@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "agent-toolkit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792690167,
+        "narHash": "sha256-72VG38zE2R20DYpYx/ZlOAmrNTMpMMVNgamx8Z5n/dc=",
+        "owner": "eai-org",
+        "repo": "agent-toolkit",
+        "rev": "f28387f53cd4ce4049e2708a12ba9b081a6d75af",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eai-org",
+        "repo": "agent-toolkit",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -119,6 +135,7 @@
     },
     "root": {
       "inputs": {
+        "agent-toolkit": "agent-toolkit",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",

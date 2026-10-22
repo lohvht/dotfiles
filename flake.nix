@@ -21,6 +21,10 @@
     nur.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # Not a flake: only its skills/ and rules/ are linked into place.
+    # Pull upstream changes with `nix flake update agent-toolkit`.
+    agent-toolkit.url = "github:eai-org/agent-toolkit";
+    agent-toolkit.flake = false;
   };
   outputs =
     { self
@@ -31,6 +35,7 @@
       home-manager
     , nur
     , nix-vscode-extensions
+    , agent-toolkit
     , ...
     }:
     let
@@ -39,6 +44,7 @@
       default_overlays = {
         nur = nur.overlays.default;
         nix-vscode-extensions = nix-vscode-extensions.overlays.default;
+        agent-toolkit = final: prev: { agent-toolkit-src = agent-toolkit; };
         default = import ./overlays;
       };
       mkHomeMgrCfg = homeProfileName: { system ? flake-utils.lib.system.x86_64-linux

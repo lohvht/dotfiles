@@ -240,6 +240,21 @@ in
       _1password.enable = lib.mkEnableOption "enable 1password";
       bitwarden.enable = lib.mkEnableOption "enable bitwarden";
     };
+    llmTools = {
+      claude = {
+        enable = lib.mkEnableOption "enable claude-code";
+        agentToolkit = {
+          enable = lib.mkEnableOption "link the skills from github:eai-org/agent-toolkit";
+          rules.enable = lib.mkEnableOption "also link its always-on opinionated rules";
+          excludedSkills = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
+            example = [ "run-nx-checks" ];
+            description = "agent-toolkit skills to leave out";
+          };
+        };
+      };
+    };
   };
   # exposed defaults to args outside.
   # The following keywords can be referenced in the top level scope like so
