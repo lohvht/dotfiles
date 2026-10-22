@@ -42,6 +42,7 @@ in
           "rust-analyzer.imports.granularity.enforce" = true;
           "rust-analyzer.cargo.autoreload" = true;
           "rust-analyzer.check.command" = "clippy";
+          "rust-analyzer.server.path" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
           "[rust]" = {
             "editor.codeActionsOnSave" = {
               "source.organizeImports" = "explicit";
