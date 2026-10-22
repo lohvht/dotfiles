@@ -184,6 +184,10 @@ builtins.concatStringsSep "" (
       # POSIX compliant way of reading strings without echoing to prompt.
       # This function is merely a wrapper over `read`, for help, please refer
       # to `man read`
+      #
+      # Example Usage:
+      # read_secret my_var # Captures the value being typed, then press enter.
+      # echo $my_var # prints the values typed
       read_secret()
       {
           # Disable echo.
