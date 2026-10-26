@@ -5,11 +5,15 @@ let
 
   # Mirrors upstream's install.sh: each skill dir is linked from the pinned source,
   # into Claude's skills dir and the agent-neutral ~/.agents/skills.
-  toolkit = cfg.agentToolkit;
+  agentToolkitCfg = config.customHomeProfile.llmTools.agentToolkit;
   toolkitSrc = pkgs.agent-toolkit-src;
   toolkitSkills = lib.mapAttrs (name: _: "${toolkitSrc}/skills/${name}") (
-    lib.filterAttrs (name: type: type == "directory" && !(builtins.elem name toolkit.excludedSkills))
+    lib.filterAttrs (name: type: type == "directory" && !(builtins.elem name agentToolkitCfg.excludedSkills))
       (builtins.readDir "${toolkitSrc}/skills")
+  );
+  toolkitRules = lib.mapAttrs (name: _: "${toolkitSrc}/rules/${name}") (
+    lib.filterAttrs (name: type: type == "regular" && !(builtins.elem name agentToolkitCfg.excludedRules))
+      (builtins.readDir "${toolkitSrc}/rules")
   );
 
   shell_extracommon_str = ''
@@ -22,6 +26,12 @@ in
     {
       programs.claude-code = {
         enable = true;
+      };
+      programs.bash.initExtra = shell_extracommon_str;
+      programs.zsh.initContent = shell_extracommon_str;
+    }
+    (lib.mkIf (!cfg.noOverrideSettings) {
+      programs.claude-code = {
         enableMcpIntegration = true;
         settings = {
           theme = "auto";
@@ -31,15 +41,12 @@ in
           promptSuggestionEnabled = false;
         };
       };
-      programs.bash.initExtra = shell_extracommon_str;
-      programs.zsh.initContent = shell_extracommon_str;
-    }
-    (lib.mkIf toolkit.enable {
-      programs.claude-code.skills = toolkitSkills;
-      home.file = lib.mapAttrs' (name: src: lib.nameValuePair ".agents/skills/${name}" { source = src; }) toolkitSkills;
     })
-    (lib.mkIf (toolkit.enable && toolkit.rules.enable) {
-      programs.claude-code.rulesDir = "${toolkitSrc}/rules";
+    (lib.mkIf agentToolkitCfg.enable {
+      programs.claude-code.skills = toolkitSkills;
+    })
+    (lib.mkIf (agentToolkitCfg.enable && agentToolkitCfg.rules.enable) {
+      programs.claude-code.rules = toolkitRules;
     })
     (lib.mkIf isVSCodeEnable {
       programs.vscodium = {

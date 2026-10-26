@@ -243,15 +243,22 @@ in
     llmTools = {
       claude = {
         enable = lib.mkEnableOption "enable claude-code";
-        agentToolkit = {
-          enable = lib.mkEnableOption "link the skills from github:eai-org/agent-toolkit";
-          rules.enable = lib.mkEnableOption "also link its always-on opinionated rules";
-          excludedSkills = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [ ];
-            example = [ "run-nx-checks" ];
-            description = "agent-toolkit skills to leave out";
-          };
+        noOverrideSettings = lib.mkEnableOption "don't override settings with nix managed claude-code setting";
+      };
+      agentToolkit = {
+        enable = lib.mkEnableOption "link the skills from github:eai-org/agent-toolkit";
+        rules.enable = lib.mkEnableOption "also link its always-on opinionated rules";
+        excludedSkills = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [ ];
+          example = [ "run-nx-checks" ];
+          description = "agent-toolkit skills to leave out";
+        };
+        excludedRules = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [ ];
+          example = [ "plans-directory.md" ];
+          description = "agent-toolkit rules to leave out";
         };
       };
     };

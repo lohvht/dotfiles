@@ -46,9 +46,10 @@
       handbrake.enable = true;
       mkvtoolnix.enable = true;
     };
-    llmTools.claude = {
-      enable = true;
+    llmTools = {
+      claude.enable = true;
       agentToolkit.enable = true;
+      agentToolkit.rules.enable = true;
     };
     musicCd.enable = true;
     # NOTE: Replace the usernames here
